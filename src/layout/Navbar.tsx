@@ -1,14 +1,26 @@
-import { Logo } from "./Logo";
+import { useState, useEffect } from "react";
+import LogoSrc from "@/assets/Logo-Mark.png";
 
 const navLinks = ["मुख्यपृष्ठ", "परिचय", "सेवाएं", "सहयोग"];
 
 export function Navbar() {
+  const [open, setOpen] = useState(false);
+
+  // Close menu on resize to desktop
+  useEffect(() => {
+    const onResize = () => { if (window.innerWidth >= 768) setOpen(false); };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
   return (
     <header className="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border/60">
       <div className="bg-primary text-primary-foreground text-center py-1.5 text-sm tracking-widest font-display">
         ॐ क्रीं काली कुलेश्वराय स्वाहा
       </div>
+
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
+        {/* Left links — desktop only */}
         <div className="hidden md:flex gap-8 flex-1">
           {navLinks.slice(0, 2).map((l) => (
             <a key={l} href="#" className="text-primary font-display text-sm hover:text-gold transition-colors">
@@ -16,7 +28,10 @@ export function Navbar() {
             </a>
           ))}
         </div>
-        <Logo />
+
+        <img src={LogoSrc} alt="Kaali Kulam" className="h-10 w-auto" />
+
+        {/* Right links — desktop only */}
         <div className="hidden md:flex gap-8 flex-1 justify-end">
           {navLinks.slice(2).map((l) => (
             <a key={l} href="#" className="text-foreground/70 font-display text-sm hover:text-gold transition-colors">
@@ -24,7 +39,48 @@ export function Navbar() {
             </a>
           ))}
         </div>
+
+        {/* Hamburger — mobile only */}
+        <button
+          className="md:hidden ml-4 p-2 rounded-md text-foreground/70 hover:text-primary transition-colors"
+          aria-label={open ? "Close menu" : "Open menu"}
+          aria-expanded={open}
+          onClick={() => setOpen((o) => !o)}
+        >
+          {open ? (
+            // X icon
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <line x1="4" y1="4" x2="18" y2="18" />
+              <line x1="18" y1="4" x2="4" y2="18" />
+            </svg>
+          ) : (
+            // Hamburger icon
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+              <line x1="3" y1="6" x2="19" y2="6" />
+              <line x1="3" y1="11" x2="19" y2="11" />
+              <line x1="3" y1="16" x2="19" y2="16" />
+            </svg>
+          )}
+        </button>
       </nav>
+
+      {/* Mobile drawer */}
+{open && (
+  <div className="md:hidden border-t border-border/60 bg-background/95 backdrop-blur-md px-6 py-4 flex flex-col gap-4">
+    {navLinks.map((l, i) => (
+      <a
+        key={l}
+        href="#"
+        onClick={() => setOpen(false)}
+        className={`font-display text-base transition-colors hover:text-gold ${
+          i < 2 ? "text-primary" : "text-foreground/70"
+        }`}
+      >
+        {l}
+      </a>
+    ))}
+  </div>
+)}
     </header>
   );
 }

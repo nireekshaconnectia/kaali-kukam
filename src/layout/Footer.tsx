@@ -10,12 +10,14 @@ export function Footer() {
   return (
     <footer className="relative overflow-hidden bg-primary text-primary-foreground">
       {/* Trishul — always visible, repositioned per breakpoint */}
-      <img
-        src={trishul}
-        alt="त्रिशूल"
-        loading="lazy"
-        className="pointer-events-none absolute -right-18 top-10 h-[60%] w-auto  xs:h-[70%] sm:h-[90%] sm:opacity-60 md:h-[110%] md:-right-4 md:opacity-90 lg:h-[120%]"
-      />
+    <img
+  src={trishul}
+  alt="त्रिशूल"
+  loading="lazy"
+  className="pointer-events-none absolute right-18 -top-14 h-[60%] w-auto 
+             sm:h-[90%]
+             md:right-4 md:-top-16 md:h-[90%] 0"
+/>
 
       <div className="relative mx-auto grid max-w-6xl gap-10 px-6 py-14 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
         {/* Col 1 — Logo + address */}

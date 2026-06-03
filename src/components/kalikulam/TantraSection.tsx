@@ -27,8 +27,8 @@ export function TantraSection() {
   return (
     <section className="mx-auto max-w-5xl px-6 py-16">
       <div className="text-center mb-14">
-        <h2 className="font-display text-3xl md:text-5xl text-gold-soft">
-          तंत्र <span className="text-primary">-</span> मंत्र <span className="text-primary">-</span> यंत्र
+        <h2 className="font-display text-3xl md:text-5xl text-muted-foreground">
+          तंत्र <span className="text-muted-foreground">-</span> मंत्र <span className="text-muted-foreground">-</span> यंत्र
         </h2>
         <p className="mt-3 text-muted-foreground text-sm font-display">
           विधि, ध्वनि और रूप &nbsp;·&nbsp; तीन शक्तियाँ, एक मार्ग
@@ -42,7 +42,7 @@ export function TantraSection() {
             className={`grid items-center gap-8 md:grid-cols-2 ${item.reverse ? "md:[direction:rtl]" : ""}`}
           >
             <div className="[direction:ltr]">
-              <h3 className="font-display text-3xl text-gold mb-3">{item.title}</h3>
+              <h3 className="font-display text-3xl text-muted-foreground mb-3">{item.title}</h3>
               <p className="text-foreground/75 leading-relaxed text-[15px]">{item.text}</p>
             </div>
             <div className="flex justify-center [direction:ltr]">

@@ -1,64 +1,107 @@
-import kaliFace from "@/assets/kali-face.jpg";
-
-const wmBase: React.CSSProperties = {
-  fontWeight: 300,
-  letterSpacing: "0.08em",
-  color: "transparent",
-  WebkitTextStroke: "1px rgba(160, 140, 200, 0.35)",
-  lineHeight: 1,
-  whiteSpace: "nowrap",
-};
+import maaKali from "@/assets/Maa_Kali_1.png";
+import vectorKali from "@/assets/Vector-1.png";
+import vectorKrsna from "@/assets/Vector-3.png";
+import vectorAishwarya from "@/assets/Vector-2.png";
+import vectorSwaha from "@/assets/Vector.png";
 
 export function Hero() {
   return (
     <section
-      className="relative overflow-hidden bg-black w-full flex items-end justify-center"
+      className="relative overflow-hidden w-full flex items-center justify-center"
       style={{
-        minHeight: "clamp(220px, 50vw, 480px)",
+        minHeight: "clamp(320px, 60vw, 600px)",
         fontFamily: "'Noto Serif Devanagari', serif",
+        background: "#000",
       }}
     >
-      {/* Watermark layer */}
-      <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center select-none z-1">
-        <div className="flex gap-[5vw]">
-          {["कृष्ण", "काली"].map((w) => (
-            <span
-              key={w}
-              style={{ ...wmBase, fontSize: "max(3.5rem, 14vw)" }}
-            >
-              {w}
-            </span>
-          ))}
-        </div>
-        <div className="flex gap-[5vw]" style={{ marginTop: "-0.2em" }}>
-          {["शंकर", "स्वाहा"].map((w) => (
-            <span
-              key={w}
-              style={{
-                ...wmBase,
-                fontSize: "max(2.5rem, 10vw)",
-                WebkitTextStroke: "1px rgba(160, 140, 200, 0.30)",
-              }}
-            >
-              {w}
-            </span>
-          ))}
-        </div>
-      </div>
+      {/* Entire composition wrapper — keeps all pieces relative to each other */}
+      <div
+        style={{
+          position: "relative",
+          width: "clamp(300px, 80vw, 680px)",
+          aspectRatio: "1.2 / 1",
+        }}
+      >
+        {/* ── TOP ROW ── */}
 
-      {/* Face image */}
-      <div className="relative z-2 flex justify-center">
+        {/* कृष्ण — top left */}
         <img
-          src={kaliFace}
+          src={vectorKrsna}
+          alt="कृष्ण"
+          style={{
+            position: "absolute",
+            top: "20%",
+            left: "0%",
+            width: "40%",
+            mixBlendMode: "screen",
+            filter: "invert(1)",
+            opacity: 0.9,
+          }}
+        />
+
+        {/* काली — top right */}
+        <img
+          src={vectorKali}
+          alt="काली"
+          style={{
+            position: "absolute",
+            top: "20%",
+            right: "0%",
+            width: "38%",
+            mixBlendMode: "screen",
+            filter: "invert(1)",
+            opacity: 0.9,
+          }}
+        />
+
+        {/* ── CENTER FACE ── */}
+        <img
+          src={maaKali}
           alt="माँ काली का दिव्य स्वरूप"
           style={{
-            width: "clamp(140px, 38vw, 280px)",
-            aspectRatio: "1 / 1.1",
-            objectFit: "cover",
-            objectPosition: "top center",
-            WebkitMaskImage: "linear-gradient(to bottom, black 62%, transparent 100%)",
-            maskImage: "linear-gradient(to bottom, black 62%, transparent 100%)",
-            borderRadius: "0 0 50% 50%",
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: "52%",
+            zIndex: 2,
+            objectFit: "contain",
+            WebkitMaskImage:
+              "linear-gradient(to bottom, black 60%, rgba(0,0,0,0.5) 82%, transparent 100%)",
+            maskImage:
+              "linear-gradient(to bottom, black 60%, rgba(0,0,0,0.5) 82%, transparent 100%)",
+          }}
+        />
+
+        {/* ── BOTTOM ROW ── */}
+
+        {/* ऐश्वराय — bottom left */}
+        <img
+          src={vectorAishwarya}
+          alt="ऐश्वराय"
+          style={{
+            position: "absolute",
+            bottom: "20%",
+            left: "0%",
+            width: "44%",
+            mixBlendMode: "screen",
+            filter: "invert(1)",
+            opacity: 0.9,
+          }}
+        />
+
+        {/* स्वाहा — bottom right */}
+        <img
+          src={vectorSwaha}
+          alt="स्वाहा"
+          style={{
+            position: "absolute",
+            bottom: "20%",
+            right: "0%",
+            width: "38%",
+            mixBlendMode: "screen",
+            filter: "invert(1)",
+            opacity: 0.9,
           }}
         />
       </div>
