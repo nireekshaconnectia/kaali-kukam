@@ -8,7 +8,6 @@ import vectorSwaha from "@/assets/Vector.png";
 export function Hero() {
   const [mounted, setMounted] = useState(false);
 
-  // Give the browser one frame to paint the hidden state, then trigger animations
   useEffect(() => {
     const t = setTimeout(() => setMounted(true), 60);
     return () => clearTimeout(t);
@@ -21,17 +20,17 @@ export function Hero() {
     <section
       className="relative overflow-hidden w-full flex items-center justify-center"
       style={{
-        minHeight: "clamp(80px, 40vw, 400px)",
         fontFamily: "'Noto Serif Devanagari', serif",
         background: "#000",
       }}
     >
       <div
-        style={{
-          position: "relative",
-          width: "clamp(300px, 80vw, 680px)",
-          aspectRatio: "1.2 / 1",
-        }}
+  style={{
+    position: "relative",
+    width: "clamp(300px, 95vw, 680px)",
+    height: "clamp(260px, 85vw, 580px)", // replace aspectRatio with this
+  }}
+
       >
         {/* कृष्ण — top left */}
         <img
