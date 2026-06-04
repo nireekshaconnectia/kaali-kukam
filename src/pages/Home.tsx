@@ -6,7 +6,7 @@ import { FaqSection } from "../components/kalikulam/FaqSection";
 
 function Home() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-black text-white">
       <Hero />
       <IntroGuru />
       <TantraSection />

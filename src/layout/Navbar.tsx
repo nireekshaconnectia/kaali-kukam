@@ -15,26 +15,30 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border/60">
-      <div className="bg-primary text-primary-foreground text-center py-1.5 text-sm tracking-widest font-display">
-        ॐ क्रीं काली कुलेश्वराय स्वाहा
+      <div className="bg-[#F42903] text-primary-foreground text-center py-1.5 text-sm font-display">
+        ‖ ॐ कृष्ण काली शंकराय स्वाहा ‖
       </div>
 
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
         {/* Left links — desktop only */}
         <div className="hidden md:flex gap-8 flex-1">
-          {navLinks.slice(0, 2).map((l) => (
-            <a key={l} href="#" className="text-primary font-display text-sm hover:text-gold transition-colors">
+          {navLinks.slice(0, 2).map((l, idx) => (
+            <a
+              key={l}
+              href="#"
+              className={`px-4 py-2 ${idx === 0 ? 'text-crimson' : 'text-foreground'} font-display text-sm hover:text-gold transition-colors`}
+            >
               {l}
             </a>
           ))}
         </div>
 
-        <img src={LogoSrc} alt="Kaali Kulam" className="h-10 w-auto" />
+        <img src={LogoSrc} alt="Kaali Kulam" className="h-16 md:h-20 w-auto" />
 
         {/* Right links — desktop only */}
         <div className="hidden md:flex gap-8 flex-1 justify-end">
           {navLinks.slice(2).map((l) => (
-            <a key={l} href="#" className="text-foreground/70 font-display text-sm hover:text-gold transition-colors">
+            <a key={l} href="#" className="px-4 py-2 text-foreground/70 font-display text-sm hover:text-gold transition-colors">
               {l}
             </a>
           ))}

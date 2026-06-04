@@ -1,4 +1,4 @@
-import { Logo } from "./Logo";
+import union from "@/assets/Union.png";
 import trishul from "@/assets/trishul.png";
 
 const cols = [
@@ -8,21 +8,19 @@ const cols = [
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-primary text-primary-foreground">
+    <footer className="relative bg-[#F42903] text-primary-foreground">
       {/* Trishul — always visible, repositioned per breakpoint */}
-    <img
-  src={trishul}
-  alt="त्रिशूल"
-  loading="lazy"
-  className="pointer-events-none absolute right-18 -top-14 h-[60%] w-auto 
-             sm:h-[90%]
-             md:right-4 md:-top-16 md:h-[90%] 0"
-/>
+      <img
+    src={trishul}
+    alt="त्रिशूल"
+    loading="lazy"
+    className="pointer-events-none absolute right-4 -top-16 md:-top-20 h-[80%] md:h-[130%] w-auto"
+  />
 
       <div className="relative mx-auto grid max-w-6xl gap-10 px-6 py-14 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
         {/* Col 1 — Logo + address */}
         <div>
-          <Logo />
+          <img src={union} alt="Union" className="h-20 w-auto mt-2" />
           <p className="mt-6 text-sm/relaxed text-primary-foreground/85">
             प्लॉट F1/149, सेक्टर 16, रोहिणी,
             <br />
@@ -71,9 +69,9 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="relative border-t border-primary-foreground/20 py-4 text-center text-xs text-primary-foreground/70">
-        © 2026 Kali Kulam. All rights reserved.
-      </div>
+        <div className="bg-[#BD1C00] text-primary-foreground py-1.5 text-center text-xs">
+          © 2026 Kali Kulam. All rights reserved.
+        </div>
     </footer>
   );
 }

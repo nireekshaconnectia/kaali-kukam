@@ -24,7 +24,7 @@ export function FaqSection() {
   return (
     <section className="mx-auto max-w-3xl px-6 py-16">
       <h2 className="text-center font-display text-4xl md:text-5xl text-foreground mb-12">प्रश्नोत्तर</h2>
-      <Accordion type="single" collapsible defaultValue="item-0" className="space-y-3">
+      <Accordion type="single" collapsible defaultValue="item-0" className="space-y-3 pt-3 pb-3">
         {faqs.map((faq, i) => (
           <AccordionItem
             key={i}
