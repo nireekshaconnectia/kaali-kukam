@@ -1,4 +1,4 @@
-import dakshinaHands from "@/assets/dakshina-hands.jpeg";
+import dakshinaHands from "@/assets/dakshina-hands.png";
 import { useScrollReveal } from "../../hooks/useScrollReveal";
 
 export function DakshinaSection() {

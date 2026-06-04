@@ -34,7 +34,7 @@ export function IntroGuru() {
             width={400}
             height={500}
             loading="lazy"
-            className="w-64 md:w-full max-w-xs object-contain border-b-2 border-gold/40"
+            className="w-64 md:w-full max-w-xs object-contain"
           />
         </div>
       </div>
