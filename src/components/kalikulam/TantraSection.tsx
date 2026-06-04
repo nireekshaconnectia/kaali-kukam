@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import roundShape from "@/assets/RoundShape.png";
 import tanthraa from "@/assets/Tanthraa.png";
 import manthraaNew from "@/assets/Manthraa_New.png";

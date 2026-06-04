@@ -1,5 +1,5 @@
 import guru from "@/assets/guru.png";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { useScrollReveal } from "../../hooks/useScrollReveal";
 
 export function IntroGuru() {
   const textRef = useScrollReveal<HTMLDivElement>({ delay: 0 });
