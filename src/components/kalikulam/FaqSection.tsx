@@ -1,9 +1,11 @@
+import { useEffect, useRef } from "react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "../ui/accordion";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const faqs = [
   {
@@ -21,25 +23,64 @@ const faqs = [
 ];
 
 export function FaqSection() {
+  const headingRef = useScrollReveal<HTMLHeadingElement>({ threshold: 0.3 });
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+
+    itemRefs.current.forEach((el, i) => {
+      if (!el) return;
+      el.style.opacity = "0";
+      el.style.transform = "translateY(24px)";
+      el.style.transition = `opacity 0.6s ease ${i * 80}ms, transform 0.6s ease ${i * 80}ms`;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            el.style.opacity = "1";
+            el.style.transform = "translateY(0)";
+            observer.disconnect();
+          }
+        },
+        { threshold: 0.1 }
+      );
+      observer.observe(el);
+      observers.push(observer);
+    });
+
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
+
   return (
     <section className="mx-auto max-w-3xl px-6 py-16">
-      <h2 className="text-center font-display text-4xl md:text-5xl text-foreground mb-12">प्रश्नोत्तर</h2>
+      <h2
+        ref={headingRef}
+        className="text-center font-display text-4xl md:text-5xl text-foreground mb-12"
+      >
+        प्रश्नोत्तर
+      </h2>
+
       <Accordion type="single" collapsible defaultValue="item-0" className="space-y-3 pt-3 pb-3">
         {faqs.map((faq, i) => (
-          <AccordionItem
+          <div
             key={i}
-            value={`item-${i}`}
-            className="rounded-lg border border-border bg-card/60 px-5"
+            ref={(el) => { itemRefs.current[i] = el; }}
           >
-            <AccordionTrigger className="font-display text-left text-gold-soft hover:no-underline">
-              {faq.q}
-            </AccordionTrigger>
-            <AccordionContent className="space-y-3 text-foreground/75 leading-relaxed">
-              {faq.a.map((p, j) => (
-                <p key={j}>{p}</p>
-              ))}
-            </AccordionContent>
-          </AccordionItem>
+            <AccordionItem
+              value={`item-${i}`}
+              className="rounded-lg border border-border bg-card/60 px-5"
+            >
+              <AccordionTrigger className="font-display text-left text-gold-soft hover:no-underline">
+                {faq.q}
+              </AccordionTrigger>
+              <AccordionContent className="space-y-3 text-foreground/75 leading-relaxed">
+                {faq.a.map((p, j) => (
+                  <p key={j}>{p}</p>
+                ))}
+              </AccordionContent>
+            </AccordionItem>
+          </div>
         ))}
       </Accordion>
     </section>

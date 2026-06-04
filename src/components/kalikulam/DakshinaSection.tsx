@@ -1,6 +1,9 @@
 import dakshinaHands from "@/assets/dakshina-hands.jpeg";
+import { useScrollReveal } from "../../hooks/useScrollReveal";
 
 export function DakshinaSection() {
+  const contentRef = useScrollReveal<HTMLDivElement>({ threshold: 0.2 });
+
   return (
     <section className="relative overflow-hidden">
       <img
@@ -12,7 +15,7 @@ export function DakshinaSection() {
         className="absolute inset-0 h-full w-full object-cover opacity-60"
       />
       <div className="absolute inset-0 bg-linear-to-b from-background/70 via-maroon/40 to-background/90" />
-      <div className="relative mx-auto max-w-3xl px-6 py-20 text-center">
+      <div ref={contentRef} className="relative mx-auto max-w-3xl px-6 py-20 text-center">
         <p className="font-display text-muted-foreground text-sm mb-1">कृतज्ञता का अर्पण</p>
         <h2 className="font-display text-4xl md:text-5xl text-muted-foreground mb-8">संकल्प दक्षिणा</h2>
         <button className="rounded-full border border-gold/60 bg-linear-to-b from-accent/70 to-maroon px-8 py-3 font-display text-muted-foreground transition-transform hover:scale-105 glow">

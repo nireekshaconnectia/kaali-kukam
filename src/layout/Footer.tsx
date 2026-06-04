@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import union from "@/assets/Union.png";
 import trishul from "@/assets/trishul.png";
 
@@ -7,71 +8,107 @@ const cols = [
 ];
 
 export function Footer() {
-  return (
-    <footer className="relative bg-[#F42903] text-primary-foreground">
-      {/* Trishul — always visible, repositioned per breakpoint */}
-      <img
-    src={trishul}
-    alt="त्रिशूल"
-    loading="lazy"
-    className="pointer-events-none absolute right-4 -top-16 md:-top-20 h-[80%] md:h-[130%] w-auto"
-  />
+  const footerRef = useRef<HTMLElement>(null);
+  const trishulRef = useRef<HTMLImageElement>(null);
 
-      <div className="relative mx-auto grid max-w-6xl gap-10 px-6 py-14 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-        {/* Col 1 — Logo + address */}
+  useEffect(() => {
+    const el = footerRef.current;
+    if (!el) return;
+    el.style.opacity = "0";
+    el.style.transform = "translateY(40px)";
+    el.style.transition = "opacity 0.8s ease, transform 0.8s cubic-bezier(0.22,1,0.36,1)";
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.style.opacity = "1";
+          el.style.transform = "translateY(0)";
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1, root: document.getElementById("scroll-container") }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const container = document.getElementById("scroll-container");
+    if (!container) return;
+    const handleScroll = () => {
+      const el = trishulRef.current;
+      const footer = footerRef.current;
+      if (!el || !footer) return;
+      const rect = footer.getBoundingClientRect();
+      const progress = Math.max(0, Math.min(1, 1 - rect.top / window.innerHeight));
+      el.style.transform = `translateY(${progress * -24}px)`;
+    };
+    container.addEventListener("scroll", handleScroll, { passive: true });
+    return () => container.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <footer
+      ref={footerRef}
+      style={{
+        scrollSnapAlign: "start",
+        scrollSnapStop: "always",
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        position: "relative",
+        backgroundColor: "#F42903",
+        color: "white",
+      }}
+    >
+      <img
+        ref={trishulRef}
+        src={trishul}
+        alt="त्रिशूल"
+        loading="lazy"
+        style={{
+          transition: "transform 0.1s linear",
+          pointerEvents: "none",
+          position: "absolute",
+          right: "1rem",
+          top: "-4rem",
+          height: "130%",
+          width: "auto",
+        }}
+      />
+
+      <div style={{ position: "relative", maxWidth: "72rem", margin: "0 auto", padding: "3.5rem 1.5rem", width: "100%", display: "grid", gap: "2.5rem", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))" }}>
         <div>
-          <img src={union} alt="Union" className="h-20 w-auto mt-2" />
-          <p className="mt-6 text-sm/relaxed text-primary-foreground/85">
-            प्लॉट F1/149, सेक्टर 16, रोहिणी,
-            <br />
-            दिल्ली &nbsp; 110089
+          <img src={union} alt="Union" style={{ height: "5rem", width: "auto", marginTop: "0.5rem" }} />
+          <p style={{ marginTop: "1.5rem", fontSize: "0.875rem", lineHeight: "1.6", opacity: 0.85 }}>
+            प्लॉट F1/149, सेक्टर 16, रोहिणी,<br />दिल्ली &nbsp; 110089
           </p>
-          <p className="mt-2 text-sm text-primary-foreground/85">
-            support@kalikulam.org
-          </p>
+          <p style={{ marginTop: "0.5rem", fontSize: "0.875rem", opacity: 0.85 }}>support@kalikulam.org</p>
         </div>
 
-        {/* Col 2 — Nav links */}
-        <div className="flex gap-12">
+        <div style={{ display: "flex", gap: "3rem" }}>
           {cols.map((col, i) => (
-            <ul key={i} className="space-y-2 font-display text-sm">
+            <ul key={i} style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.5rem", fontSize: "0.875rem" }}>
               {col.map((l) => (
-                <li key={l}>
-                  <a
-                    href="#"
-                    className="hover:text-gold-soft transition-colors"
-                  >
-                    {l}
-                  </a>
-                </li>
+                <li key={l}><a href="#" style={{ color: "white", textDecoration: "none", opacity: 0.9 }}>{l}</a></li>
               ))}
             </ul>
           ))}
         </div>
 
-        {/* Col 3 — Newsletter */}
-        <div className="sm:col-span-2 md:col-span-1">
-          <p className="font-display mb-3">काली कुलम ज्ञान पत्रिका</p>
-          <form className="flex items-center gap-2 rounded-full border border-primary-foreground/40 bg-background/20 px-4 py-2">
-            <input
-              type="email"
-              placeholder="ईमेल"
-              className="flex-1 bg-transparent text-sm outline-none placeholder:text-primary-foreground/60"
-            />
-            <button
-              type="submit"
-              aria-label="सदस्यता लें"
-              className="grid h-7 w-7 place-items-center rounded-full bg-primary-foreground/90 text-primary"
-            >
-              →
-            </button>
-          </form>
+        <div>
+          <p style={{ marginBottom: "0.75rem", fontFamily: "var(--font-display)" }}>काली कुलम ज्ञान पत्रिका</p>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", borderRadius: "9999px", border: "1px solid rgba(255,255,255,0.4)", background: "rgba(0,0,0,0.2)", padding: "0.5rem 1rem" }}>
+            <input type="email" placeholder="ईमेल" style={{ flex: 1, background: "transparent", border: "none", outline: "none", fontSize: "0.875rem", color: "white" }} />
+            <button aria-label="सदस्यता लें" style={{ width: "1.75rem", height: "1.75rem", borderRadius: "50%", background: "rgba(255,255,255,0.9)", color: "#F42903", border: "none", cursor: "pointer", display: "grid", placeItems: "center" }}>→</button>
+          </div>
         </div>
       </div>
 
-        <div className="bg-[#BD1C00] text-primary-foreground py-1.5 text-center text-xs">
-          © 2026 Kali Kulam. All rights reserved.
-        </div>
+      <div style={{ background: "#BD1C00", textAlign: "center", padding: "0.375rem", fontSize: "0.75rem" }}>
+        © 2026 Kali Kulam. All rights reserved.
+      </div>
     </footer>
   );
 }

@@ -6,13 +6,53 @@ import { FaqSection } from "../components/kalikulam/FaqSection";
 
 function Home() {
   return (
-    <div className="min-h-screen bg-black text-white">
-      <Hero />
-      <IntroGuru />
-      <TantraSection />
-      <DakshinaSection />
-      <FaqSection />
-    </div>
+    <>
+      <SnapSection>
+        <Hero />
+      </SnapSection>
+
+      <SnapSection>
+        <IntroGuru />
+      </SnapSection>
+
+      {/* TantraSection has tall content — snaps at top, min 100vh */}
+      <SnapSection tall>
+        <TantraSection />
+      </SnapSection>
+
+      <SnapSection>
+        <DakshinaSection />
+      </SnapSection>
+
+      <SnapSection tall>
+        <FaqSection />
+      </SnapSection>
+    </>
   );
 }
+
+function SnapSection({
+  children,
+  tall = false,
+}: {
+  children: React.ReactNode;
+  tall?: boolean;
+}) {
+  return (
+    <section
+      style={{
+        scrollSnapAlign: "start",
+        scrollSnapStop: "always",
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: tall ? "flex-start" : "center",
+        backgroundColor: "var(--color-background, #0d0a09)",
+      }}
+    >
+      {children}
+    </section>
+  );
+}
+
 export default Home;
