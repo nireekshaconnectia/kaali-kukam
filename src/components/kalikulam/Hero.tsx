@@ -21,7 +21,7 @@ export function Hero() {
     <section
       className="relative overflow-hidden w-full flex items-center justify-center"
       style={{
-        minHeight: "clamp(320px, 60vw, 600px)",
+        minHeight: "clamp(80px, 40vw, 400px)",
         fontFamily: "'Noto Serif Devanagari', serif",
         background: "#000",
       }}
