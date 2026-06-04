@@ -53,7 +53,7 @@ export function Footer() {
       style={{
         scrollSnapAlign: "start",
         scrollSnapStop: "always",
-        minHeight: "100vh",
+        minHeight: "50vh",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -73,7 +73,7 @@ export function Footer() {
           position: "absolute",
           right: "1rem",
           top: "-4rem",
-          height: "130%",
+          height: "115%",
           width: "auto",
         }}
       />
