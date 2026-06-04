@@ -8,69 +8,61 @@ import { useEffect, useRef } from "react";
  */
 export function useBackgroundMusic(src: string, volume = 0.35) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const unlockedRef = useRef(false);
+  const isPlayingRef = useRef(false);
 
   useEffect(() => {
-    // Create and configure audio element
+    // Create audio element
     const audio = new Audio();
     audio.loop = true;
     audio.volume = volume;
     audio.preload = "auto";
-    // iOS Safari requires load() before play() will work
     audio.src = src;
     audio.load();
     audioRef.current = audio;
 
-    const attemptPlay = () => {
-      if (unlockedRef.current) return;
-      audio
-        .play()
-        .then(() => {
-          unlockedRef.current = true;
-          removeListeners();
-        })
-        .catch(() => {
-          // Still blocked — will retry on next interaction
-        });
-    };
-
-    // iOS Safari: play() MUST be called synchronously inside a touch/click handler.
-    // Using { passive: true } improves scroll performance on mobile.
-    const handleInteraction = () => {
-      if (unlockedRef.current) return;
-      // Re-load on iOS in case the element stalled
+    const startPlayback = () => {
+      if (isPlayingRef.current) return;
+      
+      // For iOS: need to reload if audio element is stalled
       if (audio.readyState === 0) {
         audio.load();
       }
-      attemptPlay();
+      
+      audio.play()
+        .then(() => {
+          isPlayingRef.current = true;
+          // Remove listeners once playing
+          removeListeners();
+        })
+        .catch((err) => {
+          console.log("Playback still blocked:", err);
+        });
     };
 
     const removeListeners = () => {
-      window.removeEventListener("touchstart", handleInteraction);
-      window.removeEventListener("touchend", handleInteraction);
-      window.removeEventListener("click", handleInteraction);
-      window.removeEventListener("keydown", handleInteraction);
+      document.removeEventListener("touchstart", startPlayback);
+      document.removeEventListener("click", startPlayback);
+      document.removeEventListener("keydown", startPlayback);
     };
 
-    // Try immediate autoplay first (works on desktop / Android with no autoplay block)
-    audio
-      .play()
+    // Try to play immediately (might work on desktop)
+    audio.play()
       .then(() => {
-        unlockedRef.current = true;
+        isPlayingRef.current = true;
       })
       .catch(() => {
-        // Autoplay blocked — arm interaction listeners
-        // touchend fires slightly after touchstart and is more reliable for iOS play()
-        window.addEventListener("touchstart", handleInteraction, { passive: true });
-        window.addEventListener("touchend", handleInteraction, { passive: true });
-        window.addEventListener("click", handleInteraction);
-        window.addEventListener("keydown", handleInteraction);
+        // Autoplay blocked - wait for user interaction on the ENTIRE document
+        document.addEventListener("touchstart", startPlayback, { once: false });
+        document.addEventListener("click", startPlayback, { once: false });
+        document.addEventListener("keydown", startPlayback, { once: false });
       });
 
     return () => {
       removeListeners();
-      audio.pause();
-      audio.src = "";
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.src = "";
+      }
     };
   }, [src, volume]);
 }
