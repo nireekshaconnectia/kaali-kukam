@@ -156,11 +156,6 @@ export function FaqSection() {
               : {
                   scale: [1, 1.05, 1],
                   rotateY: [0, 10, 0, -10, 0],
-                  filter: [
-                    "drop-shadow(0px 0px 0px rgba(214, 161, 95, 0))",
-                    "drop-shadow(0px 0px 30px rgba(214, 161, 95, 0.6))",
-                    "drop-shadow(0px 0px 0px rgba(214, 161, 95, 0))",
-                  ],
                 }
           }
           transition={{
