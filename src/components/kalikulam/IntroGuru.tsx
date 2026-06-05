@@ -12,7 +12,7 @@ export function IntroGuru() {
   const isInView = useInView(sectionRef, { 
     amount: 0.1,
     once: false,  // Re-trigger every time
-    margin: "-400px 0px -400px 0px"
+    margin: "-380px 0px -380px 0px"
   });
 
   // Left to right animation for text
