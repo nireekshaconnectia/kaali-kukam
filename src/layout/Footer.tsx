@@ -1,4 +1,5 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
+import { motion } from "framer-motion";
 import union from "@/assets/Union.png";
 import trishul from "@/assets/trishul.png";
 
@@ -8,58 +9,30 @@ const cols = [
 ];
 
 export function Footer() {
-  const footerRef = useRef<HTMLElement>(null);
   const trishulRef = useRef<HTMLImageElement>(null);
 
-  // Fade up on scroll into view
-  useEffect(() => {
-    const el = footerRef.current;
+  // Trishul subtle parallax — keep this, it's well-matched to the pattern
+  const handleScroll = () => {
+    const el = trishulRef.current;
     if (!el) return;
-    
-    el.style.opacity = "0";
-    el.style.transform = "translateY(40px)";
-    el.style.transition = "opacity 0.8s ease, transform 0.8s cubic-bezier(0.22,1,0.36,1)";
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.style.opacity = "1";
-          el.style.transform = "translateY(0)";
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.1, root: document.getElementById("scroll-container") }
-    );
-    
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
-
-  // Trishul subtle parallax on scroll
-  useEffect(() => {
-    const container = document.getElementById("scroll-container");
-    if (!container) return;
-    
-    const handleScroll = () => {
-      const el = trishulRef.current;
-      const footer = footerRef.current;
-      if (!el || !footer) return;
-      
-      const rect = footer.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      const progress = Math.max(0, Math.min(1, 1 - rect.top / viewportHeight));
-      el.style.transform = `translateY(${progress * -24}px)`;
-    };
-    
-    container.addEventListener("scroll", handleScroll, { passive: true });
-    return () => container.removeEventListener("scroll", handleScroll);
-  }, []);
+    const rect = el.closest("footer")?.getBoundingClientRect();
+    if (!rect) return;
+    const progress = Math.max(0, Math.min(1, 1 - rect.top / window.innerHeight));
+    el.style.transform = `translateY(${progress * -24}px)`;
+  };
 
   return (
-    <footer
-      ref={footerRef}
-      style={{ scrollSnapAlign: "start", scrollSnapStop: "always" }}
+    // Converted to Framer Motion for consistency; removed stale scrollSnapAlign
+    <motion.footer
       className="relative bg-[#F42903] text-primary-foreground"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      onViewportEnter={() => {
+        const container = document.getElementById("scroll-container");
+        if (container) container.addEventListener("scroll", handleScroll, { passive: true });
+      }}
     >
       <img
         ref={trishulRef}
@@ -77,7 +50,7 @@ export function Footer() {
           <p className="mt-6 text-sm/relaxed text-primary-foreground/85">
             पता: F1/145, सेक्टर 16, रोहिणी,
             <br />
-             दिल्ली - 110089
+            दिल्ली - 110089
           </p>
           <p className="mt-2 text-sm text-primary-foreground/85">support@kalikulam.org</p>
         </div>
@@ -100,7 +73,7 @@ export function Footer() {
         {/* Col 3 — Newsletter */}
         <div className="sm:col-span-2 md:col-span-1">
           <p className="font-display mb-3">काली कुलम ज्ञान पत्रिका</p>
-          <form 
+          <form
             onSubmit={(e) => e.preventDefault()}
             className="flex items-center gap-2 rounded-full border border-primary-foreground/40 bg-background/20 px-4 py-2"
           >
@@ -123,6 +96,6 @@ export function Footer() {
       <div className="bg-[#BD1C00] text-primary-foreground py-1.5 text-center text-md">
         © 2026 Kali Kulam. All rights reserved.
       </div>
-    </footer>
+    </motion.footer>
   );
 }

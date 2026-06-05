@@ -154,10 +154,11 @@
   --sidebar-primary: oklch(0.488 0.243 264.376);
   --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
   --sidebar-accent: oklch(0.279 0.041 260.031);
-  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
 }
+
 /* Animated gradient background */
 .bg-300\% {
   background-size: 300% auto;
@@ -172,22 +173,46 @@
 * {
   scroll-behavior: smooth;
 }
+
+/* ── Scrollbar: visible only on large screens ── */
+/* Hide scrollbar on mobile / tablet */
+#scroll-container {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
 #scroll-container::-webkit-scrollbar {
-  width: 8px;
+  display: none; /* Chrome/Safari/mobile */
 }
 
-#scroll-container::-webkit-scrollbar-track {
-  background: #2d2d2d;
-  border-radius: 10px;
+/* Show styled scrollbar on large screens (≥ 1024px) */
+@media (min-width: 1024px) {
+  #scroll-container {
+    scrollbar-width: thin;
+    scrollbar-color: #555 #2d2d2d;
+  }
+  #scroll-container::-webkit-scrollbar {
+    display: block;
+    width: 8px;
+  }
+  #scroll-container::-webkit-scrollbar-track {
+    background: #2d2d2d;
+    border-radius: 10px;
+  }
+  #scroll-container::-webkit-scrollbar-thumb {
+    background: #555;
+    border-radius: 10px;
+  }
+  #scroll-container::-webkit-scrollbar-thumb:hover {
+    background: #777;
+  }
 }
 
-#scroll-container::-webkit-scrollbar-thumb {
-  background: #555;
-  border-radius: 10px;
-}
-
-#scroll-container::-webkit-scrollbar-thumb:hover {
-  background: #777;
+/* Prevent horizontal overflow everywhere */
+html,
+body,
+#root {
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 /* Hover transition for all interactive elements */
@@ -195,15 +220,17 @@ a,
 button {
   transition: all 0.3s ease;
 }
+
 @layer base {
   * {
     border-color: var(--color-border);
   }
-html, body {
-  overflow-x: hidden;
-  margin: 0;
-  padding: 0;
-}
+  html,
+  body {
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);

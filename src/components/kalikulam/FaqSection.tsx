@@ -1,6 +1,5 @@
 // FaqSection.tsx
-import { motion, useInView, useAnimation, type Variants } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import {
   Accordion,
   AccordionContent,
@@ -45,141 +44,44 @@ const faqs = [
   },
 ];
 
-const containerVariants: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.3,
-    },
-  },
-};
-
-const headerVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    y: 50,
-    scale: 0.9,
-    rotateX: -15,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    rotateX: 0,
-    transition: {
-      type: "spring",
-      stiffness: 120,
-      damping: 12,
-      duration: 0.8,
-    },
-  },
-};
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 40, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      type: "spring",
-      stiffness: 100,
-      damping: 15,
-      duration: 0.6,
-    },
-  },
-};
-
 export function FaqSection() {
   const prefersReducedMotion = useReducedMotion();
-  const sectionRef = useRef(null);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
-  const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
-  const controls = useAnimation();
+  const dur = prefersReducedMotion ? 0 : 0.6;
+  const yVal = prefersReducedMotion ? 0 : 30;
 
-  useEffect(() => {
-    if (isInView && !prefersReducedMotion) {
-      controls.start("visible");
-    }
-  }, [isInView, controls, prefersReducedMotion]);
+  // Container staggers children on enter — whileInView replaces useAnimation
+  const containerVariants = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
+  };
+
+  const fadeUp = {
+    hidden: { opacity: prefersReducedMotion ? 1 : 0, y: yVal },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: dur, ease: "easeOut" as const },
+    },
+  };
 
   return (
     <motion.section
-      ref={sectionRef}
-      className="mx-auto max-w-3xl px-6 py-16 w-full overflow-hidden relative"
+      className="mx-auto max-w-3xl px-6 py-16 w-full"
       initial="hidden"
-      animate={controls}
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.15 }}
       variants={containerVariants}
     >
-      {/* Animated Heading with Enhanced Effects */}
-      <motion.div variants={headerVariants} className="relative mb-12">
-        {/* Multiple pulsing background circles */}
-        {!prefersReducedMotion && (
-          <>
-            <motion.div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-[#D6A15F]/5 blur-3xl"
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.3, 0.6, 0.3],
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
-            <motion.div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-[#D6A15F]/3 blur-3xl"
-              animate={{
-                scale: [1, 1.3, 1],
-                opacity: [0.2, 0.4, 0.2],
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: 0.5,
-              }}
-            />
-          </>
-        )}
-
-        <motion.img
+      {/* Header image — simple fade-up, no 3D rotation */}
+      <motion.div variants={fadeUp} className="mb-12 flex justify-center">
+        <img
           src={vector}
           alt="संकल्प FAQ"
-          className="mx-auto h-auto w-full max-w-sm relative z-10"
-          animate={
-            prefersReducedMotion
-              ? {}
-              : {
-                  scale: [1, 1.05, 1],
-                  rotateY: [0, 10, 0, -10, 0],
-                }
-          }
-          transition={{
-            scale: {
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut",
-            },
-            rotateY: {
-              duration: 6,
-              repeat: Infinity,
-              ease: "easeInOut",
-            },
-            filter: {
-              duration: 4,
-              repeat: Infinity,
-              repeatDelay: 1,
-              ease: "easeInOut",
-            },
-          }}
+          className="h-auto w-full max-w-sm"
         />
       </motion.div>
 
-      {/* FAQ Accordion */}
+      {/* Accordion — let the built-in height transition do the work */}
       <Accordion
         type="single"
         collapsible
@@ -189,93 +91,28 @@ export function FaqSection() {
         {faqs.map((faq, i) => (
           <motion.div
             key={i}
-            variants={itemVariants}
+            variants={fadeUp}
             className="w-full min-w-0"
-            whileHover={
-              prefersReducedMotion
-                ? {}
-                : {
-                    scale: 1.02,
-                    transition: { type: "spring", stiffness: 400, damping: 20 },
-                  }
-            }
-            onHoverStart={() => setHoveredIndex(i)}
-            onHoverEnd={() => setHoveredIndex(null)}
           >
             <AccordionItem
               value={`item-${i}`}
-              className="border-b border-[#1f1f1f] py-1 group"
+              className="border-b border-[#1f1f1f] py-1"
             >
               <AccordionTrigger className="text-left text-[15px] font-medium text-[#D6A15F] hover:no-underline py-4 [&>svg]:text-[#D6A15F] [&>svg]:h-4 [&>svg]:w-4 [&>svg]:transition-transform [&>svg]:duration-300">
-                <motion.span
-                  className="inline-block"
-                  whileHover={prefersReducedMotion ? {} : { x: 12 }}
-                  animate={
-                    hoveredIndex === i && !prefersReducedMotion
-                      ? {
-                          x: [0, 8, 0],
-                          color: ["#D6A15F", "#E8B97A", "#D6A15F"],
-                        }
-                      : {}
-                  }
-                  transition={{
-                    x: { duration: 0.5, repeat: Infinity },
-                    color: { duration: 0.8, repeat: Infinity },
-                  }}
-                >
-                  {faq.q}
-                </motion.span>
+                {faq.q}
               </AccordionTrigger>
 
               <AccordionContent className="pt-2 pb-4">
-                <motion.div
-                  className="rounded-2xl bg-linear-to-br from-[#111111] to-[#1a1a1a] px-6 py-5 text-[#D8D8D8] text-[14px] leading-7 space-y-4 border border-[#2a2a2a] relative overflow-hidden"
-                  initial={{ opacity: 0, scale: 0.95, y: 20 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ duration: 0.4, ease: "easeOut" }}
-                  whileHover={
-                    prefersReducedMotion
-                      ? {}
-                      : {
-                          scale: 1.02,
-                          borderColor: "#D6A15F",
-                          transition: { duration: 0.2 },
-                        }
-                  }
-                >
-                
+                <div className="rounded-2xl bg-linear-to-br from-[#111111] to-[#1a1a1a] px-6 py-5 text-[#D8D8D8] text-[14px] leading-7 space-y-4 border border-[#2a2a2a]">
                   {faq.a.map((p, j) => (
-                    <motion.p
-                      key={j}
-                      initial={{ opacity: 0, x: -30 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{
-                        delay: j * 0.1,
-                        duration: 0.5,
-                        ease: "easeOut",
-                      }}
-                      className="hover:text-white transition-colors duration-300 relative"
-                      whileHover={
-                        prefersReducedMotion
-                          ? {}
-                          : {
-                              x: 5,
-                              transition: { duration: 0.2 },
-                            }
-                      }
-                    >
-                      {p}
-                    </motion.p>
+                    <p key={j}>{p}</p>
                   ))}
-
-                </motion.div>
+                </div>
               </AccordionContent>
             </AccordionItem>
           </motion.div>
         ))}
       </Accordion>
-
-     
     </motion.section>
   );
 }

@@ -18,11 +18,11 @@ function Layout() {
         style={{
           flex: 1,
           overflowY: "scroll",
-          scrollSnapType: "y mandatory",
+          overflowX: "hidden",
+          WebkitOverflowScrolling: "touch", // smooth momentum scroll on iOS
           scrollBehavior: "smooth",
         }}
         id="scroll-container"
-        className="custom-scrollbar" // Add this class
       >
         <Outlet />
         <Footer />
