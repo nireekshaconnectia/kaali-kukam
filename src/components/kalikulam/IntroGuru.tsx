@@ -52,7 +52,7 @@ export function IntroGuru() {
     return (
       <section
         ref={sectionRef}
-        className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-15"
+        className="mx-auto max-w-6xl px-4 py-9 md:px-6 md:py-15"
       >
         <div className="grid items-center gap-6 md:gap-10 md:grid-cols-[1.4fr_1fr]">
          <div>
