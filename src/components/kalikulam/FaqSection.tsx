@@ -243,15 +243,7 @@ export function FaqSection() {
                         }
                   }
                 >
-                  {/* Animated gradient background on hover */}
-                  {!prefersReducedMotion && (
-                    <motion.div
-                      className="absolute inset-0 bg-linear-to-r from-transparent via-[#D6A15F]/5 to-transparent -translate-x-full"
-                      whileHover={{ x: "100%" }}
-                      transition={{ duration: 0.6 }}
-                    />
-                  )}
-
+                
                   {faq.a.map((p, j) => (
                     <motion.p
                       key={j}
@@ -276,35 +268,6 @@ export function FaqSection() {
                     </motion.p>
                   ))}
 
-                  {/* Animated decorative elements in content */}
-                  {!prefersReducedMotion && (
-                    <>
-                      <motion.div
-                        className="absolute bottom-2 right-2 w-8 h-8 border border-[#D6A15F]/20 rounded-full"
-                        animate={{
-                          scale: [1, 1.2, 1],
-                          rotate: [0, 180, 360],
-                        }}
-                        transition={{
-                          duration: 10,
-                          repeat: Infinity,
-                          ease: "linear",
-                        }}
-                      />
-                      <motion.div
-                        className="absolute top-2 left-2 w-4 h-4 bg-[#D6A15F]/10 rounded-full"
-                        animate={{
-                          scale: [1, 1.5, 1],
-                          opacity: [0.3, 0.8, 0.3],
-                        }}
-                        transition={{
-                          duration: 3,
-                          repeat: Infinity,
-                          ease: "easeInOut",
-                        }}
-                      />
-                    </>
-                  )}
                 </motion.div>
               </AccordionContent>
             </AccordionItem>
