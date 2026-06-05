@@ -60,13 +60,13 @@ export function IntroGuru() {
     पूज्य आदिगुरु ,
   </p>
 
-  <h2 className="font-body text-2xl md:text-4xl font-bold leading-none">
+  <h2 className="font-body text-2xl md:text-3xl font-bold leading-none">
     <span
       className="
-        bg-linear-to-r
+        bg-linear-to-tr
         from-[#EBB57C]
-        via-[#94622C]
-        to-[#835626]
+        via-[#95632e]
+        to-[#94622C]
         bg-clip-text
         text-transparent
         drop-shadow-[0_1px_2px_rgba(235,181,124,0.35)]
