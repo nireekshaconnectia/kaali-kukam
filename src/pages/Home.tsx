@@ -4,33 +4,6 @@ import { IntroGuru } from "../components/kalikulam/IntroGuru";
 import { Hero } from "../components/kalikulam/Hero";
 import { FaqSection } from "../components/kalikulam/FaqSection";
 
-function Home() {
-  return (
-    <>
-      <SnapSection>
-        <Hero />
-      </SnapSection>
-
-      <SnapSection>
-        <IntroGuru />
-      </SnapSection>
-
-      {/* TantraSection has tall content — snaps at top, min 100vh */}
-      <SnapSection tall>
-        <TantraSection />
-      </SnapSection>
-
-      <SnapSection>
-        <DakshinaSection />
-      </SnapSection>
-
-      <SnapSection tall>
-        <FaqSection />
-      </SnapSection>
-    </>
-  );
-}
-
 function SnapSection({
   children,
   tall = false,
@@ -52,6 +25,32 @@ function SnapSection({
     >
       {children}
     </section>
+  );
+}
+
+function Home() {
+  return (
+    <>
+      <SnapSection>
+        <Hero />
+      </SnapSection>
+
+      <SnapSection>
+        <IntroGuru />
+      </SnapSection>
+
+      <SnapSection tall>
+        <TantraSection />
+      </SnapSection>
+
+      <SnapSection>
+        <DakshinaSection />
+      </SnapSection>
+
+      <SnapSection tall>
+        <FaqSection />
+      </SnapSection>
+    </>
   );
 }
 

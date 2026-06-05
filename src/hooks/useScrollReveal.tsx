@@ -1,39 +1,47 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
-/**
- * useScrollReveal
- * Attaches a fade-up reveal animation to the returned ref
- * using IntersectionObserver (no extra dependencies needed).
- */
+interface ScrollRevealOptions {
+  threshold?: number;
+  delay?: number;
+  rootMargin?: string;
+}
+
 export function useScrollReveal<T extends HTMLElement>(
-  options: { threshold?: number; delay?: number } = {}
+  options: ScrollRevealOptions = {}
 ) {
-  const ref = useRef<T>(null);
-  const { threshold = 0.15, delay = 0 } = options;
+  const elementRef = useRef<T>(null);
+  const [hasRevealed, setHasRevealed] = useState(false);
 
   useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    // Initial hidden state
-    el.style.opacity = "0";
-    el.style.transform = "translateY(32px)";
-    el.style.transition = `opacity 0.7s ease ${delay}ms, transform 0.7s ease ${delay}ms`;
+    const element = elementRef.current;
+    if (!element || hasRevealed) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          el.style.opacity = "1";
-          el.style.transform = "translateY(0)";
+        if (entry.isIntersecting && !hasRevealed) {
+          setHasRevealed(true);
+          element.style.opacity = "1";
+          element.style.transform = "translateY(0)";
           observer.disconnect();
         }
       },
-      { threshold }
+      {
+        threshold: options.threshold ?? 0.1,
+        rootMargin: options.rootMargin ?? "0px 0px -50px 0px",
+      }
     );
 
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [threshold, delay]);
+    // Set initial hidden state
+    element.style.opacity = "0";
+    element.style.transform = "translateY(24px)";
+    element.style.transition = `opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)`;
+    if (options.delay) {
+      element.style.transitionDelay = `${options.delay}ms`;
+    }
 
-  return ref;
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [options.threshold, options.delay, options.rootMargin, hasRevealed]);
+
+  return elementRef;
 }

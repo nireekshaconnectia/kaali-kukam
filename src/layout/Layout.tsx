@@ -9,12 +9,11 @@ function Layout() {
         height: "100vh",
         display: "flex",
         flexDirection: "column",
-        overflow: "hidden", // prevent body scroll; Home handles its own scroll
+        overflow: "hidden",
       }}
     >
       <Navbar />
 
-      {/* This inner div is the actual scroll container */}
       <div
         style={{
           flex: 1,

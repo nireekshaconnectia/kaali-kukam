@@ -1,11 +1,11 @@
-import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "../ui/accordion";
-import { useScrollReveal } from "../../hooks/useScrollReveal";
+import vector from "@/assets/1.png";
 
 const faqs = [
   {
@@ -42,75 +42,91 @@ const faqs = [
   },
 ];
 
+const listVariants = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.1, delayChildren: 0.1 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.5, ease: "easeOut" as const },
+  },
+};
+
 export function FaqSection() {
-  const headingRef = useScrollReveal<HTMLHeadingElement>({ threshold: 0.3 });
-  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-
-    itemRefs.current.forEach((el, i) => {
-      if (!el) return;
-      el.style.opacity = "0";
-      el.style.transform = "translateY(24px)";
-      el.style.transition = `opacity 0.6s ease ${i * 80}ms, transform 0.6s ease ${i * 80}ms`;
-
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            el.style.opacity = "1";
-            el.style.transform = "translateY(0)";
-            observer.disconnect();
-          }
-        },
-        { threshold: 0.1 },
-      );
-      observer.observe(el);
-      observers.push(observer);
-    });
-
-    return () => observers.forEach((o) => o.disconnect());
-  }, []);
-
   return (
     <section className="mx-auto max-w-3xl px-6 py-16 w-full">
-      <h2
-        ref={headingRef}
-        className="text-center font-display text-4xl md:text-5xl text-foreground mb-12"
-      >
-        प्रश्नोत्तर
-      </h2>
 
-      <Accordion
-        type="single"
-        collapsible
-        defaultValue="item-0"
-        className="space-y-3 w-full"
+      {/* Heading image with bounce and rotation */}
+      <motion.img
+        src={vector}
+        alt="संकल्प FAQ"
+        className="mx-auto mb-8 h-auto w-full max-w-sm"
+        initial={{ opacity: 0, y: 30, rotateX: -15 }}
+        whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 0.8, ease: "easeOut", type: "spring" }}
+      />
+
+      {/* FAQ list with staggered reveal */}
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+        variants={listVariants}
       >
-        {faqs.map((faq, i) => (
-          <div
-            key={i}
-            ref={(el) => {
-              itemRefs.current[i] = el;
-            }}
-            className="w-full min-w-0"
-          >
-            <AccordionItem
-              value={`item-${i}`}
-              className="rounded-lg border border-border bg-card/60 px-5 w-full"
+        <Accordion
+          type="single"
+          collapsible
+          defaultValue="item-0"
+          className="space-y-4 w-full"
+        >
+          {faqs.map((faq, i) => (
+            <motion.div
+              key={i}
+              variants={itemVariants}
+              className="w-full min-w-0"
+              whileHover={{ scale: 1.01 }}
+              transition={{ type: "spring", stiffness: 400 }}
             >
-              <AccordionTrigger className="font-display text-left text-gold-soft hover:no-underline">
-                {faq.q}
-              </AccordionTrigger>
-              <AccordionContent className="space-y-3 text-foreground/75 leading-relaxed">
-                {faq.a.map((p, j) => (
-                  <p key={j}>{p}</p>
-                ))}
-              </AccordionContent>
-            </AccordionItem>
-          </div>
-        ))}
-      </Accordion>
+              <AccordionItem
+                value={`item-${i}`}
+                className="rounded-lg border border-border bg-card/60 px-5 w-full backdrop-blur-sm transition-all duration-300 hover:border-gold-soft/30"
+              >
+                <AccordionTrigger
+                  className="font-display text-left bg-linear-to-r from-[#EBB57C] to-[#94622C] bg-clip-text text-transparent hover:no-underline group"
+                >
+                  <motion.span
+                    className="inline-block"
+                    whileHover={{ x: 5 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    {faq.q}
+                  </motion.span>
+                </AccordionTrigger>
+                <AccordionContent className="space-y-3 text-foreground leading-relaxed">
+                  {faq.a.map((p, j) => (
+                    <motion.p
+                      key={j}
+                      initial={{ opacity: 0, x: -10 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: j * 0.1, duration: 0.3 }}
+                    >
+                      {p}
+                    </motion.p>
+                  ))}
+                </AccordionContent>
+              </AccordionItem>
+            </motion.div>
+          ))}
+        </Accordion>
+      </motion.div>
     </section>
   );
 }
