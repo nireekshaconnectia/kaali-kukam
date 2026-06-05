@@ -120,7 +120,7 @@ export function Footer() {
         </div>
       </div>
 
-      <div className="bg-[#BD1C00] text-primary-foreground py-1.5 text-center text-xs">
+      <div className="bg-[#BD1C00] text-primary-foreground py-1.5 text-center text-md">
         © 2026 Kali Kulam. All rights reserved.
       </div>
     </footer>

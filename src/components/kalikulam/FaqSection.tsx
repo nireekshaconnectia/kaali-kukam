@@ -1,3 +1,4 @@
+// FaqSection.tsx
 import { motion } from "framer-motion";
 import {
   Accordion,
@@ -6,6 +7,7 @@ import {
   AccordionTrigger,
 } from "../ui/accordion";
 import vector from "@/assets/1.png";
+import { useReducedMotion } from "../../hooks/useReducedMotion";
 
 const faqs = [
   {
@@ -60,25 +62,34 @@ const itemVariants = {
 };
 
 export function FaqSection() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <section className="mx-auto max-w-3xl px-6 py-16 w-full">
-
       {/* Heading image with bounce and rotation */}
       <motion.img
         src={vector}
         alt="संकल्प FAQ"
         className="mx-auto mb-8 h-auto w-full max-w-sm"
-        initial={{ opacity: 0, y: 30, rotateX: -15 }}
+        initial={
+          prefersReducedMotion
+            ? { opacity: 1, y: 0, rotateX: 0 }
+            : { opacity: 0, y: 30, rotateX: -15 }
+        }
         whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-        viewport={{  amount: 0.3 }}
-        transition={{ duration: 0.8, ease: "easeOut", type: "spring" }}
+        viewport={{ amount: 0.3 }}
+        transition={
+          prefersReducedMotion
+            ? { duration: 0 }
+            : { duration: 0.8, ease: "easeOut", type: "spring" }
+        }
       />
 
       {/* FAQ list with staggered reveal */}
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={{  amount: 0.1 }}
+        viewport={{ amount: 0.1 }}
         variants={listVariants}
       >
         <Accordion
@@ -92,35 +103,50 @@ export function FaqSection() {
               key={i}
               variants={itemVariants}
               className="w-full min-w-0"
-              whileHover={{ scale: 1.01 }}
+              whileHover={prefersReducedMotion ? {} : { scale: 1.01 }}
               transition={{ type: "spring", stiffness: 400 }}
             >
               <AccordionItem
                 value={`item-${i}`}
-                className="rounded-lg border border-border bg-card/60 px-5 w-full backdrop-blur-sm transition-all duration-300 hover:border-gold-soft/30"
+                className="border-b border-[#1f1f1f] py-1"
               >
                 <AccordionTrigger
-                  className="font-display text-left bg-linear-to-r from-[#EBB57C] to-[#94622C] bg-clip-text text-transparent hover:no-underline group"
+                  className="text-left text-[15px] font-medium text-[#D6A15F] hover:no-underline py-4 [&>svg]:text-[#D6A15F][&>svg]:h-4 [&>svg]:w-4"
                 >
                   <motion.span
                     className="inline-block"
-                    whileHover={{ x: 5 }}
+                    whileHover={prefersReducedMotion ? {} : { x: 5 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
                     {faq.q}
                   </motion.span>
                 </AccordionTrigger>
-                <AccordionContent className="space-y-3 text-foreground leading-relaxed">
+               <AccordionContent className="pt-2 pb-4">
+  <div
+    className="
+      rounded-2xl
+      bg-[#111111]
+      px-6
+      py-5
+      text-[#D8D8D8]
+      text-[14px]
+      leading-7
+      space-y-4
+    "
+  >
                   {faq.a.map((p, j) => (
                     <motion.p
                       key={j}
-                      initial={{ opacity: 0, x: -10 }}
+                      initial={
+                        prefersReducedMotion ? {} : { opacity: 0, x: -10 }
+                      }
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: j * 0.1, duration: 0.3 }}
                     >
                       {p}
                     </motion.p>
                   ))}
+                  </div>
                 </AccordionContent>
               </AccordionItem>
             </motion.div>

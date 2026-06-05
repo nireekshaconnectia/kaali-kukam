@@ -1,4 +1,4 @@
-// FIXED: Typewriter component without complex hooks
+// TantraSection.tsx
 import { motion, useInView } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import roundShape from "@/assets/RoundShape.png";
@@ -9,6 +9,7 @@ import titleTantra from "@/assets/Tantra.png";
 import titleMantra from "@/assets/Mantra.png";
 import titleYantra from "@/assets/Yantra.png";
 import titleTantraMantraYantra from "@/assets/Tantra_Mantra_Yantra.png";
+import { useReducedMotion } from "../../hooks/useReducedMotion";
 
 const items = [
   {
@@ -37,15 +38,22 @@ const items = [
   },
 ];
 
-// FIXED: Simpler typewriter hook without edge cases
+// Simplified typewriter for mobile
 function useTypewriter(text: string, speed = 30) {
   const [displayText, setDisplayText] = useState("");
-  const [isTyping, setIsTyping] = useState(true);
+  const [isComplete, setIsComplete] = useState(false);
   const ref = useRef(null);
-  const isInView = useInView(ref, {  amount: 0.5 });
+  const isInView = useInView(ref, { amount: 0.3 });
+  const prefersReducedMotion = useReducedMotion();
 
   useEffect(() => {
-    if (!isInView) return;
+    if (prefersReducedMotion) {
+      setDisplayText(text);
+      setIsComplete(true);
+      return;
+    }
+    
+    if (!isInView || isComplete) return;
     
     let i = 0;
     const timer = setInterval(() => {
@@ -54,22 +62,30 @@ function useTypewriter(text: string, speed = 30) {
         i++;
       } else {
         clearInterval(timer);
-        setIsTyping(false);
+        setIsComplete(true);
       }
     }, speed);
 
     return () => clearInterval(timer);
-  }, [isInView, text, speed]);
+  }, [isInView, text, speed, isComplete, prefersReducedMotion]);
 
-  return { displayText, isTyping, ref };
+  // Reset when text changes and not in view
+  useEffect(() => {
+    if (!isInView && !prefersReducedMotion) {
+      setDisplayText("");
+      setIsComplete(false);
+    }
+  }, [isInView, text, prefersReducedMotion]);
+
+  return { displayText: prefersReducedMotion ? text : displayText, isTyping: !isComplete && !prefersReducedMotion, ref };
 }
 
 function TypewriterText({ text, className }: { text: string; className?: string }) {
-  const { displayText, isTyping, ref } = useTypewriter(text, 25);
+  const { displayText, isTyping, ref } = useTypewriter(text, 30);
 
   return (
     <p ref={ref} className={className}>
-      {displayText || (displayText === "" && text.slice(0, 1)) || text}
+      {displayText || text.slice(0, 1)}
       {isTyping && displayText.length < text.length && (
         <motion.span
           animate={{ opacity: [1, 0, 1] }}
@@ -81,36 +97,38 @@ function TypewriterText({ text, className }: { text: string; className?: string 
   );
 }
 
-const headerVariants = {
-  hidden: { opacity: 0, y: 24, scale: 0.95 },
-  visible: { 
-    opacity: 1, 
-    y: 0, 
+const headerVariants = (prefersReducedMotion: boolean) => ({
+  hidden: { opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 24, scale: prefersReducedMotion ? 1 : 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
     scale: 1,
-    transition: { duration: 0.8, ease: "easeOut" as const }
+    transition: { duration: prefersReducedMotion ? 0 : 0.8, ease: "easeOut" as const }
   },
-};
+});
 
-const textVariants = {
-  hidden: (fromLeft: boolean) => ({ opacity: 0, x: fromLeft ? -60 : 60 }),
+const textVariants = (prefersReducedMotion: boolean) => ({
+  hidden: (fromLeft: boolean) => ({ opacity: prefersReducedMotion ? 1 : 0, x: prefersReducedMotion ? 0 : (fromLeft ? -60 : 60) }),
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const, delay: 0.1 },
+    transition: { duration: prefersReducedMotion ? 0 : 0.7, ease: [0.22, 1, 0.36, 1] as const, delay: 0.1 },
   },
-};
+});
 
-const imgVariants = {
-  hidden: (fromLeft: boolean) => ({ opacity: 0, x: fromLeft ? 60 : -60, scale: 0.8 }),
+const imgVariants = (prefersReducedMotion: boolean) => ({
+  hidden: (fromLeft: boolean) => ({ opacity: prefersReducedMotion ? 1 : 0, x: prefersReducedMotion ? 0 : (fromLeft ? 60 : -60), scale: prefersReducedMotion ? 1 : 0.8 }),
   visible: {
     opacity: 1,
     x: 0,
     scale: 1,
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const, delay: 0.12 },
+    transition: { duration: prefersReducedMotion ? 0 : 0.7, ease: [0.22, 1, 0.36, 1] as const, delay: 0.12 },
   },
-};
+});
 
 export function TantraSection() {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <section className="mx-auto max-w-5xl px-6 py-16">
 
@@ -118,8 +136,8 @@ export function TantraSection() {
         className="mb-16 flex flex-col items-center text-center"
         initial="hidden"
         whileInView="visible"
-        viewport={{  amount: 0.3 }}
-        variants={headerVariants}
+        viewport={{ amount: 0.3 }}
+        variants={headerVariants(prefersReducedMotion)}
       >
         <motion.div className="relative inline-block">
           <img
@@ -127,6 +145,9 @@ export function TantraSection() {
             alt="तंत्र . मंत्र . यंत्र"
             className="h-16 md:h-24 w-auto object-contain"
           />
+          <p className="text-foreground -mt-2 text-sm md:text-base">
+            विधि, ध्वनि और रूप - तीन शक्तियाँ, एक मार्ग
+          </p>
         </motion.div>
       </motion.div>
 
@@ -141,8 +162,8 @@ export function TantraSection() {
               custom={item.imageRight}
               initial="hidden"
               whileInView="visible"
-              viewport={{  amount: 0.25 }}
-              variants={textVariants}
+              viewport={{ amount: 0.25 }}
+              variants={textVariants(prefersReducedMotion)}
             >
               <img
                 src={item.titleImg}
@@ -151,7 +172,7 @@ export function TantraSection() {
               />
               <TypewriterText 
                 text={item.text} 
-                className="text-foreground/75 leading-relaxed text-[15px]"
+                className="text-foreground leading-relaxed text-[15px]"
               />
             </motion.div>
 
@@ -160,8 +181,8 @@ export function TantraSection() {
               custom={item.imageRight}
               initial="hidden"
               whileInView="visible"
-              viewport={{  amount: 0.25 }}
-              variants={imgVariants}
+              viewport={{ amount: 0.25 }}
+              variants={imgVariants(prefersReducedMotion)}
             >
               <div className="relative inline-block">
                 <img

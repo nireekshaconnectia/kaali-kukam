@@ -1,3 +1,4 @@
+// Home.tsx
 import { DakshinaSection } from "../components/kalikulam/DakshinaSection";
 import { TantraSection } from "../components/kalikulam/TantraSection";
 import { IntroGuru } from "../components/kalikulam/IntroGuru";
@@ -16,7 +17,7 @@ function SnapSection({
       style={{
         scrollSnapAlign: "start",
         scrollSnapStop: "always",
-        minHeight: "100vh",
+        minHeight: "40vh",
         display: "flex",
         flexDirection: "column",
         justifyContent: tall ? "flex-start" : "center",

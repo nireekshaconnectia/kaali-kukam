@@ -43,7 +43,7 @@ export function Hero() {
         style={{
           position: "relative",
           width: "clamp(300px, 95vw, 680px)",
-          height: "clamp(260px, 85vw, 580px)",
+          height: "clamp(160px, 85vw, 580px)",
         }}
       >
         {/* कृष्ण — top left */}
