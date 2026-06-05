@@ -42,7 +42,7 @@ function useTypewriter(text: string, speed = 30) {
   const [displayText, setDisplayText] = useState("");
   const [isTyping, setIsTyping] = useState(true);
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.5 });
+  const isInView = useInView(ref, {  amount: 0.5 });
 
   useEffect(() => {
     if (!isInView) return;
@@ -118,7 +118,7 @@ export function TantraSection() {
         className="mb-16 flex flex-col items-center text-center"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
+        viewport={{  amount: 0.3 }}
         variants={headerVariants}
       >
         <motion.div className="relative inline-block">
@@ -141,7 +141,7 @@ export function TantraSection() {
               custom={item.imageRight}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.25 }}
+              viewport={{  amount: 0.25 }}
               variants={textVariants}
             >
               <img
@@ -160,7 +160,7 @@ export function TantraSection() {
               custom={item.imageRight}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.25 }}
+              viewport={{  amount: 0.25 }}
               variants={imgVariants}
             >
               <div className="relative inline-block">

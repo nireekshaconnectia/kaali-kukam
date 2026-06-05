@@ -70,7 +70,7 @@ export function FaqSection() {
         className="mx-auto mb-8 h-auto w-full max-w-sm"
         initial={{ opacity: 0, y: 30, rotateX: -15 }}
         whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
+        viewport={{  amount: 0.3 }}
         transition={{ duration: 0.8, ease: "easeOut", type: "spring" }}
       />
 
@@ -78,7 +78,7 @@ export function FaqSection() {
       <motion.div
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.1 }}
+        viewport={{  amount: 0.1 }}
         variants={listVariants}
       >
         <Accordion

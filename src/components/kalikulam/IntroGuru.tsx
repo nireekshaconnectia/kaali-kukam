@@ -26,7 +26,7 @@ const itemVariants = {
 // FIXED: Simplified name animation without character splitting
 export function IntroGuru() {
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
+  const isInView = useInView(sectionRef, {  amount: 0.2 });
 
   return (
     <section ref={sectionRef} className="mx-auto max-w-6xl px-6 py-12">
@@ -84,7 +84,7 @@ export function IntroGuru() {
           className="flex justify-center"
           initial={{ opacity: 0, scale: 0.8, rotateY: -15 }}
           whileInView={{ opacity: 1, scale: 1, rotateY: 0 }}
-          viewport={{ once: true, amount: 0.15 }}
+          viewport={{  amount: 0.15 }}
           transition={{ duration: 0.8, delay: 0.2, type: "spring" }}
           whileHover={{ scale: 1.02 }}
         >

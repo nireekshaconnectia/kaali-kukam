@@ -16,7 +16,7 @@ const cornerVariants = {
     opacity: 0.9,
     x: 0,
     y: 0,
-    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.9, ease: [0.16, 1, 0.3, 1] as const },
   },
 };
 
@@ -27,7 +27,7 @@ const centerVariants = {
     opacity: 1,
     scale: 1,
     filter: "brightness(1)",
-    transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.08 },
+    transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] as const, delay: 0.08 },
   },
 };
 
@@ -58,7 +58,7 @@ export function Hero() {
             top: "20%",
             left: "0%",
             width: "40%",
-            mixBlendMode: "screen",
+            
           }}
         />
 
@@ -74,7 +74,7 @@ export function Hero() {
             top: "20%",
             right: "0%",
             width: "38%",
-            mixBlendMode: "screen",
+            
           }}
         />
 
@@ -111,7 +111,7 @@ export function Hero() {
             bottom: "20%",
             left: "-6%",
             width: "44%",
-            mixBlendMode: "screen",
+            
           }}
         />
 
@@ -127,7 +127,7 @@ export function Hero() {
             bottom: "20%",
             right: "0%",
             width: "38%",
-            mixBlendMode: "screen",
+            
           }}
         />
       </motion.div>
