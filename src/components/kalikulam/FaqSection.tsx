@@ -1,6 +1,6 @@
 // FaqSection.tsx
 import { motion, useInView, useAnimation, type Variants } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -95,6 +95,7 @@ const itemVariants: Variants = {
 export function FaqSection() {
   const prefersReducedMotion = useReducedMotion();
   const sectionRef = useRef(null);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
   const controls = useAnimation();
 
@@ -114,20 +115,35 @@ export function FaqSection() {
     >
       {/* Animated Heading with Enhanced Effects */}
       <motion.div variants={headerVariants} className="relative mb-12">
-        {/* Pulsing background circle behind heading */}
+        {/* Multiple pulsing background circles */}
         {!prefersReducedMotion && (
-          <motion.div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-[#D6A15F]/5 blur-3xl"
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.6, 0.3],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
+          <>
+            <motion.div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-[#D6A15F]/5 blur-3xl"
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.3, 0.6, 0.3],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+            <motion.div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-[#D6A15F]/3 blur-3xl"
+              animate={{
+                scale: [1, 1.3, 1],
+                opacity: [0.2, 0.4, 0.2],
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 0.5,
+              }}
+            />
+          </>
         )}
 
         <motion.img
@@ -138,19 +154,30 @@ export function FaqSection() {
             prefersReducedMotion
               ? {}
               : {
-                  scale: [1, 1.02, 1],
+                  scale: [1, 1.05, 1],
+                  rotateY: [0, 10, 0, -10, 0],
+                  filter: [
+                    "drop-shadow(0px 0px 0px rgba(214, 161, 95, 0))",
+                    "drop-shadow(0px 0px 30px rgba(214, 161, 95, 0.6))",
+                    "drop-shadow(0px 0px 0px rgba(214, 161, 95, 0))",
+                  ],
                 }
           }
           transition={{
-            filter: {
+            scale: {
               duration: 3,
               repeat: Infinity,
-              repeatDelay: 2,
               ease: "easeInOut",
             },
-            scale: {
+            rotateY: {
+              duration: 6,
+              repeat: Infinity,
+              ease: "easeInOut",
+            },
+            filter: {
               duration: 4,
               repeat: Infinity,
+              repeatDelay: 1,
               ease: "easeInOut",
             },
           }}
@@ -173,10 +200,12 @@ export function FaqSection() {
               prefersReducedMotion
                 ? {}
                 : {
-                    scale: 1.01,
+                    scale: 1.02,
                     transition: { type: "spring", stiffness: 400, damping: 20 },
                   }
             }
+            onHoverStart={() => setHoveredIndex(i)}
+            onHoverEnd={() => setHoveredIndex(null)}
           >
             <AccordionItem
               value={`item-${i}`}
@@ -185,8 +214,19 @@ export function FaqSection() {
               <AccordionTrigger className="text-left text-[15px] font-medium text-[#D6A15F] hover:no-underline py-4 [&>svg]:text-[#D6A15F] [&>svg]:h-4 [&>svg]:w-4 [&>svg]:transition-transform [&>svg]:duration-300">
                 <motion.span
                   className="inline-block"
-                  whileHover={prefersReducedMotion ? {} : { x: 8 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  whileHover={prefersReducedMotion ? {} : { x: 12 }}
+                  animate={
+                    hoveredIndex === i && !prefersReducedMotion
+                      ? {
+                          x: [0, 8, 0],
+                          color: ["#D6A15F", "#E8B97A", "#D6A15F"],
+                        }
+                      : {}
+                  }
+                  transition={{
+                    x: { duration: 0.5, repeat: Infinity },
+                    color: { duration: 0.8, repeat: Infinity },
+                  }}
                 >
                   {faq.q}
                 </motion.span>
@@ -194,27 +234,82 @@ export function FaqSection() {
 
               <AccordionContent className="pt-2 pb-4">
                 <motion.div
-                  className="rounded-2xl bg-linear-to-br from-[#111111] to-[#1a1a1a] px-6 py-5 text-[#D8D8D8] text-[14px] leading-7 space-y-4 border border-[#2a2a2a]"
-                  initial={{ opacity: 0, scale: 0.98 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  className="rounded-2xl bg-linear-to-br from-[#111111] to-[#1a1a1a] px-6 py-5 text-[#D8D8D8] text-[14px] leading-7 space-y-4 border border-[#2a2a2a] relative overflow-hidden"
+                  initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ duration: 0.4, ease: "easeOut" }}
+                  whileHover={
+                    prefersReducedMotion
+                      ? {}
+                      : {
+                          scale: 1.02,
+                          borderColor: "#D6A15F",
+                          transition: { duration: 0.2 },
+                        }
+                  }
                 >
+                  {/* Animated gradient background on hover */}
+                  {!prefersReducedMotion && (
+                    <motion.div
+                      className="absolute inset-0 bg-linear-to-r from-transparent via-[#D6A15F]/5 to-transparent -translate-x-full"
+                      whileHover={{ x: "100%" }}
+                      transition={{ duration: 0.6 }}
+                    />
+                  )}
+
                   {faq.a.map((p, j) => (
                     <motion.p
                       key={j}
-                      initial={{ opacity: 0, x: -20 }}
+                      initial={{ opacity: 0, x: -30 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{
-                        delay: j * 0.08,
-                        duration: 0.4,
+                        delay: j * 0.1,
+                        duration: 0.5,
                         ease: "easeOut",
                       }}
-                      className="hover:text-white transition-colors duration-300"
+                      className="hover:text-white transition-colors duration-300 relative"
+                      whileHover={
+                        prefersReducedMotion
+                          ? {}
+                          : {
+                              x: 5,
+                              transition: { duration: 0.2 },
+                            }
+                      }
                     >
                       {p}
                     </motion.p>
                   ))}
 
+                  {/* Animated decorative elements in content */}
+                  {!prefersReducedMotion && (
+                    <>
+                      <motion.div
+                        className="absolute bottom-2 right-2 w-8 h-8 border border-[#D6A15F]/20 rounded-full"
+                        animate={{
+                          scale: [1, 1.2, 1],
+                          rotate: [0, 180, 360],
+                        }}
+                        transition={{
+                          duration: 10,
+                          repeat: Infinity,
+                          ease: "linear",
+                        }}
+                      />
+                      <motion.div
+                        className="absolute top-2 left-2 w-4 h-4 bg-[#D6A15F]/10 rounded-full"
+                        animate={{
+                          scale: [1, 1.5, 1],
+                          opacity: [0.3, 0.8, 0.3],
+                        }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          ease: "easeInOut",
+                        }}
+                      />
+                    </>
+                  )}
                 </motion.div>
               </AccordionContent>
             </AccordionItem>
@@ -222,76 +317,7 @@ export function FaqSection() {
         ))}
       </Accordion>
 
-      {/* Enhanced Floating particles background */}
-      {!prefersReducedMotion && (
-        <>
-          <div className="absolute inset-0 pointer-events-none overflow-hidden -z-10">
-            {[...Array(12)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-1 h-1 bg-[#D6A15F]/30 rounded-full"
-                initial={{
-                  x: `${Math.random() * 100}%`,
-                  y: `${Math.random() * 100}%`,
-                }}
-                animate={{
-                  y: [`${Math.random() * 100}%`, `${Math.random() * 100}%`],
-                  x: [`${Math.random() * 100}%`, `${Math.random() * 100}%`],
-                  opacity: [0, 0.5, 0],
-                  scale: [0, 1.5, 0],
-                }}
-                transition={{
-                  duration: 8 + Math.random() * 7,
-                  repeat: Infinity,
-                  ease: "linear",
-                  delay: Math.random() * 5,
-                }}
-              />
-            ))}
-          </div>
-
-          {/* Rotating golden ring decoration */}
-          <motion.div
-            className="absolute bottom-20 -right-20 w-64 h-64 border-2 border-[#D6A15F]/10 rounded-full pointer-events-none -z-10"
-            animate={{
-              rotate: 360,
-              scale: [1, 1.1, 1],
-            }}
-            transition={{
-              rotate: {
-                duration: 20,
-                repeat: Infinity,
-                ease: "linear",
-              },
-              scale: {
-                duration: 8,
-                repeat: Infinity,
-                ease: "easeInOut",
-              },
-            }}
-          />
-
-          <motion.div
-            className="absolute top-20 -left-20 w-48 h-48 border border-[#D6A15F]/5 rounded-full pointer-events-none -z-10"
-            animate={{
-              rotate: -360,
-              scale: [1, 1.2, 1],
-            }}
-            transition={{
-              rotate: {
-                duration: 25,
-                repeat: Infinity,
-                ease: "linear",
-              },
-              scale: {
-                duration: 6,
-                repeat: Infinity,
-                ease: "easeInOut",
-              },
-            }}
-          />
-        </>
-      )}
+     
     </motion.section>
   );
 }

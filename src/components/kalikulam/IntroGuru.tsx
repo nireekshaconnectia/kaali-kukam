@@ -140,7 +140,7 @@ export function IntroGuru() {
             variants={textLineVariants}
             initial="hidden"
             animate={isInView ? "visible" : "hidden"}
-            className="font-body text-2xl md:text-3xl lg:text-4xl font-bold inline-block
+            className="font-body text-2xl md:text-3xl font-bold inline-block
              bg-linear-to-r from-[#EBB57C] to-[#94622C]
              bg-clip-text text-transparent"
           >
