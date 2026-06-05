@@ -17,7 +17,9 @@ function SnapSection({
       style={{
         scrollSnapAlign: "start",
         scrollSnapStop: "always",
-        minHeight: "40vh",
+        minHeight: tall ? "80vh" : "auto",  // Changed from fixed minHeight
+        paddingTop: "2rem",  // Add some padding for spacing
+        paddingBottom: "2rem",
         display: "flex",
         flexDirection: "column",
         justifyContent: tall ? "flex-start" : "center",
