@@ -33,11 +33,7 @@ function SnapSection({
 
 function Home() {
   return (
-    <div style={{ 
-      scrollSnapType: "y mandatory", 
-      overflowY: "scroll", 
-      height: "100vh" 
-    }}>
+    <>
       <SnapSection>
         <Hero />
       </SnapSection>
@@ -57,7 +53,7 @@ function Home() {
       <SnapSection tall>
         <FaqSection />
       </SnapSection>
-    </div>
+    </>
   );
 }
 
