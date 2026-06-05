@@ -3,7 +3,7 @@ import union from "@/assets/Union.png";
 import trishul from "@/assets/trishul.png";
 
 const cols = [
-  ["मुख्यपृष्ठ", "परिचय", "दर्शन", "सेवाएं"],
+  ["मुख्यपृष्ठ", "परिचय", "दर्शन", "सेवाएं "],
   ["अनुसंधान", "शास्त्रीय", "आचारबिंदु", "संपर्क"],
 ];
 
@@ -67,7 +67,7 @@ export function Footer() {
         alt="त्रिशूल"
         loading="lazy"
         style={{ transition: "transform 0.1s linear" }}
-        className="pointer-events-none absolute right-4 -top-16 md:-top-20 h-[80%] md:h-[130%] w-auto"
+        className="pointer-events-none absolute right-4 -top-16 md:-top-20 h-[80%] md:h-[117.5%] w-auto"
       />
 
       <div className="relative mx-auto grid max-w-6xl gap-10 px-6 py-14 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
@@ -75,9 +75,9 @@ export function Footer() {
         <div>
           <img src={union} alt="Union" className="h-20 w-auto mt-2" />
           <p className="mt-6 text-sm/relaxed text-primary-foreground/85">
-            प्लॉट F1/149, सेक्टर 16, रोहिणी,
+            पता: F1/145, सेक्टर 16, रोहिणी,
             <br />
-            दिल्ली &nbsp; 110089
+             दिल्ली - 110089
           </p>
           <p className="mt-2 text-sm text-primary-foreground/85">support@kalikulam.org</p>
         </div>

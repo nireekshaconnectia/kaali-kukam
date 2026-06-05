@@ -40,7 +40,7 @@ export function DakshinaSection() {
 
       {/* Content with rich animations */}
       <motion.div
-        className="relative mx-auto max-w-3xl px-6 py-20 text-center"
+        className="relative mx-auto max-w-3xl px-3 py-10 text-center"
         initial="hidden"
         whileInView="visible"
         viewport={{ amount: 0.2 }}
@@ -78,7 +78,7 @@ export function DakshinaSection() {
 
         {/* CTA button with pulse */}
         <motion.button
-          className="rounded-full border border-gold/60 bg-linear-to-b from-[#EBB57C] to-[#94622C] px-8 py-3 font-body text-muted-foreground transition-transform glow text-3xl"
+          className="rounded-full border border-gold/60 bg-linear-to-b from-[#EBB57C] to-[#94622C] px-8 py-3 font-body text-muted-foreground transition-transform glow text-3xl mb-10"
           variants={{
             hidden: { opacity: 0, y: 20, scale: 0.8 },
             visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: "easeOut" } },

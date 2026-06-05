@@ -22,6 +22,7 @@ function Layout() {
           scrollBehavior: "smooth",
         }}
         id="scroll-container"
+        className="custom-scrollbar" // Add this class
       >
         <Outlet />
         <Footer />
