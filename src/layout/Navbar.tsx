@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import LogoSrc from "@/assets/Logo-Mark.png";
+import NavbarMantra from "@/assets/Navbar_Mantra.png";
 
 const navLinks = ["मुख्यपृष्ठ", "परिचय", "सेवाएं", "सहयोग"];
 
@@ -22,8 +23,12 @@ export function Navbar() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
     >
-      <div className="bg-[#F42903] text-primary-foreground text-center py-1.5 text-sm font-body">
-        ‖ ॐ कृष्ण काली शंकराय स्वाहा ‖
+      <div className="bg-[#F42903] flex justify-center py-1.5">
+        <img
+          src={NavbarMantra}
+          alt="ॐ कृष्ण काली शंकराय स्वाहा"
+          className="h-4 md:h-5 w-auto object-contain"
+        />
       </div>
 
       <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-3">

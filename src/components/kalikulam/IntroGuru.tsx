@@ -47,7 +47,7 @@ export function IntroGuru() {
         <motion.div variants={slideLeft}>
           <motion.p
             variants={fadeUp}
-            className="text-foreground/75 leading-relaxed text-[14px] md:text-[15px] pb-2"
+            className="text-[#FFFFFF] leading-relaxed text-[14px] md:text-[15px] pb-2"
           >
             पूज्य आदिगुरु ,
           </motion.p>
@@ -61,9 +61,9 @@ export function IntroGuru() {
             मांगीलाल भील
           </motion.h2>
 
-          <div className="space-y-3 md:space-y-4 text-foreground/75 leading-relaxed text-[13px] md:text-[15px] mt-3 md:mt-4">
+          <div className="space-y-3 md:space-y-4 text-[#FFFFFF] leading-relaxed text-[13px] md:text-[15px] mt-3 md:mt-4">
             <motion.p variants={fadeUp}>
-              तंत्र शास्त्र के सूत्र "गृहस्थो नास्ति मे तुल्य:" (गृहस्थ के समान
+              तंत्र शास्त्र के सूत्र "<span className="font-bold">गृहस्थो नास्ति मे तुल्य:</span>" (गृहस्थ के समान
               कोई नहीं) को चरितार्थ करते हुए, माँ शारदा के परम उपासक पूज्य
               आदिगुरु मांगीलाल भील एक कुशल गृहस्थ और अडिग साधक का जीवंत उदाहरण
               हैं।
@@ -84,7 +84,7 @@ export function IntroGuru() {
 
         {/* Image — slides from right, no infinite float */}
         <motion.div
-          className="flex justify-center mt-4 md:mt-0"
+          className="flex justify-center mt-4 md:mt-0 md:pt-[100px]"
           variants={slideRight}
           whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
         >

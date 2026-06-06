@@ -96,14 +96,19 @@ export function FaqSection() {
           >
             <AccordionItem
               value={`item-${i}`}
-              className="border-b border-[#1f1f1f] py-1"
+              className="border-b border-[#1f1f1f] py-1 relative"
             >
-              <AccordionTrigger className="text-left text-[15px] font-medium text-[#D6A15F] hover:no-underline py-4 [&>svg]:text-[#D6A15F] [&>svg]:h-4 [&>svg]:w-4 [&>svg]:transition-transform [&>svg]:duration-300">
-                {faq.q}
+              <div className="absolute bottom-0 left-0 right-0 h-[1px] overflow-hidden">
+                <div className="h-full w-full bg-gradient-to-r from-transparent via-white/15 to-transparent bg-[length:200%_100%] animate-shimmer" />
+              </div>
+              <AccordionTrigger className="text-left text-[16px] md:text-[17px] font-medium hover:no-underline py-4 [&>svg]:text-[#D6A15F] [&>svg]:h-4 [&>svg]:w-4 [&>svg]:transition-transform [&>svg]:duration-300">
+                <span className="bg-linear-to-r from-[#EBB57C] to-[#94622C] bg-clip-text text-transparent">
+                  {faq.q}
+                </span>
               </AccordionTrigger>
 
               <AccordionContent className="pt-2 pb-4">
-                <div className="rounded-2xl bg-linear-to-br from-[#111111] to-[#1a1a1a] px-6 py-5 text-[#D8D8D8] text-[14px] leading-7 space-y-4 border border-[#2a2a2a]">
+                <div className="rounded-2xl bg-linear-to-br from-[#0d0d0d] to-[#151515] px-6 py-5 text-[#FFFFFF] text-[15px] md:text-[16px] leading-8 space-y-4 border border-[#2a2a2a]">
                   {faq.a.map((p, j) => (
                     <p key={j}>{p}</p>
                   ))}

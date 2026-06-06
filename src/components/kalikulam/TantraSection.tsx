@@ -91,7 +91,7 @@ export function TantraSection() {
           className="h-16 md:h-24 w-auto object-contain"
           loading="eager"
         />
-        <p className="text-foreground -mt-2 text-sm md:text-base">
+        <p className="text-[#FFFFFF] -mt-2 text-sm md:text-base">
           विधि, ध्वनि और रूप - तीन शक्तियाँ, एक मार्ग
         </p>
       </motion.div>
@@ -116,7 +116,7 @@ export function TantraSection() {
                 className="h-8 md:h-12 w-auto mb-4 object-contain"
                 loading="lazy"
               />
-              <p className="text-foreground leading-relaxed text-[15px]">
+              <p className="text-[#FFFFFF] leading-relaxed text-[15px]">
                 {item.text}
               </p>
             </motion.div>
@@ -149,7 +149,7 @@ export function TantraSection() {
                   alt={`${item.title} emblem`}
                   loading="lazy"
                   decoding="async"
-                  className={`absolute inset-0 ${item.title === "यंत्र" ? "w-24 md:w-28" : "w-28 md:w-32"} m-auto`}
+                  className={`absolute inset-0 ${item.title === "यंत्र" ? "w-24 md:w-28" : "w-28 md:w-32"} ${item.title === "मंत्र" ? "ml-[-8px] md:ml-[-12px]" : "m-auto"}`}
                 />
               </div>
             </motion.div>
