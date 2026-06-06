@@ -42,10 +42,10 @@ export function TantraSection() {
   const prefersReducedMotion = useReducedMotion();
   const isMobile = useIsMobile();
 
-  const xOffset = prefersReducedMotion ? 0 : isMobile ? 24 : 60;
-  const dur = prefersReducedMotion ? 0 : 0.7;
+  // On mobile, use opacity-only fade (no X slide) to avoid layout recalc jank
+  const dur = prefersReducedMotion ? 0 : isMobile ? 0.5 : 0.7;
+  const xOffset = prefersReducedMotion || isMobile ? 0 : 60;
 
-  // Slide only — no scale pop
   const slideText = (fromLeft: boolean) => ({
     hidden: { opacity: prefersReducedMotion ? 1 : 0, x: fromLeft ? -xOffset : xOffset },
     visible: {
@@ -65,12 +65,16 @@ export function TantraSection() {
   });
 
   const headerVariants = {
-    hidden: { opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 24 },
+    hidden: { opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 18 },
     visible: {
-      opacity: 1, y: 0,
-      transition: { duration: prefersReducedMotion ? 0 : 0.8, ease: "easeOut" as const },
+      opacity: 1,
+      y: 0,
+      transition: { duration: prefersReducedMotion ? 0 : 0.6, ease: "easeOut" as const },
     },
   };
+
+  // Slower rotation on mobile to reduce GPU load; disabled for reduced motion
+  const rotateDuration = prefersReducedMotion ? 0 : isMobile ? 40 : 25;
 
   return (
     <section className="mx-auto max-w-5xl px-6 py-16">
@@ -78,13 +82,14 @@ export function TantraSection() {
         className="mb-16 flex flex-col items-center text-center"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.3 }}
+        viewport={{ once: true, amount: 0.4 }}
         variants={headerVariants}
       >
         <img
           src={titleTantraMantraYantra}
           alt="तंत्र . मंत्र . यंत्र"
           className="h-16 md:h-24 w-auto object-contain"
+          loading="eager"
         />
         <p className="text-foreground -mt-2 text-sm md:text-base">
           विधि, ध्वनि और रूप - तीन शक्तियाँ, एक मार्ग
@@ -97,45 +102,53 @@ export function TantraSection() {
             key={item.title}
             className="grid items-center gap-8 md:grid-cols-2"
           >
-            {/* Text — simple fade + slide, no typewriter */}
+            {/* Text — fade + slide (slide disabled on mobile) */}
             <motion.div
               className={`${item.imageRight ? "md:order-1" : "md:order-2"}`}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.25 }}
+              viewport={{ once: true, amount: 0.3 }}
               variants={slideText(item.imageRight)}
             >
               <img
                 src={item.titleImg}
                 alt={item.title}
                 className="h-8 md:h-12 w-auto mb-4 object-contain"
+                loading="lazy"
               />
               <p className="text-foreground leading-relaxed text-[15px]">
                 {item.text}
               </p>
             </motion.div>
 
-            {/* Image — slide only, no scale */}
+            {/* Image — GPU-composited rotation via will-change */}
             <motion.div
               className={`flex justify-center ${item.imageRight ? "md:order-2" : "md:order-1"}`}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.25 }}
+              viewport={{ once: true, amount: 0.3 }}
               variants={slideImg(item.imageRight)}
             >
-              <div className="relative inline-block">
+              <div className="relative inline-block" style={{ willChange: "transform" }}>
                 <motion.img
                   src={item.emblem}
                   alt={item.title}
                   loading="lazy"
+                  decoding="async"
                   className="w-28 md:w-36 drop-shadow-[0_0_30px_oklch(0.55_0.24_28/0.35)]"
+                  style={{ willChange: "transform" }}
                   animate={prefersReducedMotion ? {} : { rotate: 360 }}
-                  transition={prefersReducedMotion ? {} : { repeat: Infinity, duration: 25, ease: "linear" }}
+                  transition={
+                    prefersReducedMotion
+                      ? {}
+                      : { repeat: Infinity, duration: rotateDuration, ease: "linear" }
+                  }
                 />
                 <img
                   src={item.topImg}
-                  alt={`${item.title} top`}
+                  alt={`${item.title} emblem`}
                   loading="lazy"
+                  decoding="async"
                   className={`absolute inset-0 ${item.title === "यंत्र" ? "w-24 md:w-28" : "w-28 md:w-32"} m-auto`}
                 />
               </div>
