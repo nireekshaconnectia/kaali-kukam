@@ -55,9 +55,9 @@ export function Hero() {
           transition={{ delay: 0.3 }}
           style={{
             position: "absolute",
-            top: "20%",
+            top: "24%",
             left: "0%",
-            width: "40%",
+            width: "30%",
             
           }}
         />

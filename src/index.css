@@ -174,37 +174,13 @@
   scroll-behavior: smooth;
 }
 
-/* ── Scrollbar: visible only on large screens ── */
-/* Hide scrollbar on mobile / tablet */
+/* ── Scrollbar: hidden on all screens ── */
 #scroll-container {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE/Edge */
 }
 #scroll-container::-webkit-scrollbar {
   display: none; /* Chrome/Safari/mobile */
-}
-
-/* Show styled scrollbar on large screens (≥ 1024px) */
-@media (min-width: 1024px) {
-  #scroll-container {
-    scrollbar-width: thin;
-    scrollbar-color: #555 #2d2d2d;
-  }
-  #scroll-container::-webkit-scrollbar {
-    display: block;
-    width: 8px;
-  }
-  #scroll-container::-webkit-scrollbar-track {
-    background: #2d2d2d;
-    border-radius: 10px;
-  }
-  #scroll-container::-webkit-scrollbar-thumb {
-    background: #555;
-    border-radius: 10px;
-  }
-  #scroll-container::-webkit-scrollbar-thumb:hover {
-    background: #777;
-  }
 }
 
 /* Prevent horizontal overflow everywhere */

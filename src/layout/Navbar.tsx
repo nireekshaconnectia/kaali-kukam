@@ -71,25 +71,27 @@ export function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile drawer — slides down with staggered links */}
       <AnimatePresence>
         {open && (
           <motion.div
-            className="md:hidden border-t border-border/60 bg-background/95 backdrop-blur-md px-6 py-4 flex flex-col gap-4"
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="absolute top-full left-0 right-0 md:hidden border-t border-border/60 bg-background/95 backdrop-blur-lg px-6 py-6 flex flex-col gap-5 shadow-2xl"
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ type: "spring", stiffness: 350, damping: 28 }}
           >
             {navLinks.map((l, i) => (
               <motion.a
                 key={l}
                 href="#"
                 onClick={() => setOpen(false)}
-                className={`font-body text-base transition-colors hover:text-gold ${i < 2 ? "text-primary" : "text-foreground/70"}`}
-                initial={{ opacity: 0, x: -16 }}
+                className={`font-body text-base font-semibold tracking-wide transition-colors hover:text-gold ${i === 0 ? "text-primary" : "text-foreground/80"}`}
+                initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: i * 0.06, duration: 0.3 }}
+                exit={{ opacity: 0, x: -10 }}
+                whileTap={{ scale: 0.96 }}
+                whileHover={{ x: 6 }}
+                transition={{ type: "spring", stiffness: 300, damping: 24, delay: i * 0.05 }}
               >
                 {l}
               </motion.a>

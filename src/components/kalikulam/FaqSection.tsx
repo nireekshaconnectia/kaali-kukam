@@ -77,7 +77,7 @@ export function FaqSection() {
         <img
           src={vector}
           alt="संकल्प FAQ"
-          className="h-auto w-full max-w-sm"
+          className="h-auto w-48 md:w-80"
         />
       </motion.div>
 

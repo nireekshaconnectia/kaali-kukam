@@ -124,11 +124,13 @@ export function TantraSection() {
               variants={slideImg(item.imageRight)}
             >
               <div className="relative inline-block">
-                <img
+                <motion.img
                   src={item.emblem}
                   alt={item.title}
                   loading="lazy"
                   className="w-28 md:w-36 drop-shadow-[0_0_30px_oklch(0.55_0.24_28/0.35)]"
+                  animate={prefersReducedMotion ? {} : { rotate: 360 }}
+                  transition={prefersReducedMotion ? {} : { repeat: Infinity, duration: 25, ease: "linear" }}
                 />
                 <img
                   src={item.topImg}
