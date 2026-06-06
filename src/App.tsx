@@ -1,31 +1,40 @@
-import { lazy, Suspense, useEffect, type ComponentType } from "react";
+import { lazy, Suspense, useState, useEffect, useCallback, type ComponentType } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Layout from "./layout/Layout";
 import { useBackgroundMusic } from "./hooks/useBackgroundMusic";
+import { EntryOverlay } from "./components/kalikulam/EntryOverlay";
 
-// 👇 Replace with your actual audio file path inside src/assets/
 const bgMusic = new URL("./assets/background.mpeg", import.meta.url).href;
 
 const Home = lazy(() => import("./pages/Home") as Promise<{ default: ComponentType<any> }>);
 
 function App() {
   const location = useLocation();
+  const { play } = useBackgroundMusic(bgMusic, 0.35);
 
-  // 🎵 Background music — plays site-wide, loops silently
-  useBackgroundMusic(bgMusic, 0.35);
+  const [showOverlay, setShowOverlay] = useState(true);
+
+  const handleEnter = useCallback(() => {
+    play();
+    setShowOverlay(false);
+  }, [play]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
 
   return (
-    <Suspense fallback={<div className="flex items-center text-2xl text-center">Loading...</div>}>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route path="/" element={<Home />} />
-        </Route>
-      </Routes>
-    </Suspense>
+    <>
+      <EntryOverlay visible={showOverlay} onEnter={handleEnter} />
+
+      <Suspense fallback={<div className="flex items-center text-2xl text-center">Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route path="/" element={<Home />} />
+          </Route>
+        </Routes>
+      </Suspense>
+    </>
   );
 }
 
