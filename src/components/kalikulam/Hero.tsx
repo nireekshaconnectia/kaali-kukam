@@ -1,3 +1,4 @@
+// Hero.tsx
 import { motion } from "framer-motion";
 import { useOutletContext } from "react-router-dom";
 import maaKali from "@/assets/Maa_Kali_1.png";
@@ -51,7 +52,8 @@ export function Hero() {
         style={{
           position: "relative",
           width: "clamp(300px, 95vw, 680px)",
-          height: isMobile ? "clamp(360px, 15vh, 80px)" : "clamp(360px, 85vh, 580px)",
+          // FIXED: Proper mobile height
+          height: isMobile ? "clamp(380px, 65vh, 480px)" : "clamp(360px, 85vh, 580px)",
         }}
       >
         {/* कृष्ण — top left */}

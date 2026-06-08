@@ -5,7 +5,6 @@ import guru from "@/assets/guru.png";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
 import { useIsMobile } from "../../hooks/use-mobile";
 
-// Re-usable hook: fires "visible" on enter, "hidden" on exit — every time
 function useScrollAnimation(amount = 0.3) {
   const ref = useRef<HTMLDivElement>(null);
   const controls = useAnimation();
@@ -23,7 +22,8 @@ export function IntroGuru() {
   const isMobile = useIsMobile();
 
   const dur = prefersReducedMotion ? 0 : isMobile ? 0.5 : 0.7;
-  const xOffset = prefersReducedMotion || isMobile ? 0 : 60;
+  // FIXED: Keep xOffset for mobile (reduced slightly)
+  const xOffset = prefersReducedMotion ? 0 : 30;
 
   const header = useScrollAnimation(0.1);
   const textBlock = useScrollAnimation(0.3);
@@ -62,7 +62,7 @@ export function IntroGuru() {
       {/* Header */}
       <motion.div
         ref={header.ref}
-        animate={textBlock.controls}
+        animate={header.controls}
         initial="hidden"
         variants={slideText(true)}
         className="mb-4"

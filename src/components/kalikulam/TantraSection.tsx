@@ -19,9 +19,8 @@ const items = [
     emblem: roundShape,
     text: "तंत्र न कोई रहस्य है, न कोई भय की विद्या। यह इस सृष्टि की समग्र शक्ति को समझने और जीवन में उतारने का मार्ग है। जीवन का हर अनुभव, सुख हो या दुख, परिवार हो या एकांत, सब साधना है।",
     imageRight: true,
-    // width: 334, height: 232, top: 58px, left: 999px (relative to container)
-    topImgPosition: { top: "-15%", left: "0%" }, // Centered horizontally, slightly raised
-    topImgSize: "w-28 md:w-32", // 334px scale equivalent
+    topImgPosition: { top: "-15%", left: "0%" },
+    topImgSize: "w-28 md:w-32",
   },
   {
     title: "मंत्र",
@@ -30,9 +29,8 @@ const items = [
     emblem: roundShape,
     text: "मंत्र वह दिव्य ध्वनि है जो सृष्टि के आरंभ से विद्यमान है। प्रत्येक मंत्र एक विशेष शक्ति का वाहक है। जब इसे सही विधि, सही भाव और सही समय पर उच्चारित किया जाए तो यह जीवन को बदलने की क्षमता रखता है।",
     imageRight: false,
-    // width: 338, height: 321, top: 3048.5px (but relative to emblem)
-    topImgPosition: { top: "-10%", left: "-3%" }, // Slightly larger, positioned off-center
-    topImgSize: "w-32 md:w-40 ", // 338px scale equivalent
+    topImgPosition: { top: "-10%", left: "-3%" },
+    topImgSize: "w-32 md:w-40 ",
   },
   {
     title: "यंत्र",
@@ -41,9 +39,8 @@ const items = [
     emblem: roundShape,
     text: "यंत्र एक पवित्र ज्यामितीय संरचना है जिसमें देवी-देवताओं की शक्ति को आह्वान किया जाता है। यह केवल एक चित्र नहीं, यह एक जीवंत ऊर्जा केंद्र है। घर में, व्यापार में और जीवन के हर क्षेत्र में यंत्र एक अदृश्य सुरक्षा कवच का कार्य करता है।",
     imageRight: true,
-    // width: 270, height: 270, top: 7.5px, left: 1049px
-    topImgPosition: { top: "-22%", left: "18%" }, // Centered, minimal offset
-    topImgSize: "w-24 md:w-32", // 270px scale equivalent
+    topImgPosition: { top: "-22%", left: "18%" },
+    topImgSize: "w-24 md:w-32",
   },
 ];
 
@@ -51,9 +48,9 @@ export function TantraSection() {
   const prefersReducedMotion = useReducedMotion();
   const isMobile = useIsMobile();
 
-  // On mobile, use opacity-only fade (no X slide) to avoid layout recalc jank
+  // FIXED: Keep xOffset for mobile to maintain animations
   const dur = prefersReducedMotion ? 0 : isMobile ? 0.5 : 0.7;
-  const xOffset = prefersReducedMotion || isMobile ? 0 : 60;
+  const xOffset = prefersReducedMotion ? 0 : 40; // Slightly reduced for mobile but still present
 
   const slideText = (fromLeft: boolean) => ({
     hidden: { opacity: prefersReducedMotion ? 1 : 0, x: fromLeft ? -xOffset : xOffset, scale: prefersReducedMotion ? 1 : 0.95 },
@@ -84,7 +81,7 @@ export function TantraSection() {
     },
   };
 
-  // Slower rotation on mobile to reduce GPU load; disabled for reduced motion
+  // Slower rotation on mobile to reduce GPU load
   const rotateDuration = prefersReducedMotion ? 0 : isMobile ? 40 : 25;
 
   return (
@@ -113,7 +110,7 @@ export function TantraSection() {
             key={item.title}
             className="grid items-center gap-8 md:grid-cols-2"
           >
-            {/* Text — fade + slide (slide disabled on mobile) */}
+            {/* Text — fade + slide */}
             <motion.div
               className={`${item.imageRight ? "md:order-1" : "md:order-2"}`}
               initial="hidden"
@@ -132,7 +129,7 @@ export function TantraSection() {
               </p>
             </motion.div>
 
-            {/* Image — GPU-composited rotation via will-change */}
+            {/* Image — GPU-composited rotation */}
             <motion.div
               className={`flex justify-center ${item.imageRight ? "md:order-2" : "md:order-1"}`}
               initial="hidden"
