@@ -76,7 +76,7 @@ export function IntroGuru() {
         variants={headerVariants}
         className="mb-4 flex flex-col "
       >
-        <p className="text-[#EBB57C] text-sm md:text-base tracking-wide">
+        <p className="text-white text-sm md:text-base tracking-wide">
           पूज्य आदिगुरु
         </p>
       </motion.div>
