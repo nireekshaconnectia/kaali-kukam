@@ -71,7 +71,7 @@ export function FaqSection() {
       className="mx-auto max-w-5xl px-6 md:px-14 pt-16 pb-24 md:pb-48 w-full"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.15 }}
+      viewport={{ once: false, amount: 0.15 }}
       variants={containerVariants}
     >
       {/* Header image — simple fade-up, no 3D rotation */}

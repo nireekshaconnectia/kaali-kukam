@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useOutletContext } from "react-router-dom";
 import maaKali from "@/assets/Maa_Kali_1.png";
 import vectorKali from "@/assets/Vector-1.png";
 import vectorKrsna from "@/assets/Vector-3.png";
@@ -32,6 +33,8 @@ const centerVariants = {
 };
 
 export function Hero() {
+  const { isReady } = useOutletContext<{ isReady: boolean }>();
+
   return (
     <section
       className="relative overflow-hidden w-full flex items-center justify-center"
@@ -39,7 +42,7 @@ export function Hero() {
     >
       <motion.div
         initial="hidden"
-        animate="visible"
+        animate={isReady ? "visible" : "hidden"}
         style={{
           position: "relative",
           width: "clamp(300px, 95vw, 680px)",

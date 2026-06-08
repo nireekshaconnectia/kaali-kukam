@@ -51,7 +51,7 @@ export function DakshinaSection() {
           className="absolute inset-0 h-full w-full object-cover opacity-48"
           initial={{ opacity: 0, scale: prefersReducedMotion ? 1 : 1.06 }}
           whileInView={{ opacity: 0.48, scale: 1 }}
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: false, amount: 0.2 }}
           transition={{ duration: prefersReducedMotion ? 0 : 1.2, ease: "easeOut" }}
         />
 
@@ -60,7 +60,7 @@ export function DakshinaSection() {
           className="relative mx-auto max-w-5xl px-6 md:px-14 py-10 text-center"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: false, amount: 0.2 }}
           variants={{
             hidden: {},
             visible: { transition: { staggerChildren: 0.12 } },

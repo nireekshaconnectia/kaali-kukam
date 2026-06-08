@@ -14,7 +14,7 @@ export function Footer() {
       className="relative bg-[#F42903] text-primary-foreground"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
+      viewport={{ once: false, amount: 0.1 }}
       transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
     >
       {/* Trishul Background - anchored to bottom of footer but aligned to grid */}

@@ -40,7 +40,7 @@ export function IntroGuru() {
         className="grid items-center gap-6 md:gap-8 md:grid-cols-[1.4fr_1fr]"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.15 }}
+        viewport={{ once: false, amount: 0.15 }}
         variants={containerVariants}
       >
         {/* Text block */}

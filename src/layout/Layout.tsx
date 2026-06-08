@@ -2,7 +2,7 @@ import { Navbar } from "./Navbar";
 import { Footer } from "./Footer";
 import { Outlet } from "react-router-dom";
 
-function Layout() {
+function Layout({ isReady = true }: { isReady?: boolean }) {
   return (
     <div
       style={{
@@ -12,7 +12,7 @@ function Layout() {
         overflow: "hidden",
       }}
     >
-      <Navbar />
+      <Navbar isReady={isReady} />
 
       <div
         style={{
@@ -24,7 +24,7 @@ function Layout() {
         }}
         id="scroll-container"
       >
-        <Outlet />
+        <Outlet context={{ isReady }} />
         <Footer />
       </div>
     </div>

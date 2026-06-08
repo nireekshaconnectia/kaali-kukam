@@ -82,7 +82,7 @@ export function TantraSection() {
         className="mb-16 flex flex-col items-center text-center"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true, amount: 0.4 }}
+        viewport={{ once: false, amount: 0.4 }}
         variants={headerVariants}
       >
         <img
@@ -107,7 +107,7 @@ export function TantraSection() {
               className={`${item.imageRight ? "md:order-1" : "md:order-2"}`}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
+              viewport={{ once: false, amount: 0.3 }}
               variants={slideText(item.imageRight)}
             >
               <img
@@ -126,7 +126,7 @@ export function TantraSection() {
               className={`flex justify-center ${item.imageRight ? "md:order-2" : "md:order-1"}`}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
+              viewport={{ once: false, amount: 0.3 }}
               variants={slideImg(item.imageRight)}
             >
               <div className="relative inline-block" style={{ willChange: "transform" }}>
