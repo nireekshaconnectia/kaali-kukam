@@ -6,6 +6,7 @@ import vectorKrsna from "@/assets/Vector-3.png";
 import vectorAishwarya from "@/assets/Vector-2.png";
 import vectorSwaha from "@/assets/Vector.png";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
+import { useIsMobile } from "../../hooks/use-mobile";
 
 // Each calligraphy corner flies in from its diagonal corner
 const cornerVariants = {
@@ -36,6 +37,7 @@ const centerVariants = {
 export function Hero() {
   const { isReady } = useOutletContext<{ isReady: boolean }>();
   const prefersReducedMotion = useReducedMotion();
+  const isMobile = useIsMobile();
 
   return (
     <section
@@ -49,7 +51,7 @@ export function Hero() {
         style={{
           position: "relative",
           width: "clamp(300px, 95vw, 680px)",
-          height: "clamp(360px, 15vh, 80px)",
+          height: isMobile ? "clamp(360px, 15vh, 80px)" : "clamp(360px, 85vh, 580px)",
         }}
       >
         {/* कृष्ण — top left */}
@@ -64,7 +66,6 @@ export function Hero() {
             top: "24%",
             left: "0%",
             width: "30%",
-            
           }}
         />
 
@@ -80,7 +81,6 @@ export function Hero() {
             top: "20%",
             right: "0%",
             width: "38%",
-            
           }}
         />
 
@@ -117,7 +117,6 @@ export function Hero() {
             bottom: "20%",
             left: "-6%",
             width: "44%",
-            
           }}
         />
 
@@ -133,7 +132,6 @@ export function Hero() {
             bottom: "20%",
             right: "0%",
             width: "38%",
-            
           }}
         />
       </motion.div>

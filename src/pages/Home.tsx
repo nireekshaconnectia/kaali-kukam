@@ -5,8 +5,7 @@ import { IntroGuru } from "../components/kalikulam/IntroGuru";
 import { Hero } from "../components/kalikulam/Hero";
 import { FaqSection } from "../components/kalikulam/FaqSection";
 
-// Removed scrollSnapAlign / scrollSnapStop — they cause the "stuck" feeling on mobile.
-// Sections now flow naturally; smooth scroll behavior is still applied globally.
+// Sections now flow naturally with proper spacing for scroll animations
 function Section({
   children,
   tall = false,
@@ -18,8 +17,8 @@ function Section({
     <section
       style={{
         minHeight: tall ? "100vh" : "auto",
-        paddingTop: "2rem",
-        paddingBottom: "2rem",
+        paddingTop: tall ? "2rem" : "2rem",
+        paddingBottom: tall ? "2rem" : "2rem",
         display: "flex",
         flexDirection: "column",
         justifyContent: tall ? "flex-start" : "center",
@@ -34,7 +33,7 @@ function Section({
 function Home() {
   return (
     <>
-      <Section>
+      <Section tall>
         <Hero />
       </Section>
 
