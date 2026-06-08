@@ -57,26 +57,17 @@ export function IntroGuru() {
     },
   });
 
-  const headerVariants = {
-    hidden: { opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 18 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: prefersReducedMotion ? 0 : 0.6, ease: "easeOut" as const },
-    },
-  };
-
   return (
     <section className="mx-auto max-w-5xl px-6 md:px-14 py-16">
       {/* Header */}
       <motion.div
         ref={header.ref}
-        animate={header.controls}
+        animate={textBlock.controls}
         initial="hidden"
-        variants={headerVariants}
-        className="mb-16 flex flex-col items-center text-center"
+        variants={slideText(true)}
+        className="mb-4"
       >
-        <p className="text-[#EBB57C] text-sm md:text-base tracking-wide">
+        <p className="text-white text-sm md:text-base tracking-wide">
           पूज्य आदिगुरु
         </p>
       </motion.div>
