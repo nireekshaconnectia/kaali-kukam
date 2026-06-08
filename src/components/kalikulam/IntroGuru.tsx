@@ -25,7 +25,7 @@ export function IntroGuru() {
   const dur = prefersReducedMotion ? 0 : isMobile ? 0.5 : 0.7;
   const xOffset = prefersReducedMotion || isMobile ? 0 : 60;
 
-  const header = useScrollAnimation(0.4);
+  const header = useScrollAnimation(0.1);
   const textBlock = useScrollAnimation(0.3);
   const imgBlock = useScrollAnimation(0.3);
 
@@ -74,9 +74,9 @@ export function IntroGuru() {
         animate={header.controls}
         initial="hidden"
         variants={headerVariants}
-        className="mb-4 flex flex-col "
+        className="mb-16 flex flex-col items-center text-center"
       >
-        <p className="text-white text-sm md:text-base tracking-wide">
+        <p className="text-[#EBB57C] text-sm md:text-base tracking-wide">
           पूज्य आदिगुरु
         </p>
       </motion.div>
