@@ -14,7 +14,7 @@ export function IntroGuru() {
 
   // Text animations - slides from left
   const slideLeft = {
-    hidden: { opacity: prefersReducedMotion ? 1 : 0, x: -xOffset },
+    hidden: { opacity: 0, x: -xOffset },
     visible: {
       opacity: 1,
       x: 0,
@@ -24,7 +24,7 @@ export function IntroGuru() {
 
   // Fade up animation for paragraphs
   const fadeUp = {
-    hidden: { opacity: prefersReducedMotion ? 1 : 0, y: yOffset },
+    hidden: { opacity: 0, y: yOffset },
     visible: {
       opacity: 1,
       y: 0,
@@ -34,7 +34,7 @@ export function IntroGuru() {
 
   // Image animation - slides from right
   const imageAnimation = {
-    hidden: { opacity: prefersReducedMotion ? 1 : 0, x: xOffset, scale: prefersReducedMotion ? 1 : 0.95 },
+    hidden: { opacity: 0, x: xOffset, scale: 0.95 },
     visible: {
       opacity: 1,
       x: 0,
@@ -51,7 +51,7 @@ export function IntroGuru() {
           <motion.p
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false, amount: 0.3 }}
+            viewport={{ once: false, amount: 0.2, margin: "-50px 0px -50px 0px" }}
             variants={slideLeft}
             className="text-[#FFFFFF] leading-relaxed text-[14px] md:text-[15px] pb-2"
           >
@@ -61,7 +61,7 @@ export function IntroGuru() {
           <motion.h2
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: false, amount: 0.3 }}
+            viewport={{ once: false, amount: 0.2, margin: "-50px 0px -50px 0px" }}
             variants={fadeUp}
             className="font-body text-2xl md:text-3xl font-bold inline-block
              bg-linear-to-r from-[#EBB57C] to-[#94622C]
@@ -74,7 +74,7 @@ export function IntroGuru() {
             <motion.p
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: false, amount: 0.3 }}
+              viewport={{ once: false, amount: 0.2, margin: "-50px 0px -50px 0px" }}
               variants={fadeUp}
             >
               तंत्र शास्त्र के सूत्र "<span className="font-bold">गृहस्थो नास्ति मे तुल्य:</span>" (गृहस्थ के समान
@@ -85,7 +85,7 @@ export function IntroGuru() {
             <motion.p
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: false, amount: 0.3 }}
+              viewport={{ once: false, amount: 0.2, margin: "-50px 0px -50px 0px" }}
               variants={fadeUp}
             >
               मोरड़ी मावली की पावन भूमि पर रहते हुए, वे प्रकृति के पंचभूतों की
@@ -96,7 +96,7 @@ export function IntroGuru() {
             <motion.p
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: false, amount: 0.3 }}
+              viewport={{ once: false, amount: 0.2, margin: "-50px 0px -50px 0px" }}
               variants={fadeUp}
             >
               खेत की माटी हो या घर की रसोई - गुरुदेव के लिए प्रत्येक कर्म माँ की
@@ -111,7 +111,7 @@ export function IntroGuru() {
           className="flex justify-center mt-4 md:mt-0 md:pt-25"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: false, amount: 0.3 }}
+          viewport={{ once: false, amount: 0.2, margin: "-50px 0px -50px 0px" }}
           variants={imageAnimation}
           whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
         >
