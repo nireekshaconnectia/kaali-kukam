@@ -39,7 +39,7 @@ export function Hero() {
 
   return (
     <section
-      className="relative overflow-hidden w-full min-h-screen flex items-center justify-center"
+      className="relative overflow-hidden w-full h-screen flex items-center justify-center -my-20"
       style={{ fontFamily: "'Mukta', serif", background: "#000" }}
     >
       <motion.div
@@ -49,7 +49,7 @@ export function Hero() {
         style={{
           position: "relative",
           width: "clamp(300px, 95vw, 680px)",
-          height: "clamp(160px, 85vw, 580px)",
+          height: "clamp(360px, 15vh, 80px)",
         }}
       >
         {/* कृष्ण — top left */}
