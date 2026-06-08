@@ -68,7 +68,7 @@ export function FaqSection() {
 
   return (
     <motion.section
-      className="mx-auto max-w-5xl px-6 md:px-14 py-16 w-full"
+      className="mx-auto max-w-5xl px-6 md:px-14 pt-16 pb-24 md:pb-48 w-full"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.15 }}
@@ -79,7 +79,7 @@ export function FaqSection() {
         <img
           src={vector}
           alt="संकल्प FAQ"
-          className="h-auto w-48 md:w-80"
+          className="h-auto w-56 md:w-64"
         />
       </motion.div>
 

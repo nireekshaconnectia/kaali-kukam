@@ -17,13 +17,13 @@ export function Navbar() {
   return (
     // Navbar slides down from top on mount
     <motion.header
-      className="sticky top-0 z-50 bg-background/30 backdrop-blur-2xl border-b border-border/40"
+      className="sticky top-0 z-50 bg-background/30 backdrop-blur-2xl"
       style={{ fontFamily: "'Mukta', serif" }}
       initial={{ opacity: 0, y: -100 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
     >
-      <div className="bg-[#F42903] flex justify-center py-1.5">
+      <div className="bg-[#F42903] flex justify-center py-1.5 mb-2">
         <img
           src={NavbarMantra}
           alt="ॐ कृष्ण काली शंकराय स्वाहा"
