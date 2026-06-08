@@ -5,6 +5,7 @@ import vectorKali from "@/assets/Vector-1.png";
 import vectorKrsna from "@/assets/Vector-3.png";
 import vectorAishwarya from "@/assets/Vector-2.png";
 import vectorSwaha from "@/assets/Vector.png";
+import { useReducedMotion } from "../../hooks/useReducedMotion";
 
 // Each calligraphy corner flies in from its diagonal corner
 const cornerVariants = {
@@ -34,6 +35,7 @@ const centerVariants = {
 
 export function Hero() {
   const { isReady } = useOutletContext<{ isReady: boolean }>();
+  const prefersReducedMotion = useReducedMotion();
 
   return (
     <section
@@ -41,8 +43,9 @@ export function Hero() {
       style={{ fontFamily: "'Mukta', serif", background: "#000" }}
     >
       <motion.div
-        initial="hidden"
+        initial={prefersReducedMotion ? "visible" : "hidden"}
         animate={isReady ? "visible" : "hidden"}
+        transition={prefersReducedMotion ? { duration: 0 } : undefined}
         style={{
           position: "relative",
           width: "clamp(300px, 95vw, 680px)",

@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import goddessImg from "@/assets/kaali_maa_tandav.png";
+import { useReducedMotion } from "../../hooks/useReducedMotion";
 
 interface EntryOverlayProps {
   onEnter: () => void;
@@ -7,6 +8,7 @@ interface EntryOverlayProps {
 }
 
 export function EntryOverlay({ onEnter, visible }: EntryOverlayProps) {
+  const prefersReducedMotion = useReducedMotion();
   return (
     <AnimatePresence>
       {visible && (
@@ -45,8 +47,8 @@ export function EntryOverlay({ onEnter, visible }: EntryOverlayProps) {
           >
             {/* ── Deep ambient pulse behind everything ── */}
             <motion.div
-              animate={{ opacity: [0.3, 0.6, 0.3], scale: [1, 1.08, 1] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              animate={prefersReducedMotion ? {} : { opacity: [0.3, 0.6, 0.3], scale: [1, 1.08, 1] }}
+              transition={prefersReducedMotion ? {} : { duration: 4, repeat: Infinity, ease: "easeInOut" }}
               style={{
                 position: "absolute",
                 width: 260,
@@ -60,8 +62,8 @@ export function EntryOverlay({ onEnter, visible }: EntryOverlayProps) {
 
             {/* ── Smoke layer 1 — slow CW ── */}
             <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
+              animate={prefersReducedMotion ? {} : { rotate: 360 }}
+              transition={prefersReducedMotion ? {} : { duration: 14, repeat: Infinity, ease: "linear" }}
               style={{
                 position: "absolute",
                 width: 256,
@@ -76,8 +78,8 @@ export function EntryOverlay({ onEnter, visible }: EntryOverlayProps) {
 
             {/* ── Smoke layer 2 — faster CCW, offset hue ── */}
             <motion.div
-              animate={{ rotate: -360 }}
-              transition={{ duration: 9, repeat: Infinity, ease: "linear" }}
+              animate={prefersReducedMotion ? {} : { rotate: -360 }}
+              transition={prefersReducedMotion ? {} : { duration: 9, repeat: Infinity, ease: "linear" }}
               style={{
                 position: "absolute",
                 width: 232,
@@ -92,8 +94,8 @@ export function EntryOverlay({ onEnter, visible }: EntryOverlayProps) {
 
             {/* ── Smoke layer 3 — medium CW, wider blur ── */}
             <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+              animate={prefersReducedMotion ? {} : { rotate: 360 }}
+              transition={prefersReducedMotion ? {} : { duration: 20, repeat: Infinity, ease: "linear" }}
               style={{
                 position: "absolute",
                 width: 268,
@@ -109,8 +111,8 @@ export function EntryOverlay({ onEnter, visible }: EntryOverlayProps) {
 
             {/* ── Thin ember ring — sharp, barely visible ── */}
             <motion.div
-              animate={{ rotate: -360 }}
-              transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+              animate={prefersReducedMotion ? {} : { rotate: -360 }}
+              transition={prefersReducedMotion ? {} : { duration: 30, repeat: Infinity, ease: "linear" }}
               style={{
                 position: "absolute",
                 width: 248,
@@ -124,14 +126,14 @@ export function EntryOverlay({ onEnter, visible }: EntryOverlayProps) {
             {/* ── Goddess image — screen blend removes black bg ── */}
             <motion.img
               src={goddessImg}
-              animate={{
+              animate={prefersReducedMotion ? {} : {
                 filter: [
                   "drop-shadow(0 0 10px rgba(200,0,0,0.4)) brightness(0.95)",
                   "drop-shadow(0 0 30px rgba(200,0,0,0.8)) brightness(1.05)",
                   "drop-shadow(0 0 10px rgba(200,0,0,0.4)) brightness(0.95)",
                 ],
               }}
-              transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+              transition={prefersReducedMotion ? {} : { duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
               style={{
                 width: 220,
                 height: 220,
@@ -147,9 +149,9 @@ export function EntryOverlay({ onEnter, visible }: EntryOverlayProps) {
 
           {/* ── Site name ── */}
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
+            initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            transition={prefersReducedMotion ? { duration: 0 } : { delay: 0.4, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             style={{
               display: "flex",
               flexDirection: "column",
@@ -196,8 +198,8 @@ export function EntryOverlay({ onEnter, visible }: EntryOverlayProps) {
 
           {/* ── माँ के द्वार पर आएं ── */}
           <motion.p
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+            animate={prefersReducedMotion ? {} : { opacity: [0.5, 1, 0.5] }}
+            transition={prefersReducedMotion ? {} : { duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
             style={{
               fontFamily: "'Yatra One', serif",
               fontSize: "clamp(14px, 3.5vw, 17px)",
@@ -212,14 +214,14 @@ export function EntryOverlay({ onEnter, visible }: EntryOverlayProps) {
 
           {/* ── Bindi dot ── */}
           <motion.div
-            animate={{
+            animate={prefersReducedMotion ? {} : {
               boxShadow: [
                 "0 0 0 0 rgba(244,41,3,0.6)",
                 "0 0 0 8px transparent",
                 "0 0 0 0 transparent",
               ],
             }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
+            transition={prefersReducedMotion ? {} : { duration: 2, repeat: Infinity, ease: "easeOut" }}
             style={{
               width: 5,
               height: 5,
@@ -231,8 +233,8 @@ export function EntryOverlay({ onEnter, visible }: EntryOverlayProps) {
 
           {/* ── Whisper hint ── */}
           <motion.p
-            animate={{ opacity: [0, 1, 0] }}
-            transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            animate={prefersReducedMotion ? {} : { opacity: [0, 1, 0] }}
+            transition={prefersReducedMotion ? {} : { duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
             style={{
               fontFamily: "'Mukta', sans-serif",
               fontSize: "11px",

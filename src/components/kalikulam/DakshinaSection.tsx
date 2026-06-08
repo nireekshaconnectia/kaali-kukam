@@ -23,8 +23,8 @@ export function DakshinaSection() {
   const yVal = prefersReducedMotion ? 0 : 20;
 
   const fadeUp = {
-    hidden: { opacity: prefersReducedMotion ? 1 : 0, y: yVal },
-    visible: { opacity: 1, y: 0, transition: { duration: dur, ease: "easeOut" as const } },
+    hidden: { opacity: prefersReducedMotion ? 1 : 0, y: yVal, scale: prefersReducedMotion ? 1 : 0.9 },
+    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: dur, ease: "easeOut" as const } },
   };
 
   return (

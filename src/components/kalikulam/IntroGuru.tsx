@@ -25,8 +25,8 @@ export function IntroGuru() {
   };
 
   const slideRight = {
-    hidden: { opacity: prefersReducedMotion ? 1 : 0, x: xVal },
-    visible: { opacity: 1, x: 0, transition: { duration: dur, ease: "easeOut" as const } },
+    hidden: { opacity: prefersReducedMotion ? 1 : 0, x: xVal, scale: prefersReducedMotion ? 1 : 0.85 },
+    visible: { opacity: 1, x: 0, scale: 1, transition: { duration: dur, ease: "easeOut" as const } },
   };
 
   const fadeUp = {

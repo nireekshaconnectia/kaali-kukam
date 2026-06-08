@@ -47,19 +47,21 @@ export function TantraSection() {
   const xOffset = prefersReducedMotion || isMobile ? 0 : 60;
 
   const slideText = (fromLeft: boolean) => ({
-    hidden: { opacity: prefersReducedMotion ? 1 : 0, x: fromLeft ? -xOffset : xOffset },
+    hidden: { opacity: prefersReducedMotion ? 1 : 0, x: fromLeft ? -xOffset : xOffset, scale: prefersReducedMotion ? 1 : 0.95 },
     visible: {
       opacity: 1,
       x: 0,
+      scale: 1,
       transition: { duration: dur, ease: [0.22, 1, 0.36, 1] as const, delay: 0.05 },
     },
   });
 
   const slideImg = (fromLeft: boolean) => ({
-    hidden: { opacity: prefersReducedMotion ? 1 : 0, x: fromLeft ? xOffset : -xOffset },
+    hidden: { opacity: prefersReducedMotion ? 1 : 0, x: fromLeft ? xOffset : -xOffset, scale: prefersReducedMotion ? 1 : 0.9 },
     visible: {
       opacity: 1,
       x: 0,
+      scale: 1,
       transition: { duration: dur, ease: [0.22, 1, 0.36, 1] as const, delay: 0.1 },
     },
   });

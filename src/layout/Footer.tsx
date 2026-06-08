@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import union from "@/assets/Union.png";
 import trishul from "@/assets/trishul.png";
+import { useReducedMotion } from "../hooks/useReducedMotion";
 
 const cols = [
   ["मुख्यपृष्ठ", "परिचय", "दर्शन", "सेवाएं"],
@@ -9,6 +10,19 @@ const cols = [
 ];
 
 export function Footer() {
+  const prefersReducedMotion = useReducedMotion();
+  const dur = prefersReducedMotion ? 0 : 0.6;
+  const yVal = prefersReducedMotion ? 0 : 20;
+
+  const containerVariants = {
+    hidden: {},
+    visible: { transition: { staggerChildren: 0.1 } },
+  };
+
+  const fadeUp = {
+    hidden: { opacity: prefersReducedMotion ? 1 : 0, y: yVal, scale: prefersReducedMotion ? 1 : 0.95 },
+    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: dur, ease: "easeOut" as const } },
+  };
   return (
     <motion.footer
       className="relative bg-[#F42903] text-primary-foreground"
@@ -27,9 +41,15 @@ export function Footer() {
         />
       </div>
 
-      <div className="relative mx-auto flex max-w-5xl flex-col md:flex-row justify-between gap-10 px-6 md:px-14 py-14">
+      <motion.div
+        className="relative mx-auto flex max-w-5xl flex-col md:flex-row justify-between gap-10 px-6 md:px-14 py-14"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: false, amount: 0.1 }}
+        variants={containerVariants}
+      >
         {/* Col 1 — Logo + address */}
-        <div className="z-10 flex-1">
+        <motion.div className="z-10 flex-1" variants={fadeUp}>
           <img src={union} alt="Union" className="h-20 w-auto mt-2" />
           <p className="mt-6 text-sm/relaxed text-primary-foreground/85">
             पता: F1/145, सेक्टर 16, रोहिणी,
@@ -37,10 +57,10 @@ export function Footer() {
             दिल्ली - 110089
           </p>
           <p className="mt-2 text-sm text-primary-foreground/85">support@kalikulam.org</p>
-        </div>
+        </motion.div>
 
         {/* Col 2 — Nav links and Newsletter */}
-        <div className="z-10 flex-[1.5] flex flex-col gap-10">
+        <motion.div className="z-10 flex-[1.5] flex flex-col gap-10" variants={fadeUp}>
           <div className="flex gap-12 sm:gap-24">
             {cols.map((col, i) => (
               <ul key={i} className="space-y-2 font-display text-sm">
@@ -56,7 +76,7 @@ export function Footer() {
           </div>
 
           {/* Newsletter */}
-          <div className="w-fit">
+          <motion.div className="w-fit" variants={fadeUp}>
             <p className="font-display mb-3 text-white">काली कुलम ज्ञान पत्रिका</p>
             <form
               onSubmit={(e) => e.preventDefault()}
@@ -75,13 +95,19 @@ export function Footer() {
                 →
               </button>
             </form>
-          </div>
-        </div>
-      </div>
+          </motion.div>
+        </motion.div>
+      </motion.div>
 
-      <div className="bg-[#BD1C00] text-primary-foreground py-1.5 text-center text-md relative z-10">
+      <motion.div
+        className="bg-[#BD1C00] text-primary-foreground py-1.5 text-center text-md relative z-10"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: false, amount: 0.1 }}
+        transition={{ duration: dur, ease: "easeOut" as const }}
+      >
         © 2026 Kali Kulam. All rights reserved.
-      </div>
+      </motion.div>
     </motion.footer>
   );
 }
