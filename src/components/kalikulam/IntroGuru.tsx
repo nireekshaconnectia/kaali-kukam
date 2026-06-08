@@ -1,5 +1,6 @@
 // IntroGuru.tsx
-import { motion } from "framer-motion";
+import { motion, useInView, useAnimation } from "framer-motion";
+import { useRef, useEffect } from "react";
 import guru from "@/assets/guru.png";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
 import { useIsMobile } from "../../hooks/use-mobile";
@@ -7,6 +8,19 @@ import { useIsMobile } from "../../hooks/use-mobile";
 export function IntroGuru() {
   const prefersReducedMotion = useReducedMotion();
   const isMobile = useIsMobile();
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: false, amount: 0.2 });
+  const controls = useAnimation();
+
+  useEffect(() => {
+    if (isInView) {
+      // Reset to hidden first, then animate to visible
+      controls.set("hidden");
+      controls.start("visible");
+    } else {
+      controls.set("hidden");
+    }
+  }, [isInView, controls]);
 
   const dur = prefersReducedMotion ? 0 : isMobile ? 0.5 : 0.7;
   const xOffset = prefersReducedMotion || isMobile ? 0 : 50;
@@ -44,14 +58,12 @@ export function IntroGuru() {
   };
 
   return (
-    <section className="mx-auto max-w-5xl px-4 py-8 md:px-14 md:py-12">
+    <section ref={sectionRef} className="mx-auto max-w-5xl px-4 py-8 md:px-14 md:py-12">
       <div className="grid items-center gap-6 md:gap-8 md:grid-cols-[1.4fr_1fr]">
         {/* Text block - animates when in view */}
         <div>
           <motion.p
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, amount: 0.2, margin: "-50px 0px -50px 0px" }}
+            animate={controls}
             variants={slideLeft}
             className="text-[#FFFFFF] leading-relaxed text-[14px] md:text-[15px] pb-2"
           >
@@ -59,9 +71,7 @@ export function IntroGuru() {
           </motion.p>
 
           <motion.h2
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: false, amount: 0.2, margin: "-50px 0px -50px 0px" }}
+            animate={controls}
             variants={fadeUp}
             className="font-body text-2xl md:text-3xl font-bold inline-block
              bg-linear-to-r from-[#EBB57C] to-[#94622C]
@@ -72,9 +82,7 @@ export function IntroGuru() {
 
           <div className="space-y-3 md:space-y-4 text-[#FFFFFF] leading-relaxed text-[13px] md:text-[15px] mt-3 md:mt-4">
             <motion.p
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: false, amount: 0.2, margin: "-50px 0px -50px 0px" }}
+              animate={controls}
               variants={fadeUp}
             >
               तंत्र शास्त्र के सूत्र "<span className="font-bold">गृहस्थो नास्ति मे तुल्य:</span>" (गृहस्थ के समान
@@ -83,9 +91,7 @@ export function IntroGuru() {
               हैं।
             </motion.p>
             <motion.p
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: false, amount: 0.2, margin: "-50px 0px -50px 0px" }}
+              animate={controls}
               variants={fadeUp}
             >
               मोरड़ी मावली की पावन भूमि पर रहते हुए, वे प्रकृति के पंचभूतों की
@@ -94,9 +100,7 @@ export function IntroGuru() {
               लिए वन जाने की आवश्यकता नहीं, बल्कि समर्पित मन की आवश्यकता होती है।
             </motion.p>
             <motion.p
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: false, amount: 0.2, margin: "-50px 0px -50px 0px" }}
+              animate={controls}
               variants={fadeUp}
             >
               खेत की माटी हो या घर की रसोई - गुरुदेव के लिए प्रत्येक कर्म माँ की
@@ -109,9 +113,7 @@ export function IntroGuru() {
         {/* Image - independent animation with delay */}
         <motion.div
           className="flex justify-center mt-4 md:mt-0 md:pt-25"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.2, margin: "-50px 0px -50px 0px" }}
+          animate={controls}
           variants={imageAnimation}
           whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
         >
