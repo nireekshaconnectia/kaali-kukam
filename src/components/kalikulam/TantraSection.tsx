@@ -48,41 +48,63 @@ export function TantraSection() {
   const prefersReducedMotion = useReducedMotion();
   const isMobile = useIsMobile();
 
-  // FIXED: Keep xOffset for mobile to maintain animations
-  const dur = prefersReducedMotion ? 0 : isMobile ? 0.5 : 0.7;
-  const xOffset = prefersReducedMotion ? 0 : 40; // Slightly reduced for mobile but still present
+  // Slower durations for smoother feel
+  const dur = prefersReducedMotion ? 0 : isMobile ? 0.8 : 1.0;
+  const xOffset = prefersReducedMotion ? 0 : isMobile ? 25 : 60; // Shorter distance = smoother
+
+  // Smoother easing curve for slide animations
+  const smoothEasing = [0.25, 0.46, 0.45, 0.94] as const;
 
   const slideText = (fromLeft: boolean) => ({
-    hidden: { opacity: prefersReducedMotion ? 1 : 0, x: fromLeft ? -xOffset : xOffset, scale: prefersReducedMotion ? 1 : 0.95 },
+    hidden: { 
+      opacity: prefersReducedMotion ? 1 : 0, 
+      x: fromLeft ? -xOffset : xOffset, 
+      scale: prefersReducedMotion ? 1 : 0.96 
+    },
     visible: {
       opacity: 1,
       x: 0,
       scale: 1,
-      transition: { duration: dur, ease: [0.22, 1, 0.36, 1] as const, delay: 0.05 },
+      transition: { 
+        duration: dur, 
+        ease: smoothEasing, 
+        delay: 0.08 
+      },
     },
   });
 
   const slideImg = (fromLeft: boolean) => ({
-    hidden: { opacity: prefersReducedMotion ? 1 : 0, x: fromLeft ? xOffset : -xOffset, scale: prefersReducedMotion ? 1 : 0.9 },
+    hidden: { 
+      opacity: prefersReducedMotion ? 1 : 0, 
+      x: fromLeft ? xOffset : -xOffset, 
+      scale: prefersReducedMotion ? 1 : 0.92 
+    },
     visible: {
       opacity: 1,
       x: 0,
       scale: 1,
-      transition: { duration: dur, ease: [0.22, 1, 0.36, 1] as const, delay: 0.1 },
+      transition: { 
+        duration: dur, 
+        ease: smoothEasing, 
+        delay: 0.12 
+      },
     },
   });
 
   const headerVariants = {
-    hidden: { opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 18 },
+    hidden: { opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: prefersReducedMotion ? 0 : 0.6, ease: "easeOut" as const },
+      transition: { 
+        duration: prefersReducedMotion ? 0 : 0.8, 
+        ease: smoothEasing 
+      },
     },
   };
 
-  // Slower rotation on mobile to reduce GPU load
-  const rotateDuration = prefersReducedMotion ? 0 : isMobile ? 40 : 25;
+  // Slower rotation on mobile for smoother performance
+  const rotateDuration = prefersReducedMotion ? 0 : isMobile ? 45 : 30;
 
   return (
     <section className="mx-auto max-w-5xl px-6 md:px-14 py-16">
@@ -90,7 +112,7 @@ export function TantraSection() {
         className="mb-16 flex flex-col items-center text-center"
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: false, amount: 0.4 }}
+        viewport={{ once: false, amount: 0.3 }}
         variants={headerVariants}
       >
         <img
@@ -115,7 +137,7 @@ export function TantraSection() {
               className={`${item.imageRight ? "md:order-1" : "md:order-2"}`}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: false, amount: 0.3 }}
+              viewport={{ once: false, amount: 0.25 }}
               variants={slideText(item.imageRight)}
             >
               <img
@@ -129,12 +151,12 @@ export function TantraSection() {
               </p>
             </motion.div>
 
-            {/* Image — GPU-composited rotation */}
+            {/* Image — smooth rotation with GPU acceleration */}
             <motion.div
               className={`flex justify-center ${item.imageRight ? "md:order-2" : "md:order-1"}`}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: false, amount: 0.3 }}
+              viewport={{ once: false, amount: 0.25 }}
               variants={slideImg(item.imageRight)}
             >
               <div className="relative inline-block" style={{ willChange: "transform" }}>
@@ -149,7 +171,12 @@ export function TantraSection() {
                   transition={
                     prefersReducedMotion
                       ? {}
-                      : { repeat: Infinity, duration: rotateDuration, ease: "linear" }
+                      : { 
+                          repeat: Infinity, 
+                          duration: rotateDuration, 
+                          ease: "linear",
+                          repeatDelay: 0
+                        }
                   }
                 />
                 <img

@@ -21,25 +21,31 @@ export function IntroGuru() {
   const prefersReducedMotion = useReducedMotion();
   const isMobile = useIsMobile();
 
-  const dur = prefersReducedMotion ? 0 : isMobile ? 0.5 : 0.7;
-  // FIXED: Keep xOffset for mobile (reduced slightly)
-  const xOffset = prefersReducedMotion ? 0 : 30;
+  // Slower durations for smoother feel
+  const dur = prefersReducedMotion ? 0 : isMobile ? 0.9 : 1.1;
+  const xOffset = prefersReducedMotion ? 0 : isMobile ? 20 : 60;
 
   const header = useScrollAnimation(0.1);
   const textBlock = useScrollAnimation(0.3);
   const imgBlock = useScrollAnimation(0.3);
 
+  const smoothEasing = [0.25, 0.46, 0.45, 0.94] as const;
+
   const slideText = (fromLeft: boolean) => ({
     hidden: {
       opacity: prefersReducedMotion ? 1 : 0,
       x: fromLeft ? -xOffset : xOffset,
-      scale: prefersReducedMotion ? 1 : 0.95,
+      scale: prefersReducedMotion ? 1 : 0.96,
     },
     visible: {
       opacity: 1,
       x: 0,
       scale: 1,
-      transition: { duration: dur, ease: [0.22, 1, 0.36, 1] as const, delay: 0.05 },
+      transition: { 
+        duration: dur, 
+        ease: smoothEasing, 
+        delay: 0.1 
+      },
     },
   });
 
@@ -47,13 +53,17 @@ export function IntroGuru() {
     hidden: {
       opacity: prefersReducedMotion ? 1 : 0,
       x: fromLeft ? xOffset : -xOffset,
-      scale: prefersReducedMotion ? 1 : 0.9,
+      scale: prefersReducedMotion ? 1 : 0.93,
     },
     visible: {
       opacity: 1,
       x: 0,
       scale: 1,
-      transition: { duration: dur, ease: [0.22, 1, 0.36, 1] as const, delay: 0.1 },
+      transition: { 
+        duration: dur, 
+        ease: smoothEasing, 
+        delay: 0.15 
+      },
     },
   });
 
