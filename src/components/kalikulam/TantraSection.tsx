@@ -32,7 +32,7 @@ const items = [
     imageRight: false,
     // width: 338, height: 321, top: 3048.5px (but relative to emblem)
     topImgPosition: { top: "-10%", left: "-3%" }, // Slightly larger, positioned off-center
-    topImgSize: "w-32 md:w-36", // 338px scale equivalent
+    topImgSize: "w-32 md:w-40 ", // 338px scale equivalent
   },
   {
     title: "यंत्र",
@@ -42,8 +42,8 @@ const items = [
     text: "यंत्र एक पवित्र ज्यामितीय संरचना है जिसमें देवी-देवताओं की शक्ति को आह्वान किया जाता है। यह केवल एक चित्र नहीं, यह एक जीवंत ऊर्जा केंद्र है। घर में, व्यापार में और जीवन के हर क्षेत्र में यंत्र एक अदृश्य सुरक्षा कवच का कार्य करता है।",
     imageRight: true,
     // width: 270, height: 270, top: 7.5px, left: 1049px
-    topImgPosition: { top: "-22%", left: "20%" }, // Centered, minimal offset
-    topImgSize: "w-24 md:w-28", // 270px scale equivalent
+    topImgPosition: { top: "-22%", left: "18%" }, // Centered, minimal offset
+    topImgSize: "w-24 md:w-32", // 270px scale equivalent
   },
 ];
 
