@@ -77,7 +77,7 @@ export function TantraSection() {
   const rotateDuration = prefersReducedMotion ? 0 : isMobile ? 40 : 25;
 
   return (
-    <section className="mx-auto max-w-5xl px-6 py-16">
+    <section className="mx-auto max-w-5xl px-6 md:px-14 py-16">
       <motion.div
         className="mb-16 flex flex-col items-center text-center"
         initial="hidden"

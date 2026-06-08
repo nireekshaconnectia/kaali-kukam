@@ -35,7 +35,7 @@ export function IntroGuru() {
   };
 
   return (
-    <section className="mx-auto max-w-6xl px-4 py-8 md:px-6 md:py-12">
+    <section className="mx-auto max-w-5xl px-4 py-8 md:px-14 md:py-12">
       <motion.div
         className="grid items-center gap-6 md:gap-8 md:grid-cols-[1.4fr_1fr]"
         initial="hidden"

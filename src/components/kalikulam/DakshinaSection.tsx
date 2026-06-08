@@ -57,7 +57,7 @@ export function DakshinaSection() {
 
         {/* Content — staggered fade-up children */}
         <motion.div
-          className="relative mx-auto max-w-3xl px-3 py-10 text-center"
+          className="relative mx-auto max-w-5xl px-6 md:px-14 py-10 text-center"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}

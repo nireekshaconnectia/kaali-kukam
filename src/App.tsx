@@ -4,7 +4,7 @@ import Layout from "./layout/Layout";
 import { useBackgroundMusic } from "./hooks/useBackgroundMusic";
 import { EntryOverlay } from "./components/kalikulam/EntryOverlay";
 
-const bgMusic = new URL("./assets/background.mpeg", import.meta.url).href;
+const bgMusic = new URL("./assets/Aigiri_Nandini_Bg.mp3", import.meta.url).href;
 
 const Home = lazy(() => import("./pages/Home") as Promise<{ default: ComponentType<any> }>);
 

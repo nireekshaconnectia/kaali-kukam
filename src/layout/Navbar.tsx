@@ -17,7 +17,7 @@ export function Navbar() {
   return (
     // Navbar slides down from top on mount
     <motion.header
-      className="sticky top-0 z-50 bg-background/85 backdrop-blur-md border-b border-border/60"
+      className="sticky top-0 z-50 bg-background/30 backdrop-blur-2xl border-b border-border/40"
       style={{ fontFamily: "'Mukta', serif" }}
       initial={{ opacity: 0, y: -100 }}
       animate={{ opacity: 1, y: 0 }}
@@ -37,7 +37,7 @@ export function Navbar() {
             <a
               key={l}
               href="#"
-              className={`px-8 py-2 ${idx === 0 ? "text-crimson" : "text-foreground"} font-body font-bold text-md hover:text-gold transition-colors`}
+              className={`px-8 py-2 ${idx === 0 ? "text-crimson" : "text-foreground"} font-body text-md hover:text-gold transition-colors`}
             >
               {l}
             </a>
@@ -48,7 +48,7 @@ export function Navbar() {
 
         <div className="hidden md:flex gap-15 flex-1 justify-end">
           {navLinks.slice(2).map((l) => (
-            <a key={l} href="#" className="px-8 py-2 text-foreground font-body text-md hover:text-gold transition-colors font-bold">
+            <a key={l} href="#" className="px-8 py-2 text-foreground font-body text-md hover:text-gold transition-colors">
               {l}
             </a>
           ))}
