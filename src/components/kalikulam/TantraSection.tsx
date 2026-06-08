@@ -151,7 +151,7 @@ export function TantraSection() {
                   alt={`${item.title} emblem`}
                   loading="lazy"
                   decoding="async"
-                  className={`absolute inset-0 ${item.title === "यंत्र" ? "w-24 md:w-28" : "w-28 md:w-32"} ${item.title === "मंत्र" ? "ml-[-8px] md:ml-[-12px]" : "m-auto"}`}
+                  className={`absolute inset-0 ${item.title === "यंत्र" ? "w-24 md:w-28" : "w-28 md:w-32"} ${item.title === "मंत्र" ? "-ml-2 md:-ml-3" : "m-auto"}`}
                 />
               </div>
             </motion.div>

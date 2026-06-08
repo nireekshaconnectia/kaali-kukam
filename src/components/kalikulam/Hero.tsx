@@ -39,7 +39,7 @@ export function Hero() {
 
   return (
     <section
-      className="relative overflow-hidden w-full flex items-center justify-center"
+      className="relative overflow-hidden w-full min-h-screen flex items-center justify-center"
       style={{ fontFamily: "'Mukta', serif", background: "#000" }}
     >
       <motion.div

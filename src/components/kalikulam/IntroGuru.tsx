@@ -84,7 +84,7 @@ export function IntroGuru() {
 
         {/* Image — slides from right, no infinite float */}
         <motion.div
-          className="flex justify-center mt-4 md:mt-0 md:pt-[100px]"
+          className="flex justify-center mt-4 md:mt-0 md:pt-25"
           variants={slideRight}
           whileHover={{ scale: 1.02, transition: { duration: 0.3 } }}
         >
