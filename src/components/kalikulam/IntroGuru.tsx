@@ -1,18 +1,34 @@
 // IntroGuru.tsx
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { motion, useAnimation, useInView } from "framer-motion";
 import guru from "@/assets/guru.png";
 import { useReducedMotion } from "../../hooks/useReducedMotion";
 import { useIsMobile } from "../../hooks/use-mobile";
+
+// Re-usable hook: fires "visible" on enter, "hidden" on exit — every time
+function useScrollAnimation(amount = 0.3) {
+  const ref = useRef<HTMLDivElement>(null);
+  const controls = useAnimation();
+  const inView = useInView(ref, { once: false, amount });
+
+  useEffect(() => {
+    controls.start(inView ? "visible" : "hidden");
+  }, [inView, controls]);
+
+  return { ref, controls };
+}
 
 export function IntroGuru() {
   const prefersReducedMotion = useReducedMotion();
   const isMobile = useIsMobile();
 
-  // Exact same duration/offset logic as TantraSection
   const dur = prefersReducedMotion ? 0 : isMobile ? 0.5 : 0.7;
   const xOffset = prefersReducedMotion || isMobile ? 0 : 60;
 
-  // Exact same slideText / slideImg factories as TantraSection
+  const header = useScrollAnimation(0.4);
+  const textBlock = useScrollAnimation(0.3);
+  const imgBlock = useScrollAnimation(0.3);
+
   const slideText = (fromLeft: boolean) => ({
     hidden: {
       opacity: prefersReducedMotion ? 1 : 0,
@@ -41,7 +57,6 @@ export function IntroGuru() {
     },
   });
 
-  // Exact same headerVariants as TantraSection
   const headerVariants = {
     hidden: { opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 18 },
     visible: {
@@ -53,28 +68,27 @@ export function IntroGuru() {
 
   return (
     <section className="mx-auto max-w-5xl px-6 md:px-14 py-16">
-      {/* Header — exact same structure as TantraSection */}
+      {/* Header */}
       <motion.div
-        className="mb-16 flex flex-col items-center text-center"
+        ref={header.ref}
+        animate={header.controls}
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: false, amount: 0.4 }}
         variants={headerVariants}
+        className="mb-4 flex flex-col "
       >
         <p className="text-[#EBB57C] text-sm md:text-base tracking-wide">
           पूज्य आदिगुरु
         </p>
       </motion.div>
 
-      {/* Single item grid — same structure as TantraSection items loop */}
       <div className="grid items-center gap-8 md:grid-cols-2">
-        {/* Text — slides from left (imageRight: true → text is order-1) */}
+        {/* Text — slides from left */}
         <motion.div
-          className="md:order-1"
+          ref={textBlock.ref}
+          animate={textBlock.controls}
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.3 }}
           variants={slideText(true)}
+          className="md:order-1"
         >
           <h2
             className="font-body text-2xl md:text-3xl font-bold
@@ -105,13 +119,13 @@ export function IntroGuru() {
           </div>
         </motion.div>
 
-        {/* Image — slides from right (imageRight: true → image is order-2) */}
+        {/* Image — slides from right */}
         <motion.div
-          className="flex justify-center md:order-2"
+          ref={imgBlock.ref}
+          animate={imgBlock.controls}
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: false, amount: 0.3 }}
           variants={slideImg(true)}
+          className="flex justify-center md:order-2"
         >
           <div className="relative inline-block" style={{ willChange: "transform" }}>
             <img
