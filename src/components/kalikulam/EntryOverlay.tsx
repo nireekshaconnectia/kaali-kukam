@@ -52,7 +52,7 @@ export function EntryOverlay({ onEnter, visible }: EntryOverlayProps) {
         position: "fixed",
         inset: 0,
         zIndex: 99999,
-        cursor: isClickable ? "pointer" : "not-allowed",
+        cursor: isClickable ? "pointer" : "",
         userSelect: "none",
         WebkitTapHighlightColor: "transparent",
         overflow: "hidden",

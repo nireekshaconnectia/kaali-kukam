@@ -3,7 +3,7 @@ import guru from "@/assets/guru.png";
 
 export function IntroGuru() {
   return (
-    <section className="w-full overflow-x-clip px-6 md:px-51.5">
+    <section className="w-full overflow-x-clip px-6 md:px-60">
       <div className="max-w-7xl mx-auto">
        
 
@@ -21,7 +21,7 @@ export function IntroGuru() {
               मांगीलाल भील
             </h2>
 
-            <div className="space-y-4 text-[#FFFFFF] leading-relaxed tracking-wide text-[18px]">
+            <div className="space-y-6 text-[#FFFFFF] leading-relaxed tracking-wide text-[18px]">
               <p>
                 तंत्र शास्त्र के सूत्र "<span className="font-bold">गृहस्थो नास्ति मे तुल्य:</span>" (गृहस्थ के समान
                 कोई नहीं) को चरितार्थ करते हुए, माँ शारदा के परम उपासक पूज्य

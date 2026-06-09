@@ -43,7 +43,7 @@ const items = [
 
 export function TantraSection() {
   return (
-    <section className="w-full py-16 px-10 md:px-51.5">
+    <section className="w-full py-16 px-10 md:px-61.5">
       <div className="max-w-9xl mx-auto">
         <div className="mb-16 flex flex-col items-center text-center">
           <img
@@ -71,7 +71,7 @@ export function TantraSection() {
                   className="h-8 md:h-12 w-auto mb-4 object-contain"
                   loading="lazy"
                 />
-                <p className="text-[#FFFFFF] leading-relaxed text-[16px]">
+                <p className="text-[#FFFFFF] leading-relaxed text-[18px]">
                   {item.text}
                 </p>
               </div>
