@@ -10,7 +10,7 @@ export function IntroGuru() {
         <div className="grid items-center gap-10 md:grid-cols-2">
           {/* Text */}
           <div className="md:order-1">
-             <p className="text-white text-sm md:text-xs tracking-wide mb-2">
+             <p className="text-white text-sm md:text-md tracking-wide mb-2">
           पूज्य आदिगुरु
         </p>
             <h2
