@@ -30,10 +30,10 @@ export function Navbar() {
   }, [open]);
 
   return (
-    <header
-      className="fixed top-0 left-0 w-full z-50 bg-background backdrop-blur-sm"
-      style={{ fontFamily: "'Mukta', serif" }}
-    >
+   <header
+  className="fixed top-0 left-0 w-full z-50 bg-black md:bg-background md:backdrop-blur-sm"
+  style={{ fontFamily: "'Mukta', serif" }}
+>
       <div className="bg-[#F42903] flex justify-center py-1.5">
         <img
           src={NavbarMantra}
@@ -118,27 +118,23 @@ export function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile menu overlay - improved styling */}
+      {/* Mobile menu overlay - solid black background, no transparency */}
       {open && (
         <>
-          {/* Backdrop overlay */}
-          <div
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm md:hidden z-40"
-            onClick={() => setOpen(false)}
-          />
-          
-          {/* Slide-in menu from right */}
-          <div className="fixed top-0 right-0 bottom-0 w-3/4 max-w-sm bg-background/98 backdrop-blur-lg shadow-2xl z-50 md:hidden animate-in slide-in-from-right flex flex-col">
+          {/* Backdrop overlay - solid black */}
+         <div
+  className="fixed inset-0  md:hidden"
+  style={{ zIndex: 45 }}
+  onClick={() => setOpen(false)}
+/>
+
+          {/* Slide-in menu from right - solid black, no backdrop blur */}
+          <div className="fixed top-0 right-0 bottom-0 w-3/4 max-w-sm bg-black shadow-2xl z-50 md:hidden animate-in slide-in-from-right flex flex-col">
             {/* Menu header with logo */}
-            <div className="flex items-center justify-between p-5 border-b border-border/60">
-              <img
-                src={LogoSrc}
-                alt="Kaali Kulam"
-                className="h-10 w-auto"
-              />
+            <div className="flex items-center justify-between p-5 border-b border-white/10">
               <button
                 onClick={() => setOpen(false)}
-                className="p-2 rounded-full hover:bg-foreground/10 transition-colors"
+                className="p-2 rounded-full hover:bg-white/10 transition-colors text-white"
                 aria-label="Close menu"
               >
                 <svg
@@ -155,7 +151,7 @@ export function Navbar() {
                 </svg>
               </button>
             </div>
-            
+
             {/* Navigation links */}
             <div className="flex flex-col gap-2 p-5">
               {navLinks.map((l, i) => (
@@ -165,8 +161,8 @@ export function Navbar() {
                   onClick={() => setOpen(false)}
                   className={`font-body text-lg py-3 px-4 rounded-lg transition-all duration-200 ${
                     i === 0
-                      ? "text-primary bg-primary/10 font-semibold"
-                      : "text-foreground/80 hover:bg-foreground/5 hover:text-foreground"
+                      ? "text-[#F42903] bg-white/10 font-semibold"
+                      : "text-white/80 hover:bg-white/10 hover:text-white"
                   }`}
                 >
                   {l}
