@@ -12,7 +12,7 @@ export function Footer() {
           src={trishul}
           alt="त्रिशूल"
           loading="lazy"
-          className="absolute -top-24 md:top-auto md:bottom-0 right-2 md:right-14 h-[110%] md:h-[115%] w-auto object-contain md:object-bottom object-top"
+          className="absolute -top-24 md:top-auto md:bottom-0 right-2 md:right-18 h-[110%] md:h-[115%] w-auto object-contain md:object-bottom object-top"
         />
       </div>
 
