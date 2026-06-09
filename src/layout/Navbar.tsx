@@ -16,7 +16,7 @@ export function Navbar() {
 
   return (
     <header
-      className="fixed top-0 left-0 w-full z-50 bg-background/30 backdrop-blur-sm "
+      className="fixed top-0 left-0 w-full z-50 bg-background backdrop-blur-sm"
       style={{ fontFamily: "'Mukta', serif" }}
     >
       <div className="bg-[#F42903] flex justify-center py-1.5">
@@ -27,8 +27,8 @@ export function Navbar() {
         />
       </div>
 
-      <nav className="mx-auto flex items-center justify-between px-6 md:px-60 py-3 md:py-15.25">
-        <div className="hidden md:flex gap-15 flex-1">
+      <nav className="mx-auto flex items-center justify-between px-51.5 pt-15.25">
+        <div className="hidden md:flex gap-18 flex-1">
           {navLinks.slice(0, 2).map((l, idx) => (
             <a
               key={l}

@@ -24,7 +24,7 @@ export function DakshinaSection() {
         }
       `}</style>
 
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden w-full">
         {/* Background image */}
         <img
           src={dakshinaHands}
@@ -35,8 +35,8 @@ export function DakshinaSection() {
           className="absolute inset-0 h-full w-full object-cover opacity-45"
         />
 
-        {/* Content */}
-        <div className="relative mx-auto max-w-5xl px-6 md:px-14 py-16 text-center">
+        {/* Content - now centered without extra padding since Layout provides it */}
+        <div className="relative max-w-5xl mx-auto py-16 text-center">
           <p className="font-body text-muted-foreground text-xl mb-1">
             कृतज्ञता का <GradientText text="अर्पण" />
           </p>

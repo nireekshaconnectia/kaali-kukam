@@ -7,17 +7,13 @@ import { FaqSection } from "../components/kalikulam/FaqSection";
 
 function Home() {
   return (
-    <>
+    <div className="w-full">
       <Hero />
-
       <IntroGuru />
-
       <TantraSection />
-
       <DakshinaSection />
-
       <FaqSection />
-    </>
+    </div>
   );
 }
 

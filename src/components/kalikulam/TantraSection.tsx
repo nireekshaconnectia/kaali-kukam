@@ -43,65 +43,67 @@ const items = [
 
 export function TantraSection() {
   return (
-    <section className="mx-auto max-w-5xl px-6 md:px-14 py-16">
-      <div className="mb-16 flex flex-col items-center text-center">
-        <img
-          src={titleTantraMantraYantra}
-          alt="तंत्र . मंत्र . यंत्र"
-          className="h-16 md:h-24 w-auto object-contain"
-          loading="eager"
-        />
-        <p className="text-[#FFFFFF] -mt-2 text-sm md:text-base">
-          विधि, ध्वनि और रूप - तीन शक्तियाँ, एक मार्ग
-        </p>
-      </div>
+    <section className="w-full py-16">
+      <div className="max-w-5xl mx-auto">
+        <div className="mb-16 flex flex-col items-center text-center">
+          <img
+            src={titleTantraMantraYantra}
+            alt="तंत्र . मंत्र . यंत्र"
+            className="h-16 md:h-24 w-auto object-contain"
+            loading="eager"
+          />
+          <p className="text-[#FFFFFF] -mt-2 text-sm md:text-base">
+            विधि, ध्वनि और रूप - तीन शक्तियाँ, एक मार्ग
+          </p>
+        </div>
 
-      <div className="space-y-24">
-        {items.map((item) => (
-          <div
-            key={item.title}
-            className="grid items-center gap-8 md:grid-cols-2"
-          >
-            {/* Text */}
-            <div className={`${item.imageRight ? "md:order-1" : "md:order-2"}`}>
-              <img
-                src={item.titleImg}
-                alt={item.title}
-                className="h-8 md:h-12 w-auto mb-4 object-contain"
-                loading="lazy"
-              />
-              <p className="text-[#FFFFFF] leading-relaxed text-[15px]">
-                {item.text}
-              </p>
-            </div>
-
-            {/* Image */}
-            <div className={`flex justify-center ${item.imageRight ? "md:order-2" : "md:order-1"}`}>
-              <div className="relative inline-block">
+        <div className="space-y-24">
+          {items.map((item) => (
+            <div
+              key={item.title}
+              className="grid items-center gap-8 md:grid-cols-2"
+            >
+              {/* Text */}
+              <div className={`${item.imageRight ? "md:order-1" : "md:order-2"}`}>
                 <img
-                  src={item.emblem}
+                  src={item.titleImg}
                   alt={item.title}
+                  className="h-8 md:h-12 w-auto mb-4 object-contain"
                   loading="lazy"
-                  decoding="async"
-                  className="w-28 md:w-36 drop-shadow-[0_0_30px_oklch(0.55_0.24_28/0.35)]"
                 />
-                <img
-                  src={item.topImg}
-                  alt={`${item.title} emblem`}
-                  loading="lazy"
-                  decoding="async"
-                  className={`absolute inset-0 m-auto ${item.topImgSize}`}
-                  style={{
-                    position: 'absolute',
-                    top: item.topImgPosition.top,
-                    left: item.topImgPosition.left,
-                    transform: 'translate(0, 0)',
-                  }}
-                />
+                <p className="text-[#FFFFFF] leading-relaxed text-[15px]">
+                  {item.text}
+                </p>
+              </div>
+
+              {/* Image */}
+              <div className={`flex justify-center ${item.imageRight ? "md:order-2" : "md:order-1"}`}>
+                <div className="relative inline-block">
+                  <img
+                    src={item.emblem}
+                    alt={item.title}
+                    loading="lazy"
+                    decoding="async"
+                    className="w-28 md:w-36 drop-shadow-[0_0_30px_oklch(0.55_0.24_28/0.35)]"
+                  />
+                  <img
+                    src={item.topImg}
+                    alt={`${item.title} emblem`}
+                    loading="lazy"
+                    decoding="async"
+                    className={`absolute inset-0 m-auto ${item.topImgSize}`}
+                    style={{
+                      position: 'absolute',
+                      top: item.topImgPosition.top,
+                      left: item.topImgPosition.left,
+                      transform: 'translate(0, 0)',
+                    }}
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );

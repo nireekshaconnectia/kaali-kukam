@@ -8,8 +8,8 @@ function Layout() {
     <div className="min-h-screen flex flex-col overflow-hidden">
       <Navbar />
       
-      {/* Add padding-top to account for fixed navbar height */}
-      <main className="flex-1 pt-18 md:pt-22">
+      {/* Main content with padding-top for fixed navbar and horizontal alignment */}
+      <main className="flex-1 pt-15.25  px-6 md:px-60">
         <Outlet />
       </main>
       

@@ -44,51 +44,53 @@ const faqs = [
 
 export function FaqSection() {
   return (
-    <section className="mx-auto max-w-5xl px-6 md:px-14 pt-16 pb-24 md:pb-48 w-full">
-      {/* Header image */}
-      <div className="mb-12 flex justify-center">
-        <img
-          src={vector}
-          alt="संकल्प FAQ"
-          className="h-auto w-56 md:w-64"
-        />
-      </div>
+    <section className="w-full py-16 pb-24 md:pb-48">
+      <div className="max-w-5xl mx-auto">
+        {/* Header image */}
+        <div className="mb-12 flex justify-center">
+          <img
+            src={vector}
+            alt="संकल्प FAQ"
+            className="h-auto w-56 md:w-64"
+          />
+        </div>
 
-      {/* Accordion with extra bottom space (approx 1/6 - 1/8 of accordion height) */}
-      <div className="pb-[12%]">
-        <Accordion
-          type="single"
-          collapsible
-          defaultValue="item-0"
-          className="space-y-4 w-full md:w-[87%] lg:w-[82%]"
-        >
-          {faqs.map((faq, i) => (
-            <div key={i} className="w-full min-w-0">
-              <AccordionItem
-                value={`item-${i}`}
-                className="border-b border-[#1f1f1f] py-1 relative overflow-hidden"
-              >
-                <div className="absolute bottom-0 left-0 right-0 h-px overflow-hidden">
-                  <div className="h-full w-full bg-linear-to-r from-transparent via-white/15 to-transparent bg-size-[200%_100%] animate-shimmer" />
-                </div>
-                
-                <AccordionTrigger className="text-left text-[16px] md:text-[17px] font-medium hover:no-underline py-4 [&>svg]:text-[#D6A15F] [&>svg]:h-4 [&>svg]:w-4 [&>svg]:transition-transform [&>svg]:duration-300">
-                  <span className="bg-linear-to-r from-[#EBB57C] to-[#94622C] bg-clip-text text-transparent">
-                    {faq.q}
-                  </span>
-                </AccordionTrigger>
-
-                <AccordionContent className="pt-2 pb-4">
-                  <div className="rounded-2xl bg-linear-to-br from-[#0d0d0d] to-[#151515] px-6 py-5 text-[#FFFFFF] text-[15px] md:text-[16px] leading-8 space-y-4 border border-[#2a2a2a]">
-                    {faq.a.map((p, j) => (
-                      <p key={j}>{p}</p>
-                    ))}
+        {/* Accordion with extra bottom space */}
+        <div className="pb-[12%]">
+          <Accordion
+            type="single"
+            collapsible
+            defaultValue="item-0"
+            className="space-y-4 w-full md:w-[87%] lg:w-[82%]"
+          >
+            {faqs.map((faq, i) => (
+              <div key={i} className="w-full min-w-0">
+                <AccordionItem
+                  value={`item-${i}`}
+                  className="border-b border-[#1f1f1f] py-1 relative overflow-hidden"
+                >
+                  <div className="absolute bottom-0 left-0 right-0 h-px overflow-hidden">
+                    <div className="h-full w-full bg-linear-to-r from-transparent via-white/15 to-transparent bg-size-[200%_100%] animate-shimmer" />
                   </div>
-                </AccordionContent>
-              </AccordionItem>
-            </div>
-          ))}
-        </Accordion>
+                  
+                  <AccordionTrigger className="text-left text-[16px] md:text-[17px] font-medium hover:no-underline py-4 [&>svg]:text-[#D6A15F] [&>svg]:h-4 [&>svg]:w-4 [&>svg]:transition-transform [&>svg]:duration-300">
+                    <span className="bg-linear-to-r from-[#EBB57C] to-[#94622C] bg-clip-text text-transparent">
+                      {faq.q}
+                    </span>
+                  </AccordionTrigger>
+
+                  <AccordionContent className="pt-2 pb-4">
+                    <div className="rounded-2xl bg-linear-to-br from-[#0d0d0d] to-[#151515] px-6 py-5 text-[#FFFFFF] text-[15px] md:text-[16px] leading-8 space-y-4 border border-[#2a2a2a]">
+                      {faq.a.map((p, j) => (
+                        <p key={j}>{p}</p>
+                      ))}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              </div>
+            ))}
+          </Accordion>
+        </div>
       </div>
     </section>
   );
