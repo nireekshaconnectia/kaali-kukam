@@ -55,18 +55,18 @@ export function FaqSection() {
         </div>
 
         {/* Centered Accordion */}
-        <div className="flex justify-center">
+        <div>
           <Accordion
             type="single"
             collapsible
             defaultValue="item-0"
-            className="space-y-2 w-full md:w-[87%] lg:w-[82%]"
+            className="space-y-4 w-full md:w-[87%] lg:w-[82%]"
           >
             {faqs.map((faq, i) => (
               <div key={i} className="w-full min-w-0">
                 <AccordionItem
                   value={`item-${i}`}
-                  className="border-b border-[#1f1f1f] py-3 relative overflow-hidden"
+                  className="border-b border-[#1f1f1f] py-1 relative overflow-hidden"
                 >
                   <div className="absolute bottom-0 left-0 right-0 h-px overflow-hidden">
                     <div className="h-full w-full bg-linear-to-r from-transparent via-white/15 to-transparent bg-size-[200%_100%] animate-shimmer" />
@@ -79,7 +79,7 @@ export function FaqSection() {
                   </AccordionTrigger>
 
                   <AccordionContent className="pt-2 pb-4">
-                    <div className="rounded-2xl bg-linear-to-br from-[#0d0d0d] to-[#151515] px-8 py-6 text-[#FFFFFF] text-[15px] md:text-[16px] leading-8 space-y-4">
+                    <div className="rounded-2xl bg-linear-to-br from-[#0d0d0d] to-[#151515] p-8 text-[#FFFFFF] text-[15px] md:text-[16px] leading-8 space-y-4">
                       {faq.a.map((p, j) => (
                         <p key={j}>{p}</p>
                       ))}
