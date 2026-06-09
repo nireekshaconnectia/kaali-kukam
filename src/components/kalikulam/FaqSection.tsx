@@ -55,8 +55,8 @@ export function FaqSection() {
           />
         </div>
 
-        {/* Accordion with extra bottom space */}
-        <div className="pb-[12%]">
+        {/* Centered Accordion */}
+        <div className="flex justify-center">
           <Accordion
             type="single"
             collapsible
@@ -80,7 +80,7 @@ export function FaqSection() {
                   </AccordionTrigger>
 
                   <AccordionContent className="pt-2 pb-4">
-                    <div className="rounded-2xl bg-linear-to-br from-[#0d0d0d] to-[#151515] px-6 py-5 text-[#FFFFFF] text-[15px] md:text-[16px] leading-8 space-y-4 border border-[#2a2a2a]">
+                    <div className="rounded-2xl bg-linear-to-br from-[#0d0d0d] to-[#151515] p-8 text-[#FFFFFF] text-[15px] md:text-[16px] leading-8 space-y-4 border border-[#2a2a2a]">
                       {faq.a.map((p, j) => (
                         <p key={j}>{p}</p>
                       ))}
