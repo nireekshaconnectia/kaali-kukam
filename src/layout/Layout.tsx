@@ -9,7 +9,7 @@ function Layout() {
       <Navbar />
       
       {/* Main content with padding-top for fixed navbar and horizontal alignment */}
-      <main className="flex-1 pt-15.25  px-6 md:px-60">
+      <main className="flex-1 pt-15.25">
         <Outlet />
       </main>
       

@@ -3,7 +3,7 @@ import guru from "@/assets/guru.png";
 
 export function IntroGuru() {
   return (
-    <section className="w-full overflow-x-clip">
+    <section className="w-full overflow-x-clip px-6 md:px-60">
       <div className="max-w-7xl mx-auto">
         <p className="text-white text-sm md:text-base tracking-wide mb-2">
           पूज्य आदिगुरु
