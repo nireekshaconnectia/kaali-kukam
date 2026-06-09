@@ -5,14 +5,14 @@ import trishul from "@/assets/trishul.png";
 
 export function Footer() {
   return (
-    <footer className="relative bg-[#F42903] text-primary-foreground">
+    <footer className="relative bg-[#F42903] text-primary-foreground ">
       {/* Trishul Background */}
-      <div className="absolute inset-0 mx-auto max-w-5xl pointer-events-none z-0">
+      <div className="absolute inset-0 mx-auto max-w-5xl pointer-events-none z-0 px-6 md:px-60">
         <img
           src={trishul}
           alt="त्रिशूल"
           loading="lazy"
-          className="absolute -top-24 md:top-auto md:bottom-0 right-2 md:right-18 h-[110%] md:h-[115%] w-auto object-contain md:object-bottom object-top"
+          className="absolute -top-24 md:top-auto md:bottom-0 right-2 md:right-14 h-[110%] md:h-[115%] w-auto object-contain md:object-bottom object-top"
         />
       </div>
 

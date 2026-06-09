@@ -14,9 +14,9 @@ export function Hero() {
       <div
         style={{
           position: "relative",
-          width: "min(95vw, 680px)",
+          width: "min(325vw, 1080px)",
           aspectRatio: "1 / 1",
-          maxWidth: "100%",
+          maxWidth: "150%",
         }}
       >
         {/* कृष्ण — top left */}
