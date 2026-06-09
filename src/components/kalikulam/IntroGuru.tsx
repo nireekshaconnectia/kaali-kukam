@@ -42,7 +42,7 @@ export function IntroGuru() {
           </div>
 
           {/* Image - extending to the right beyond container */}
-          <div className="flex justify-end md:order-2">
+          <div className="flex justify-center md:order-2">
             <div className="relative inline-block">
               <img
                 src={guru}
