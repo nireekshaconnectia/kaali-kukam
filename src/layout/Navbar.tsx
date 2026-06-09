@@ -7,6 +7,7 @@ const navLinks = ["मुख्यपृष्ठ", "परिचय", "से�
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const [activeLink, setActiveLink] = useState("मुख्यपृष्ठ"); // Track active link
 
   // Close menu when window is resized to desktop width
   useEffect(() => {
@@ -30,10 +31,10 @@ export function Navbar() {
   }, [open]);
 
   return (
-   <header
-  className="fixed top-0 left-0 w-full z-50 bg-black md:bg-background md:backdrop-blur-sm"
-  style={{ fontFamily: "'Mukta', serif" }}
->
+    <header
+      className="fixed top-0 left-0 w-full z-50 bg-black md:bg-background md:backdrop-blur-sm"
+      style={{ fontFamily: "'Mukta', serif" }}
+    >
       <div className="bg-[#F42903] flex justify-center py-1.5">
         <img
           src={NavbarMantra}
@@ -49,8 +50,9 @@ export function Navbar() {
             <a
               key={l}
               href="#"
+              onClick={() => setActiveLink(l)}
               className={`px-4 lg:px-8 py-2 ${
-                idx === 0 ? "text-crimson" : "text-foreground"
+                idx === 0 || activeLink === l ? "text-[#F42903] font-bold" : "text-foreground"
               } font-body text-base lg:text-xl hover:text-gold transition-colors whitespace-nowrap`}
             >
               {l}
@@ -68,12 +70,15 @@ export function Navbar() {
         </div>
 
         {/* Desktop right links - hidden on mobile */}
-        <div className="hidden md:flex gap-6 lg:gap-15  flex-1 justify-end">
+        <div className="hidden md:flex gap-6 lg:gap-15 flex-1 justify-end">
           {navLinks.slice(2).map((l) => (
             <a
               key={l}
               href="#"
-              className="px-4 lg:px-8 py-2 text-foreground font-body text-base lg:text-xl hover:text-gold transition-colors whitespace-nowrap"
+              onClick={() => setActiveLink(l)}
+              className={`px-4 lg:px-8 py-2 ${
+                activeLink === l ? "text-[#F42903] font-bold" : "text-foreground"
+              } font-body text-base lg:text-xl hover:text-gold transition-colors whitespace-nowrap`}
             >
               {l}
             </a>
@@ -122,14 +127,14 @@ export function Navbar() {
       {open && (
         <>
           {/* Backdrop overlay - solid black */}
-         <div
-  className="fixed inset-0  md:hidden"
-  style={{ zIndex: 45 }}
-  onClick={() => setOpen(false)}
-/>
+          <div
+            className="fixed inset-0 md:hidden"
+            style={{ zIndex: 45 }}
+            onClick={() => setOpen(false)}
+          />
 
           {/* Slide-in menu from right - solid black, no backdrop blur */}
-          <div className="fixed top-0 right-0 bottom-0 w-3/4 max-w-sm bg-black shadow-2xl z-50 md:hidden animate-in slide-in-from-right flex flex-col ">
+          <div className="fixed top-0 right-0 bottom-0 w-3/4 max-w-sm bg-black shadow-2xl z-50 md:hidden animate-in slide-in-from-right flex flex-col">
             {/* Menu header with logo */}
             <div className="flex items-center justify-between p-5 border-b border-white/10">
               <button
@@ -154,14 +159,17 @@ export function Navbar() {
 
             {/* Navigation links */}
             <div className="flex flex-col gap-2 p-5">
-              {navLinks.map((l, i) => (
+              {navLinks.map((l) => (
                 <a
                   key={l}
                   href="#"
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    setActiveLink(l);
+                    setOpen(false);
+                  }}
                   className={`font-body text-lg py-3 px-4 rounded-lg transition-all duration-200 ${
-                    i === 0
-                      ? "text-[#F42903] bg-white/10 font-semibold"
+                    activeLink === l
+                      ? "text-[#F42903] bg-white/10 font-extrabold"
                       : "text-white/80 hover:bg-white/10 hover:text-white"
                   }`}
                 >
