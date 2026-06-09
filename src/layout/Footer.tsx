@@ -16,7 +16,7 @@ export function Footer() {
         />
       </div>
 
-      <div className="relative mx-auto flex max-w-5xl flex-col md:flex-row justify-between gap-10 px-6 md:px-14 py-14">
+      <div className="relative mx-auto flex max-w-5xl flex-col md:flex-row justify-between gap-10 px-6 md:px-20 py-14">
         {/* Col 1 — Logo + address */}
         <div className="z-10 flex-1">
           <img src={union} alt="Union" className="h-20 w-auto mt-2" />
