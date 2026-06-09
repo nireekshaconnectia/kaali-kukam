@@ -49,7 +49,7 @@ const faqs = [
 
 export function FaqSection() {
   return (
-    <section className="mx-auto px-6 md:px-71.5 pt-16 pb-24 md:pb-48 w-full">
+    <section className="mx-auto px-6 md:px-61.5 pt-16 pb-24 md:pb-48 w-full">
       {/* Header image */}
       <div className="mb-12 flex justify-center">
         <img
