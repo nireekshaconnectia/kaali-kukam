@@ -77,7 +77,11 @@ export function TantraSection() {
               </div>
 
               {/* Image */}
-              <div className={`flex justify-center ${item.imageRight ? "md:order-2" : "md:order-1"}`}>
+              {/* Image */}
+<div
+  className={`flex justify-center ${item.imageRight ? "md:order-2" : "md:order-1"}`}
+  style={item.imageRight ? { marginRight: "-60px" } : {}}
+>
                 <div className="relative inline-block">
                   <img
                     src={item.emblem}

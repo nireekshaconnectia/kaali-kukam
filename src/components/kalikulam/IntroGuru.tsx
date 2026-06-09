@@ -20,6 +20,7 @@ export function IntroGuru() {
             style={{
               float: "right",
               width: "42%",
+              marginRight: "-25px",
               shapeOutside: `polygon(
                 22% 0%,
                 78% 0%,
@@ -72,7 +73,7 @@ export function IntroGuru() {
               साधना के लिए वन जाने की आवश्यकता नहीं, बल्कि समर्पित मन की
               आवश्यकता होती है।
             </p>
-            <p>
+            <p >
               खेत की माटी हो या घर की रसोई - गुरुदेव के लिए प्रत्येक कर्म माँ
               की ही सेवा है। उनका जीवन उन सभी गृहस्थों के लिए एक आलोक-स्तंभ
               है, जो सांसारिक दायित्वों के साथ आध्यात्मिक मार्ग पर चलना
@@ -89,12 +90,10 @@ export function IntroGuru() {
               height={500}
               loading="lazy"
               decoding="async"
-              className="w-48 sm:w-56 object-contain"
+              className="w-68 sm:w-56 object-contain"
             />
           </div>
 
-          {/* Clearfix */}
-          <div style={{ clear: "both" }} />
         </div>
       </div>
     </section>

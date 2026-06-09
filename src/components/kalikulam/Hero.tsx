@@ -38,7 +38,7 @@ export function Hero() {
           style={{
             position: "absolute",
             top: "20%",
-            right: "8%",
+            right: "0%",
             width: "38%",
           }}
         />
