@@ -1,50 +1,14 @@
 // Hero.tsx
-import { motion } from "framer-motion";
-import { useOutletContext } from "react-router-dom";
+// import { useOutletContext } from "react-router-dom";
 import maaKali from "@/assets/Maa_Kali_1.png";
 import vectorKali from "@/assets/Vector-1.png";
 import vectorKrsna from "@/assets/Vector-3.png";
 import vectorAishwarya from "@/assets/Vector-2.png";
 import vectorSwaha from "@/assets/Vector.png";
-import { useReducedMotion } from "../../hooks/useReducedMotion";
 import { useIsMobile } from "../../hooks/use-mobile";
 
-// Slower, smoother corner animations
-const cornerVariants = {
-  hidden: (dir: { x: number; y: number }) => ({
-    opacity: 0,
-    x: dir.x,
-    y: dir.y,
-  }),
-  visible: {
-    opacity: 0.9,
-    x: 0,
-    y: 0,
-    transition: { 
-      duration: 1.2, 
-      ease: [0.25, 0.46, 0.45, 0.94] as const, // Smoother easing
-    },
-  },
-};
-
-// Center Kali: slower emergence with smoother easing
-const centerVariants = {
-  hidden: { opacity: 0, scale: 0.75, filter: "brightness(0)" },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    filter: "brightness(1)",
-    transition: { 
-      duration: 1.5, 
-      ease: [0.25, 0.46, 0.45, 0.94] as const, 
-      delay: 0.15 
-    },
-  },
-};
-
 export function Hero() {
-  const { isReady } = useOutletContext<{ isReady: boolean }>();
-  const prefersReducedMotion = useReducedMotion();
+  // const { isReady } = useOutletContext<{ isReady: boolean }>();
   const isMobile = useIsMobile();
 
   return (
@@ -52,10 +16,7 @@ export function Hero() {
       className="relative overflow-hidden w-full h-screen flex items-center justify-center -my-20"
       style={{ fontFamily: "'Mukta', serif", background: "#000" }}
     >
-      <motion.div
-        initial={prefersReducedMotion ? "visible" : "hidden"}
-        animate={isReady ? "visible" : "hidden"}
-        transition={prefersReducedMotion ? { duration: 0 } : undefined}
+      <div
         style={{
           position: "relative",
           width: "clamp(300px, 95vw, 680px)",
@@ -63,46 +24,38 @@ export function Hero() {
         }}
       >
         {/* कृष्ण — top left */}
-        <motion.img
+        <img
           src={vectorKrsna}
           alt="कृष्ण"
-          custom={{ x: -28, y: -28 }}
-          variants={cornerVariants}
-          transition={{ delay: 0.4 }}
           style={{
             position: "absolute",
             top: "24%",
-            left: "0%",
+            left: "8%",
             width: "30%",
           }}
         />
 
         {/* काली — top right */}
-        <motion.img
+        <img
           src={vectorKali}
           alt="काली"
-          custom={{ x: 28, y: -28 }}
-          variants={cornerVariants}
-          transition={{ delay: 0.55 }}
           style={{
             position: "absolute",
             top: "20%",
-            right: "0%",
+            right: "5%",
             width: "38%",
           }}
         />
 
-        {/* ── CENTER — Maa Kali emerges from darkness ── */}
-        <motion.img
+        {/* CENTER — Maa Kali */}
+        <img
           src={maaKali}
           alt="माँ काली का दिव्य स्वरूप"
-          variants={centerVariants}
           style={{
             position: "absolute",
             top: "50%",
             left: "50%",
-            translateX: "-50%",
-            translateY: "-50%",
+            transform: "translate(-50%, -50%)",
             width: "52%",
             zIndex: 10,
             objectFit: "contain",
@@ -114,12 +67,9 @@ export function Hero() {
         />
 
         {/* ऐश्वराय — bottom left */}
-        <motion.img
+        <img
           src={vectorAishwarya}
           alt="ऐश्वराय"
-          custom={{ x: -28, y: 28 }}
-          variants={cornerVariants}
-          transition={{ delay: 0.7 }}
           style={{
             position: "absolute",
             bottom: "20%",
@@ -129,12 +79,9 @@ export function Hero() {
         />
 
         {/* स्वाहा — bottom right */}
-        <motion.img
+        <img
           src={vectorSwaha}
           alt="स्वाहा"
-          custom={{ x: 28, y: 28 }}
-          variants={cornerVariants}
-          transition={{ delay: 0.85 }}
           style={{
             position: "absolute",
             bottom: "20%",
@@ -142,7 +89,7 @@ export function Hero() {
             width: "38%",
           }}
         />
-      </motion.div>
+      </div>
     </section>
   );
 }

@@ -1,5 +1,4 @@
 // FaqSection.tsx
-import { motion } from "framer-motion";
 import {
   Accordion,
   AccordionContent,
@@ -44,58 +43,18 @@ const faqs = [
 ];
 
 export function FaqSection() {
-  const smoothEasing = [0.25, 0.46, 0.45, 0.94] as const;
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1,
-      transition: { staggerChildren: 0.12, delayChildren: 0.1 }
-    },
-  };
-
-  const fadeUp = {
-    hidden: { opacity: 0, y: 30, scale: 0.96 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: { duration: 0.8, ease: smoothEasing },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.6, ease: smoothEasing },
-    },
-  };
-
   return (
-    <motion.section
-      className="mx-auto max-w-5xl px-6 md:px-14 pt-16 pb-24 md:pb-48 w-full"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: false, amount: 0.15 }}
-      variants={containerVariants}
-    >
-      {/* Header image with bounce effect */}
-      <motion.div 
-        variants={fadeUp} 
-        className="mb-12 flex justify-center"
-      >
-        <motion.img
+    <section className="mx-auto max-w-5xl px-6 md:px-14 pt-16 pb-24 md:pb-48 w-full">
+      {/* Header image */}
+      <div className="mb-12 flex justify-center">
+        <img
           src={vector}
           alt="संकल्प FAQ"
           className="h-auto w-56 md:w-64"
-          whileHover={{ scale: 1.05, rotate: 2 }}
-          transition={{ duration: 0.3 }}
         />
-      </motion.div>
+      </div>
 
-      {/* Accordion with enhanced animations */}
+      {/* Accordion */}
       <Accordion
         type="single"
         collapsible
@@ -103,61 +62,32 @@ export function FaqSection() {
         className="space-y-4 w-full md:w-[87%] lg:w-[82%]"
       >
         {faqs.map((faq, i) => (
-          <motion.div
-            key={i}
-            variants={itemVariants}
-            className="w-full min-w-0"
-            whileHover={{ scale: 1.01 }}
-            transition={{ duration: 0.2 }}
-          >
+          <div key={i} className="w-full min-w-0">
             <AccordionItem
               value={`item-${i}`}
               className="border-b border-[#1f1f1f] py-1 relative overflow-hidden"
             >
-              {/* Animated gradient border */}
-              <motion.div 
-                className="absolute bottom-0 left-0 right-0 h-px overflow-hidden"
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                viewport={{ once: false }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
-              >
+              <div className="absolute bottom-0 left-0 right-0 h-px overflow-hidden">
                 <div className="h-full w-full bg-linear-to-r from-transparent via-white/15 to-transparent bg-size-[200%_100%] animate-shimmer" />
-              </motion.div>
+              </div>
               
               <AccordionTrigger className="text-left text-[16px] md:text-[17px] font-medium hover:no-underline py-4 [&>svg]:text-[#D6A15F] [&>svg]:h-4 [&>svg]:w-4 [&>svg]:transition-transform [&>svg]:duration-300">
-                <motion.span 
-                  className="bg-linear-to-r from-[#EBB57C] to-[#94622C] bg-clip-text text-transparent"
-                  whileHover={{ x: 5 }}
-                  transition={{ duration: 0.2 }}
-                >
+                <span className="bg-linear-to-r from-[#EBB57C] to-[#94622C] bg-clip-text text-transparent">
                   {faq.q}
-                </motion.span>
+                </span>
               </AccordionTrigger>
 
               <AccordionContent className="pt-2 pb-4">
-                <motion.div 
-                  className="rounded-2xl bg-linear-to-br from-[#0d0d0d] to-[#151515] px-6 py-5 text-[#FFFFFF] text-[15px] md:text-[16px] leading-8 space-y-4 border border-[#2a2a2a]"
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.4 }}
-                >
+                <div className="rounded-2xl bg-linear-to-br from-[#0d0d0d] to-[#151515] px-6 py-5 text-[#FFFFFF] text-[15px] md:text-[16px] leading-8 space-y-4 border border-[#2a2a2a]">
                   {faq.a.map((p, j) => (
-                    <motion.p 
-                      key={j}
-                      initial={{ opacity: 0, x: -10 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: j * 0.1 }}
-                    >
-                      {p}
-                    </motion.p>
+                    <p key={j}>{p}</p>
                   ))}
-                </motion.div>
+                </div>
               </AccordionContent>
             </AccordionItem>
-          </motion.div>
+          </div>
         ))}
       </Accordion>
-    </motion.section>
+    </section>
   );
 }

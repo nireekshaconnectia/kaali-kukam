@@ -1,96 +1,18 @@
 // IntroGuru.tsx
-import { useEffect, useRef } from "react";
-import { motion, useAnimation, useInView } from "framer-motion";
 import guru from "@/assets/guru.png";
-import { useReducedMotion } from "../../hooks/useReducedMotion";
-import { useIsMobile } from "../../hooks/use-mobile";
-
-function useScrollAnimation(amount = 0.3) {
-  const ref = useRef<HTMLDivElement>(null);
-  const controls = useAnimation();
-  const inView = useInView(ref, { once: false, amount });
-
-  useEffect(() => {
-    controls.start(inView ? "visible" : "hidden");
-  }, [inView, controls]);
-
-  return { ref, controls };
-}
 
 export function IntroGuru() {
-  const prefersReducedMotion = useReducedMotion();
-  const isMobile = useIsMobile();
-
-  // Slower durations for smoother feel
-  const dur = prefersReducedMotion ? 0 : isMobile ? 0.9 : 1.1;
-  const xOffset = prefersReducedMotion ? 0 : isMobile ? 20 : 60;
-
-  const header = useScrollAnimation(0.1);
-  const textBlock = useScrollAnimation(0.3);
-  const imgBlock = useScrollAnimation(0.3);
-
-  const smoothEasing = [0.25, 0.46, 0.45, 0.94] as const;
-
-  const slideText = (fromLeft: boolean) => ({
-    hidden: {
-      opacity: prefersReducedMotion ? 1 : 0,
-      x: fromLeft ? -xOffset : xOffset,
-      scale: prefersReducedMotion ? 1 : 0.96,
-    },
-    visible: {
-      opacity: 1,
-      x: 0,
-      scale: 1,
-      transition: { 
-        duration: dur, 
-        ease: smoothEasing, 
-        delay: 0.1 
-      },
-    },
-  });
-
-  const slideImg = (fromLeft: boolean) => ({
-    hidden: {
-      opacity: prefersReducedMotion ? 1 : 0,
-      x: fromLeft ? xOffset : -xOffset,
-      scale: prefersReducedMotion ? 1 : 0.93,
-    },
-    visible: {
-      opacity: 1,
-      x: 0,
-      scale: 1,
-      transition: { 
-        duration: dur, 
-        ease: smoothEasing, 
-        delay: 0.15 
-      },
-    },
-  });
-
   return (
-    <section className="mx-auto max-w-5xl px-6 md:px-14 py-16">
+    <section className="mx-auto max-w-4xl  py-16">
       {/* Header */}
-      <motion.div
-        ref={header.ref}
-        animate={header.controls}
-        initial="hidden"
-        variants={slideText(true)}
-        className="mb-4"
-      >
-        <p className="text-white text-sm md:text-base tracking-wide">
+      
+        <p className="text-white text-sm md:text-base tracking-wide mt-10">
           पूज्य आदिगुरु
         </p>
-      </motion.div>
 
-      <div className="grid items-center gap-8 md:grid-cols-2">
-        {/* Text — slides from left */}
-        <motion.div
-          ref={textBlock.ref}
-          animate={textBlock.controls}
-          initial="hidden"
-          variants={slideText(true)}
-          className="md:order-1"
-        >
+      <div className="grid items-center gap-10  md:grid-cols-2">
+        {/* Text */}
+        <div className="md:order-1">
           <h2
             className="font-body text-2xl md:text-3xl font-bold
              bg-linear-to-r from-[#EBB57C] to-[#94622C]
@@ -99,7 +21,7 @@ export function IntroGuru() {
             मांगीलाल भील
           </h2>
 
-          <div className="space-y-4 text-[#FFFFFF] leading-relaxed text-[15px]">
+          <div className="space-y-6 text-[#FFFFFF] leading-relaxed text-[15px]">
             <p>
               तंत्र शास्त्र के सूत्र "<span className="font-bold">गृहस्थो नास्ति मे तुल्य:</span>" (गृहस्थ के समान
               कोई नहीं) को चरितार्थ करते हुए, माँ शारदा के परम उपासक पूज्य
@@ -118,17 +40,11 @@ export function IntroGuru() {
               सांसारिक दायित्वों के साथ आध्यात्मिक मार्ग पर चलना चाहते हैं।
             </p>
           </div>
-        </motion.div>
+        </div>
 
-        {/* Image — slides from right */}
-        <motion.div
-          ref={imgBlock.ref}
-          animate={imgBlock.controls}
-          initial="hidden"
-          variants={slideImg(true)}
-          className="flex justify-center md:order-2"
-        >
-          <div className="relative inline-block" style={{ willChange: "transform" }}>
+        {/* Image */}
+        <div className="flex justify-center md:order-2">
+          <div className="relative inline-block">
             <img
               src={guru}
               alt="पूज्य आदिगुरु मांगीलाल भील"
@@ -136,10 +52,10 @@ export function IntroGuru() {
               height={500}
               loading="lazy"
               decoding="async"
-              className="w-48 sm:w-56 md:w-64 lg:w-full max-w-xs object-contain"
+              className="w-48 sm:w-56 md:w-full max-w-xs object-contain"
             />
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

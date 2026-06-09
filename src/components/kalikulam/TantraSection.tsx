@@ -1,5 +1,4 @@
 // TantraSection.tsx
-import { motion } from "framer-motion";
 import roundShape from "@/assets/RoundShape.png";
 import tanthraa from "@/assets/Tanthraa.png";
 import manthraaNew from "@/assets/Manthraa_New.png";
@@ -8,8 +7,6 @@ import titleTantra from "@/assets/Tantra.png";
 import titleMantra from "@/assets/Mantra.png";
 import titleYantra from "@/assets/Yantra.png";
 import titleTantraMantraYantra from "@/assets/Tantra_Mantra_Yantra.png";
-import { useReducedMotion } from "../../hooks/useReducedMotion";
-import { useIsMobile } from "../../hooks/use-mobile";
 
 const items = [
   {
@@ -45,76 +42,9 @@ const items = [
 ];
 
 export function TantraSection() {
-  const prefersReducedMotion = useReducedMotion();
-  const isMobile = useIsMobile();
-
-  // Slower durations for smoother feel
-  const dur = prefersReducedMotion ? 0 : isMobile ? 0.8 : 1.0;
-  const xOffset = prefersReducedMotion ? 0 : isMobile ? 25 : 60; // Shorter distance = smoother
-
-  // Smoother easing curve for slide animations
-  const smoothEasing = [0.25, 0.46, 0.45, 0.94] as const;
-
-  const slideText = (fromLeft: boolean) => ({
-    hidden: { 
-      opacity: prefersReducedMotion ? 1 : 0, 
-      x: fromLeft ? -xOffset : xOffset, 
-      scale: prefersReducedMotion ? 1 : 0.96 
-    },
-    visible: {
-      opacity: 1,
-      x: 0,
-      scale: 1,
-      transition: { 
-        duration: dur, 
-        ease: smoothEasing, 
-        delay: 0.08 
-      },
-    },
-  });
-
-  const slideImg = (fromLeft: boolean) => ({
-    hidden: { 
-      opacity: prefersReducedMotion ? 1 : 0, 
-      x: fromLeft ? xOffset : -xOffset, 
-      scale: prefersReducedMotion ? 1 : 0.92 
-    },
-    visible: {
-      opacity: 1,
-      x: 0,
-      scale: 1,
-      transition: { 
-        duration: dur, 
-        ease: smoothEasing, 
-        delay: 0.12 
-      },
-    },
-  });
-
-  const headerVariants = {
-    hidden: { opacity: prefersReducedMotion ? 1 : 0, y: prefersReducedMotion ? 0 : 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { 
-        duration: prefersReducedMotion ? 0 : 0.8, 
-        ease: smoothEasing 
-      },
-    },
-  };
-
-  // Slower rotation on mobile for smoother performance
-  const rotateDuration = prefersReducedMotion ? 0 : isMobile ? 45 : 30;
-
   return (
     <section className="mx-auto max-w-5xl px-6 md:px-14 py-16">
-      <motion.div
-        className="mb-16 flex flex-col items-center text-center"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: false, amount: 0.3 }}
-        variants={headerVariants}
-      >
+      <div className="mb-16 flex flex-col items-center text-center">
         <img
           src={titleTantraMantraYantra}
           alt="तंत्र . मंत्र . यंत्र"
@@ -124,7 +54,7 @@ export function TantraSection() {
         <p className="text-[#FFFFFF] -mt-2 text-sm md:text-base">
           विधि, ध्वनि और रूप - तीन शक्तियाँ, एक मार्ग
         </p>
-      </motion.div>
+      </div>
 
       <div className="space-y-24">
         {items.map((item) => (
@@ -132,14 +62,8 @@ export function TantraSection() {
             key={item.title}
             className="grid items-center gap-8 md:grid-cols-2"
           >
-            {/* Text — fade + slide */}
-            <motion.div
-              className={`${item.imageRight ? "md:order-1" : "md:order-2"}`}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: false, amount: 0.25 }}
-              variants={slideText(item.imageRight)}
-            >
+            {/* Text */}
+            <div className={`${item.imageRight ? "md:order-1" : "md:order-2"}`}>
               <img
                 src={item.titleImg}
                 alt={item.title}
@@ -149,35 +73,17 @@ export function TantraSection() {
               <p className="text-[#FFFFFF] leading-relaxed text-[15px]">
                 {item.text}
               </p>
-            </motion.div>
+            </div>
 
-            {/* Image — smooth rotation with GPU acceleration */}
-            <motion.div
-              className={`flex justify-center ${item.imageRight ? "md:order-2" : "md:order-1"}`}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: false, amount: 0.25 }}
-              variants={slideImg(item.imageRight)}
-            >
-              <div className="relative inline-block" style={{ willChange: "transform" }}>
-                <motion.img
+            {/* Image */}
+            <div className={`flex justify-center ${item.imageRight ? "md:order-2" : "md:order-1"}`}>
+              <div className="relative inline-block">
+                <img
                   src={item.emblem}
                   alt={item.title}
                   loading="lazy"
                   decoding="async"
                   className="w-28 md:w-36 drop-shadow-[0_0_30px_oklch(0.55_0.24_28/0.35)]"
-                  style={{ willChange: "transform" }}
-                  animate={prefersReducedMotion ? {} : { rotate: 360 }}
-                  transition={
-                    prefersReducedMotion
-                      ? {}
-                      : { 
-                          repeat: Infinity, 
-                          duration: rotateDuration, 
-                          ease: "linear",
-                          repeatDelay: 0
-                        }
-                  }
                 />
                 <img
                   src={item.topImg}
@@ -193,7 +99,7 @@ export function TantraSection() {
                   }}
                 />
               </div>
-            </motion.div>
+            </div>
           </div>
         ))}
       </div>
