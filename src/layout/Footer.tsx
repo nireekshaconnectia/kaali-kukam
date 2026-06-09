@@ -7,7 +7,7 @@ export function Footer() {
   return (
     <footer className="relative bg-[#F42903] text-primary-foreground ">
       {/* Trishul Background */}
-      <div className="absolute inset-0 mx-auto max-w-5xl pointer-events-none z-0 px-6 md:px-60">
+      <div className="absolute inset-0 mx-auto max-w-5xl pointer-events-none z-0 px-6 md:px-55">
         <img
           src={trishul}
           alt="त्रिशूल"

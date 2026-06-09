@@ -43,7 +43,7 @@ const items = [
 
 export function TantraSection() {
   return (
-    <section className="w-full py-16 px-10 md:px-60">
+    <section className="w-full py-16 px-10 md:px-51.5">
       <div className="max-w-9xl mx-auto">
         <div className="mb-16 flex flex-col items-center text-center">
           <img
