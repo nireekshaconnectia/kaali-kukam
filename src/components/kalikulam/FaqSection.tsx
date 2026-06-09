@@ -44,7 +44,7 @@ const faqs = [
 export function FaqSection() {
   return (
     <section className="w-full py-16 pb-24 md:pb-48">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-full">
         {/* Header image */}
         <div className="mb-12 flex justify-center">
           <img
@@ -60,10 +60,10 @@ export function FaqSection() {
             type="single"
             collapsible
             defaultValue="item-0"
-            className="space-y-4 w-full md:w-[87%] lg:w-[82%]"
+            className="space-y-4 w-full"
           >
             {faqs.map((faq, i) => (
-              <div key={i} className="w-full min-w-0">
+              <div key={i} className="w-full">
                 <AccordionItem
                   value={`item-${i}`}
                   className="border-b border-[#1f1f1f] py-1 relative overflow-hidden"
