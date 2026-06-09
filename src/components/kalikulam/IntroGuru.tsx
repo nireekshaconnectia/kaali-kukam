@@ -45,19 +45,6 @@ export function IntroGuru() {
             />
           </div>
 
-          {/* On mobile: image stacks below text normally */}
-          <div className="md:hidden flex justify-center mb-6">
-            <img
-              src={guru}
-              alt="पूज्य आदिगुरु मांगीलाल भील"
-              width={600}
-              height={500}
-              loading="lazy"
-              decoding="async"
-              className="w-48 sm:w-56 object-contain"
-            />
-          </div>
-
           {/* Text flows around the floated image */}
           <p className="text-white text-sm md:text-lg tracking-wide mb-2">
             पूज्य आदिगुरु
@@ -91,6 +78,19 @@ export function IntroGuru() {
               है, जो सांसारिक दायित्वों के साथ आध्यात्मिक मार्ग पर चलना
               चाहते हैं।
             </p>
+          </div>
+
+          {/* On mobile: image stacks below text normally */}
+          <div className="md:hidden flex justify-center mt-6">
+            <img
+              src={guru}
+              alt="पूज्य आदिगुरु मांगीलाल भील"
+              width={600}
+              height={500}
+              loading="lazy"
+              decoding="async"
+              className="w-48 sm:w-56 object-contain"
+            />
           </div>
 
           {/* Clearfix */}
