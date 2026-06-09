@@ -16,10 +16,10 @@ export function Navbar() {
 
   return (
     <header
-      className="sticky top-0 z-50 bg-background/30 backdrop-blur-sm md:backdrop-blur-2xl"
+      className="fixed top-0 left-0 w-full z-50 bg-background/30 backdrop-blur-sm "
       style={{ fontFamily: "'Mukta', serif" }}
     >
-      <div className="bg-[#F42903] flex justify-center py-1.5 mb-2">
+      <div className="bg-[#F42903] flex justify-center py-1.5">
         <img
           src={NavbarMantra}
           alt="ॐ कृष्ण काली शंकराय स्वाहा"
@@ -27,13 +27,13 @@ export function Navbar() {
         />
       </div>
 
-      <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-3">
+      <nav className="mx-auto flex items-center justify-between px-6 md:px-60 py-3 md:py-15.25">
         <div className="hidden md:flex gap-15 flex-1">
           {navLinks.slice(0, 2).map((l, idx) => (
             <a
               key={l}
               href="#"
-              className={`px-8 py-2 ${idx === 0 ? "text-crimson" : "text-foreground"} font-body text-md hover:text-gold transition-colors`}
+              className={`px-8 py-2 ${idx === 0 ? "text-crimson" : "text-foreground"} font-body text-xl hover:text-gold transition-colors`}
             >
               {l}
             </a>
@@ -51,7 +51,7 @@ export function Navbar() {
             <a
               key={l}
               href="#"
-              className="px-8 py-2 text-foreground font-body text-md hover:text-gold transition-colors"
+              className="px-8 py-2 text-foreground font-body text-xl hover:text-gold transition-colors"
             >
               {l}
             </a>
@@ -87,7 +87,7 @@ export function Navbar() {
               key={l}
               href="#"
               onClick={() => setOpen(false)}
-              className={`font-body text-base font-semibold tracking-wide transition-colors hover:text-gold ${i === 0 ? "text-primary" : "text-foreground/80"}`}
+              className={`font-body text-md font-semibold tracking-wide transition-colors hover:text-gold ${i === 0 ? "text-primary" : "text-foreground/80"}`}
             >
               {l}
             </a>

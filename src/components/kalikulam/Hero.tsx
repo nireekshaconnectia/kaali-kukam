@@ -1,26 +1,23 @@
 // Hero.tsx
-// import { useOutletContext } from "react-router-dom";
 import maaKali from "@/assets/Maa_Kali_1.png";
 import vectorKali from "@/assets/Vector-1.png";
 import vectorKrsna from "@/assets/Vector-3.png";
 import vectorAishwarya from "@/assets/Vector-2.png";
 import vectorSwaha from "@/assets/Vector.png";
-import { useIsMobile } from "../../hooks/use-mobile";
 
 export function Hero() {
-  // const { isReady } = useOutletContext<{ isReady: boolean }>();
-  const isMobile = useIsMobile();
 
   return (
     <section
-      className="relative overflow-hidden w-full h-screen flex items-center justify-center -my-20"
+      className="relative overflow-hidden w-full  flex items-start justify-center"
       style={{ fontFamily: "'Mukta', serif", background: "#000" }}
     >
       <div
         style={{
           position: "relative",
-          width: "clamp(300px, 95vw, 680px)",
-          height: isMobile ? "clamp(400px, 70vh, 500px)" : "clamp(360px, 85vh, 580px)",
+          width: "min(95vw, 680px)",
+          aspectRatio: "1 / 1",
+          maxWidth: "100%",
         }}
       >
         {/* कृष्ण — top left */}

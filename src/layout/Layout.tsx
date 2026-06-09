@@ -7,11 +7,13 @@ function Layout() {
   return (
     <div className="min-h-screen flex flex-col overflow-hidden">
       <Navbar />
-
-     
-        <Outlet  />
-        <Footer />
-     
+      
+      {/* Add padding-top to account for fixed navbar height */}
+      <main className="flex-1 pt-18 md:pt-22">
+        <Outlet />
+      </main>
+      
+      <Footer />
     </div>
   );
 }

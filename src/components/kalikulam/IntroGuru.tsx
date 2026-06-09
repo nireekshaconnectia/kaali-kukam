@@ -3,7 +3,7 @@ import guru from "@/assets/guru.png";
 
 export function IntroGuru() {
   return (
-    <section className="mx-auto max-w-4xl  py-16">
+    <section className="mx-auto max-w-4xl">
       {/* Header */}
       
         <p className="text-white text-sm md:text-base tracking-wide mt-10">
