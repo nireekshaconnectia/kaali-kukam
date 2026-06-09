@@ -3,7 +3,7 @@ import guru from "@/assets/guru.png";
 
 export function IntroGuru() {
   return (
-    <section className="w-full overflow-x-clip px-6 md:px-60">
+    <section className="w-full overflow-x-clip px-6 md:px-60 pt-26.5">
       <div className="max-w-7xl mx-auto">
        
 
