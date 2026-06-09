@@ -42,7 +42,7 @@ export function Navbar() {
         />
       </div>
 
-      <nav className="mx-auto flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-51.5 pt-10 md:pt-15.25">
+      <nav className="mx-auto flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-51.5 py-10 md:pt-15.25">
         {/* Desktop left links - hidden on mobile */}
         <div className="hidden md:flex gap-6 lg:gap-18 flex-1">
           {navLinks.slice(0, 2).map((l, idx) => (
