@@ -7,7 +7,21 @@ const navLinks = ["मुख्यपृष्ठ", "परिचय", "से�
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
-  const [activeLink, setActiveLink] = useState("मुख्यपृष्ठ"); // Track active link
+  const [activeLink, setActiveLink] = useState("मुख्यपृष्ठ");
+  const [scrolled, setScrolled] = useState(false);
+
+  // Handle scroll event
+  useEffect(() => {
+    const onScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   // Close menu when window is resized to desktop width
   useEffect(() => {
@@ -32,7 +46,11 @@ export function Navbar() {
 
   return (
     <header
-      className="fixed top-0 left-0 w-full z-50 bg-black md:bg-background md:backdrop-blur-sm"
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        scrolled 
+          ? "bg-black/95 md:bg-black/80 md:backdrop-blur-sm" 
+          : "bg-black md:bg-transparent"
+      }`}
       style={{ fontFamily: "'Mukta', serif" }}
     >
       <div className="bg-[#F42903] flex justify-center py-1.5">
@@ -51,9 +69,13 @@ export function Navbar() {
               key={l}
               href="#"
               onClick={() => setActiveLink(l)}
-              className={`px-4 lg:px-8 py-2 ${
-                idx === 0 || activeLink === l ? "text-[#F42903] font-bold" : "text-foreground"
-              } font-body text-base lg:text-xl hover:text-gold transition-colors whitespace-nowrap`}
+              className={`px-4 lg:px-8 py-2 transition-colors whitespace-nowrap font-body text-base lg:text-xl hover:text-gold ${
+                idx === 0 || activeLink === l 
+                  ? "text-[#F42903] font-bold" 
+                  : scrolled 
+                    ? "text-white" 
+                    : "text-white"
+              }`}
             >
               {l}
             </a>
@@ -76,9 +98,13 @@ export function Navbar() {
               key={l}
               href="#"
               onClick={() => setActiveLink(l)}
-              className={`px-4 lg:px-8 py-2 ${
-                activeLink === l ? "text-[#F42903] font-bold" : "text-foreground"
-              } font-body text-base lg:text-xl hover:text-gold transition-colors whitespace-nowrap`}
+              className={`px-4 lg:px-8 py-2 transition-colors whitespace-nowrap font-body text-base lg:text-xl hover:text-gold ${
+                activeLink === l 
+                  ? "text-[#F42903] font-bold" 
+                  : scrolled 
+                    ? "text-white" 
+                    : "text-white"
+              }`}
             >
               {l}
             </a>
@@ -87,7 +113,7 @@ export function Navbar() {
 
         {/* Hamburger button - visible only on mobile */}
         <button
-          className="md:hidden ml-2 p-2 rounded-md text-foreground/70 hover:text-primary transition-colors z-50 relative"
+          className="md:hidden ml-2 p-2 rounded-md text-white hover:text-[#F42903] transition-colors z-50 relative"
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((o) => !o)}
@@ -128,7 +154,7 @@ export function Navbar() {
         <>
           {/* Backdrop overlay - solid black */}
           <div
-            className="fixed inset-0 md:hidden"
+            className="fixed inset-0 md:hidden bg-black/80"
             style={{ zIndex: 45 }}
             onClick={() => setOpen(false)}
           />
@@ -169,7 +195,7 @@ export function Navbar() {
                   }}
                   className={`font-body text-lg py-3 px-4 rounded-lg transition-all duration-200 ${
                     activeLink === l
-                      ? "text-[#F42903] bg-white/10 font-extrabold"
+                      ? "text-[#F42903] bg-white/10 font-bold"
                       : "text-white/80 hover:bg-white/10 hover:text-white"
                   }`}
                 >

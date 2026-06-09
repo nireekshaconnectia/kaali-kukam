@@ -5,13 +5,14 @@ export function IntroGuru() {
   return (
     <section className="w-full overflow-x-clip px-6 md:px-60">
       <div className="max-w-7xl mx-auto">
-        <p className="text-white text-sm md:text-base tracking-wide mb-2">
-          पूज्य आदिगुरु
-        </p>
+       
 
         <div className="grid items-center gap-10 md:grid-cols-2">
           {/* Text */}
           <div className="md:order-1">
+             <p className="text-white text-sm md:text-xs tracking-wide mb-2">
+          पूज्य आदिगुरु
+        </p>
             <h2
               className="font-body text-2xl md:text-3xl font-bold
                bg-linear-to-r from-[#EBB57C] to-[#94622C]
@@ -20,7 +21,7 @@ export function IntroGuru() {
               मांगीलाल भील
             </h2>
 
-            <div className="space-y-6 text-[#FFFFFF] leading-relaxed text-[15px]">
+            <div className="space-y-4 text-[#FFFFFF] leading-relaxed tracking-wide text-[18px]">
               <p>
                 तंत्र शास्त्र के सूत्र "<span className="font-bold">गृहस्थो नास्ति मे तुल्य:</span>" (गृहस्थ के समान
                 कोई नहीं) को चरितार्थ करते हुए, माँ शारदा के परम उपासक पूज्य
@@ -47,11 +48,11 @@ export function IntroGuru() {
               <img
                 src={guru}
                 alt="पूज्य आदिगुरु मांगीलाल भील"
-                width={400}
+                width={600}
                 height={500}
                 loading="lazy"
                 decoding="async"
-                className="w-48 sm:w-56 md:w-full max-w-xs object-contain"
+                className="w-48 sm:w-56 md:w-full max-w-xl object-contain"
               />
             </div>
           </div>
