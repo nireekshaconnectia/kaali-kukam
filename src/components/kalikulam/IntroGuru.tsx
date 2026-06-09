@@ -1,11 +1,11 @@
-// IntroGuru.tsx
+// IntroGuru.tsx - Image extending beyond container to the right
 import guru from "@/assets/guru.png";
 
 export function IntroGuru() {
   return (
-    <section className="w-full">
-      <div className="max-w-5xl mx-auto">
-        <p className="text-white text-sm md:text-base tracking-wide mb-6">
+    <section className="w-full overflow-x-clip">
+      <div className="max-w-7xl mx-auto">
+        <p className="text-white text-sm md:text-base tracking-wide mb-2">
           पूज्य आदिगुरु
         </p>
 
@@ -41,8 +41,8 @@ export function IntroGuru() {
             </div>
           </div>
 
-          {/* Image */}
-          <div className="flex justify-center md:order-2">
+          {/* Image - extending to the right beyond container */}
+          <div className="flex justify-end md:order-2">
             <div className="relative inline-block">
               <img
                 src={guru}
