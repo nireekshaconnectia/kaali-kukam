@@ -1,5 +1,4 @@
 // FaqSection.tsx
-import { motion } from "framer-motion";
 import {
   Accordion,
   AccordionContent,
@@ -7,96 +6,68 @@ import {
   AccordionTrigger,
 } from "../ui/accordion";
 import vector from "@/assets/1.png";
-import { useReducedMotion } from "../../hooks/useReducedMotion";
 
 const faqs = [
   {
     q: "1. काली कुलम क्या है और यह अन्य से अलग क्यों है?",
     a: [
       "काली कुलम में 'काली' का अर्थ है स्त्री और 'कुलम' का अर्थ है घराना - अर्थात् स्त्री शक्ति का कुल।",
-
       "यह एक ऐसी आध्यात्मिक और सामाजिक संस्था है जो माँ काली की असीम ऊर्जा, करुणा और न्याय के सिद्धांतों पर आधारित है। हमारा उद्देश्य केवल धार्मिक अनुष्ठान नहीं - बल्कि मानवता के भीतर छिपी शक्ति को जागृत करना है।",
-
       "काली कुलम वह स्थान है जहाँ जाति, पंथ या भेदभाव का कोई स्थान नहीं - केवल प्रेम, भक्ति और निःस्वार्थ सेवा।",
+      "यहाँ हर व्यक्ति का स्वागत है, चाहे उसकी पृष्ठभूमि कुछ भी हो। हम सिखाते हैं कि सच्ची शक्ति आत्म-जागरण से आती है, बाहरी उपलब्धियों से नहीं।",
     ],
   },
   {
     q: "2. इस युग में काली कुलम की आवश्यकता क्यों है?",
     a: [
       "आज का मनुष्य बाहर से सशक्त और भीतर से रिक्त है। भौतिक सुख है, पर शांति नहीं। सफलता है, पर संतोष नहीं। परिवार है, पर जुड़ाव नहीं। काली कुलम उस रिक्तता को भरने का प्रयास है - सही मार्गदर्शन, सच्ची साधना और एक जीवंत परंपरा के माध्यम से। यहाँ न कोई आडंबर है, न दिखावा - केवल शुद्ध साधना और सच्चा मार्ग।",
+      "जब समाज अराजकता और भ्रम से ग्रस्त है, तब एक स्थिर केंद्र की आवश्यकता होती है। काली कुलम वह केंद्र है - जहाँ सत्य, प्रेम और साहस के मूल्य पुनः स्थापित होते हैं।",
     ],
   },
   {
     q: "3. क्या बिना गुरु के साधना संभव है?",
     a: [
       "बिना गुरु के साधना वैसी है जैसे बिना नाविक के नाव - दिशा तो होगी, पर किनारा नहीं मिलेगा। मंत्र पुस्तक में मिल सकता है, यंत्र बाज़ार में मिल सकता है - पर शक्ति केवल गुरु से मिलती है। गुरु वह दीपक है जो अपनी लौ से दूसरे दीपक को जलाता है। बिना इस दीप-दीक्षा के साधना अधूरी रहती है।",
+      "गुरु केवल मार्गदर्शक नहीं, बल्कि वह चेतना हैं जो साधक को उसकी सीमाओं से परे ले जाती है। जब शिष्य तैयार होता है, गुरु प्रकट होता है - यही सनातन सत्य है।",
     ],
   },
   {
     q: "4. काली कुलम से जुड़ने के बाद जीवन में क्या बदलाव आएगा?",
     a: [
       "मन को दिशा मिलेगी, जीवन को अर्थ मिलेगा। परिवार में सौहार्द आएगा, भीतर शांति आएगी। भय, नकारात्मकता और जीवन की बाधाएँ धीरे-धीरे दूर होंगी। गृहस्थ जीवन की दुविधाएँ सुलझेंगी और माँ काली की कृपा से जीवन के हर क्षेत्र में स्पष्टता और आत्मविश्वास आएगा।",
+      "नींद गहरी होगी, विचार स्पष्ट होंगे, और निर्णयों में एक नई स्थिरता आएगी। रिश्तों में मिठास बढ़ेगी और आत्म-विश्वास का संचार होगा। यह परिवर्तन धीरे-धीरे पर स्थायी होता है - एक बार जागा हुआ बीज फिर सुप्त नहीं होता।",
     ],
   },
   {
     q: "5. क्या तंत्र साधना केवल विशेष लोगों के लिए है?",
     a: [
       "तंत्र किसी एक वर्ग, जाति या पंथ की विद्या नहीं - यह जीवन की विद्या है। जो साँस लेता है, जो अनुभव करता है, जो जीना चाहता है - तंत्र उसी के लिए है। काली कुलम में गृहस्थ भी साधक है, स्त्री भी साधक है, युवा भी साधक है। यहाँ केवल एक योग्यता है - सच्ची जिज्ञासा।",
+      "तंत्र का अर्थ है विस्तार - अपनी सीमित धारणाओं से मुक्त होकर असीम चेतना से जुड़ना। यह कोई रहस्यमय या डरावनी विद्या नहीं, बल्कि जीवन को उसकी संपूर्णता में जीने का विज्ञान है। हर साधारण व्यक्ति इसे अपना सकता है, बस आवश्यक है सही मार्गदर्शन और समर्पण।",
     ],
   },
 ];
 
 export function FaqSection() {
-  const prefersReducedMotion = useReducedMotion();
-  const dur = prefersReducedMotion ? 0 : 0.6;
-  const yVal = prefersReducedMotion ? 0 : 30;
-
-  // Container staggers children on enter — whileInView replaces useAnimation
-  const containerVariants = {
-    hidden: {},
-    visible: { transition: { staggerChildren: 0.1, delayChildren: 0.1 } },
-  };
-
-  const fadeUp = {
-    hidden: { opacity: prefersReducedMotion ? 1 : 0, y: yVal, scale: prefersReducedMotion ? 1 : 0.9 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: { duration: dur, ease: "easeOut" as const },
-    },
-  };
-
   return (
-    <motion.section
-      className="mx-auto px-6 md:px-60 pt-16 pb-24 md:pb-48 w-full"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: false, amount: 0.15 }}
-      variants={containerVariants}
-    >
-      {/* Header image — simple fade-up, no 3D rotation */}
-      <motion.div variants={fadeUp} className="mb-12 flex justify-center">
+    <section className="mx-auto px-6 md:px-60 pt-16 pb-24 md:pb-48 w-full">
+      {/* Header image */}
+      <div className="mb-12 flex justify-center">
         <img
           src={vector}
           alt="संकल्प FAQ"
           className="h-auto w-56 md:w-64"
         />
-      </motion.div>
+      </div>
 
-      {/* Accordion — let the built-in height transition do the work */}
+      {/* Accordion */}
       <Accordion
         type="single"
         collapsible
         defaultValue="item-0"
-        className="space-y-4 w-full md:w-[87%] lg:w-[82%]"
+        className="space-y-4 w-full md:w-[90%]"
       >
         {faqs.map((faq, i) => (
-          <motion.div
-            key={i}
-            variants={fadeUp}
-            className="w-full min-w-0"
-          >
+          <div key={i} className="w-full min-w-0">
             <AccordionItem
               value={`item-${i}`}
               className="border-b border-[#1f1f1f] py-1 relative"
@@ -118,9 +89,9 @@ export function FaqSection() {
                 </div>
               </AccordionContent>
             </AccordionItem>
-          </motion.div>
+          </div>
         ))}
       </Accordion>
-    </motion.section>
+    </section>
   );
 }
