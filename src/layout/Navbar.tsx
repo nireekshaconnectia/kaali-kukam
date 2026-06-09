@@ -42,7 +42,7 @@ export function Navbar() {
         />
       </div>
 
-      <nav className="mx-auto flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-51.5 pt-4 md:pt-15.25">
+      <nav className="mx-auto flex items-center justify-between px-4 sm:px-6 md:px-8 lg:px-51.5 pt-10 md:pt-15.25">
         {/* Desktop left links - hidden on mobile */}
         <div className="hidden md:flex gap-6 lg:gap-18 flex-1">
           {navLinks.slice(0, 2).map((l, idx) => (
@@ -68,7 +68,7 @@ export function Navbar() {
         </div>
 
         {/* Desktop right links - hidden on mobile */}
-        <div className="hidden md:flex gap-6 lg:gap-15 flex-1 justify-end">
+        <div className="hidden md:flex gap-6 lg:gap-15  flex-1 justify-end">
           {navLinks.slice(2).map((l) => (
             <a
               key={l}
@@ -129,7 +129,7 @@ export function Navbar() {
 />
 
           {/* Slide-in menu from right - solid black, no backdrop blur */}
-          <div className="fixed top-0 right-0 bottom-0 w-3/4 max-w-sm bg-black shadow-2xl z-50 md:hidden animate-in slide-in-from-right flex flex-col">
+          <div className="fixed top-0 right-0 bottom-0 w-3/4 max-w-sm bg-black shadow-2xl z-50 md:hidden animate-in slide-in-from-right flex flex-col ">
             {/* Menu header with logo */}
             <div className="flex items-center justify-between p-5 border-b border-white/10">
               <button

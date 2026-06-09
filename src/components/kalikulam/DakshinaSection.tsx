@@ -24,7 +24,7 @@ export function DakshinaSection() {
         }
       `}</style>
 
-      <section className="relative overflow-hidden w-full">
+      <section className="relative overflow-hidden">
         {/* Background image */}
         <img
           src={dakshinaHands}
@@ -35,8 +35,8 @@ export function DakshinaSection() {
           className="absolute inset-0 h-full w-full object-cover opacity-45"
         />
 
-        {/* Content - now centered without extra padding since Layout provides it */}
-        <div className="relative max-w-5xl mx-auto py-16 text-center">
+        {/* Content */}
+        <div className="relative mx-auto max-w-5xl px-6 md:px-14 py-16 text-center">
           <p className="font-body text-muted-foreground text-xl mb-1">
             कृतज्ञता का <GradientText text="अर्पण" />
           </p>
@@ -52,11 +52,8 @@ export function DakshinaSection() {
             दक्षिणा प्रदान करें
           </button>
 
-          <p className="mx-auto mt-10 max-w-8xl text-foreground leading-relaxed text-[20px]">
-            दक्षिणा केवल धन नहीं, यह श्रद्धा का वह प्रवाह है जो शिष्य से गुरु तक
-            और गुरु से शक्ति तक पहुँचता है। भारतीय संस्कृति में दक्षिणा एक देवी
-            का नाम है: यज्ञ की पत्नी। जहाँ दक्षिणा है, वहाँ यज्ञ पूर्ण है। जहाँ
-            दक्षिणा नहीं, वहाँ साधना अधूरी है।
+          <p className="mx-auto mt-10 max-w-9xl text-foreground leading-relaxed md:tracking-widest  text-xl">
+            दक्षिणा केवल धन नहीं, यह श्रद्धा का वह प्रवाह है जो शिष्य से गुरु तक और गुरु से <br/> शक्ति तक पहुँचता है। भारतीय संस्कृति में दक्षिणा एक देवी का नाम है: यज्ञ की <br/> पत्नी। जहाँ दक्षिणा है, वहाँ यज्ञ पूर्ण है। जहाँ दक्षिणा नहीं, वहाँ साधना अधूरी है।
           </p>
         </div>
       </section>
