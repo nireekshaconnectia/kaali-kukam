@@ -3,14 +3,14 @@ import guru from "@/assets/guru.png";
 
 export function IntroGuru() {
   return (
-    <section className="w-full overflow-x-clip px-6 md:px-60 pt-26.5">
+    <section className="w-full overflow-x-clip px-6 md:px-60 pt-16.5">
       <div className="max-w-7xl mx-auto">
        
 
         <div className="grid items-center gap-10 md:grid-cols-2">
           {/* Text */}
           <div className="md:order-1">
-             <p className="text-white text-sm md:text-md tracking-wide mb-2">
+             <p className="text-white text-sm md:text-lg tracking-wide mb-2">
           पूज्य आदिगुरु
         </p>
             <h2
