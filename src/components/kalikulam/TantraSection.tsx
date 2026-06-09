@@ -43,8 +43,8 @@ const items = [
 
 export function TantraSection() {
   return (
-    <section className="w-full py-16 px-6 md:px-60">
-      <div className="max-w-5xl mx-auto">
+    <section className="w-full py-16 px-10 md:px-60">
+      <div className="max-w-9xl mx-auto">
         <div className="mb-16 flex flex-col items-center text-center">
           <img
             src={titleTantraMantraYantra}
@@ -57,7 +57,7 @@ export function TantraSection() {
           </p>
         </div>
 
-        <div className="space-y-24">
+        <div className="space-y-30">
           {items.map((item) => (
             <div
               key={item.title}
@@ -71,7 +71,7 @@ export function TantraSection() {
                   className="h-8 md:h-12 w-auto mb-4 object-contain"
                   loading="lazy"
                 />
-                <p className="text-[#FFFFFF] leading-relaxed text-[15px]">
+                <p className="text-[#FFFFFF] leading-relaxed text-[16px]">
                   {item.text}
                 </p>
               </div>
