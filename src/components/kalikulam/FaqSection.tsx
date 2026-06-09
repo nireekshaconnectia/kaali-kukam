@@ -69,7 +69,7 @@ export function FaqSection() {
 
   return (
     <motion.section
-      className="mx-auto max-w-5xl px-6 md:px-14 pt-16 pb-24 md:pb-48 w-full"
+      className="mx-auto px-6 md:px-60 pt-16 pb-24 md:pb-48 w-full"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: false, amount: 0.15 }}
