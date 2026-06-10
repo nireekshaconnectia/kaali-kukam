@@ -61,7 +61,7 @@ export function TantraSection() {
           {items.map((item) => (
             <div
               key={item.title}
-              className="grid items-center gap-8 md:grid-cols-2"
+              className="grid items-center gap-1 md:grid-cols-2"
             >
               {/* Text */}
               <div className={`${item.imageRight ? "md:order-1" : "md:order-2"}`}>
@@ -79,7 +79,7 @@ export function TantraSection() {
              
 <div
   className={`flex justify-center ${item.imageRight ? "md:order-2" : "md:order-1"}`}
-  style={item.imageRight ? { marginRight: "-60px" } : {}}
+  style={item.imageRight ? { marginRight: "-100px" } : {}}
 >
                 <div className="relative inline-block">
                   <img
