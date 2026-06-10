@@ -6,6 +6,8 @@ import {
   AccordionTrigger,
 } from "../ui/accordion";
 import vector from "@/assets/1.png";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 const faqs = [
   {
@@ -47,17 +49,109 @@ const faqs = [
   },
 ];
 
-export function FaqSection() {
+// Individual FAQ Item Component with scroll detection
+function FaqItem({ faq, index }: { faq: typeof faqs[0]; index: number }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { 
+    once: false, // Changed to false so animation triggers every time
+    amount: 0.3,
+    margin: "-50px"
+  });
+
   return (
-    <section className="mx-auto px-6 md:px-61.5 pt-16 pb-24 md:pb-48 w-full">
-      {/* Header image */}
-      <div className="mb-12 flex justify-center">
-        <img
+    <motion.div 
+      ref={ref}
+      className="w-full min-w-0"
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+    >
+      <AccordionItem
+        value={`item-${index}`}
+        className="border-b border-[#1f1f1f] py-1 relative group"
+      >
+        <div className="absolute bottom-0 left-0 right-0 h-px overflow-hidden">
+          <motion.div 
+            className="h-full w-full bg-linear-to-r from-transparent via-white/15 to-transparent bg-size-[200%_100%]"
+            animate={{
+              backgroundPosition: ["0% 0%", "200% 0%"],
+            }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          />
+        </div>
+        <AccordionTrigger className="text-left text-[16px] md:text-[18px] font-bold hover:no-underline py-4 [&>svg]:text-[#D6A15F] [&>svg]:h-4 [&>svg]:w-4 [&>svg]:transition-transform [&>svg]:duration-300">
+          <motion.span 
+            className="bg-linear-to-r from-[#EBB57C] to-[#94622C] bg-clip-text text-transparent"
+            whileHover={{ x: 5 }}
+            transition={{ duration: 0.2 }}
+          >
+            {faq.q}
+          </motion.span>
+        </AccordionTrigger>
+
+        <AccordionContent className="pt-2 pb-4">
+          <motion.div 
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.3 }}
+            className="rounded-2xl bg-linear-to-br from-[#0d0d0d] to-[#151515] px-6 py-5 text-[#FFFFFF] text-[15px] md:text-[18px] leading-8 border border-[#2a2a2a]"
+          >
+            {/* Scrollable content - with visible scrollbar */}
+            <div className="max-h-75 overflow-y-auto scroll-visible space-y-4 pr-2">
+              {faq.a.map((p, j) => (
+                <motion.p 
+                  key={j}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: j * 0.1 }}
+                >
+                  {p}
+                </motion.p>
+              ))}
+            </div>
+          </motion.div>
+        </AccordionContent>
+      </AccordionItem>
+    </motion.div>
+  );
+}
+
+export function FaqSection() {
+  const sectionRef = useRef(null);
+
+  
+  const headerRef = useRef(null);
+  const isHeaderInView = useInView(headerRef, { 
+    once: false, 
+    amount: 0.5 
+  });
+
+  return (
+    <motion.section 
+      ref={sectionRef}
+      className="mx-auto px-6 md:px-61.5 pt-16 pb-24 md:pb-48 w-full"
+    >
+      {/* Animated Header image - triggers on scroll up/down */}
+      <motion.div
+        ref={headerRef}
+        initial={{ opacity: 0, y: -30 }}
+        animate={isHeaderInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -30 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="mb-12 flex justify-center"
+      >
+        <motion.img
           src={vector}
           alt="संकल्प FAQ"
           className="h-auto w-56 md:w-64"
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.3 }}
         />
-      </div>
+      </motion.div>
 
       {/* Accordion */}
       <Accordion
@@ -67,31 +161,45 @@ export function FaqSection() {
         className="space-y-4 w-full md:w-[90%]"
       >
         {faqs.map((faq, i) => (
-          <div key={i} className="w-full min-w-0">
-            <AccordionItem
-              value={`item-${i}`}
-              className="border-b border-[#1f1f1f] py-1 relative"
-            >
-              <div className="absolute bottom-0 left-0 right-0 h-px overflow-hidden">
-                <div className="h-full w-full bg-linear-to-r from-transparent via-white/15 to-transparent bg-size-[200%_100%] animate-shimmer" />
-              </div>
-              <AccordionTrigger className="text-left text-[16px] md:text-[18px] font-bold hover:no-underline py-4 [&>svg]:text-[#D6A15F] [&>svg]:h-4 [&>svg]:w-4 [&>svg]:transition-transform [&>svg]:duration-300">
-                <span className="bg-linear-to-r from-[#EBB57C] to-[#94622C] bg-clip-text text-transparent">
-                  {faq.q}
-                </span>
-              </AccordionTrigger>
-
-              <AccordionContent className="pt-2 pb-4">
-                <div className="rounded-2xl bg-linear-to-br from-[#0d0d0d] to-[#151515] px-6 py-5 text-[#FFFFFF] text-[15px] md:text-[18px] leading-8 space-y-4 border border-[#2a2a2a]">
-                  {faq.a.map((p, j) => (
-                    <p key={j}>{p}</p>
-                  ))}
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-          </div>
+          <FaqItem key={i} faq={faq} index={i} />
         ))}
       </Accordion>
-    </section>
+
+      {/* Visible Scrollbar Styles */}
+      <style>{`
+        /* Make scrollbar visible and thicker */
+        .scroll-visible::-webkit-scrollbar {
+          width: 8px;
+          height: 8px;
+        }
+        
+        .scroll-visible::-webkit-scrollbar-track {
+          background: #0a0a0a;
+          border-radius: 10px;
+          border: 1px solid #2a2a2a;
+        }
+        
+        .scroll-visible::-webkit-scrollbar-thumb {
+          background: #000000;
+          border-radius: 10px;
+          border: 1px solid #3a3a3a;
+        }
+        
+        .scroll-visible::-webkit-scrollbar-thumb:hover {
+          background: #1a1a1a;
+          cursor: pointer;
+        }
+        
+        .scroll-visible::-webkit-scrollbar-corner {
+          background: #0a0a0a;
+        }
+        
+        /* For Firefox */
+        .scroll-visible {
+          scrollbar-width: auto;
+          scrollbar-color: #000000 #0a0a0a;
+        }
+      `}</style>
+    </motion.section>
   );
 }

@@ -1,11 +1,42 @@
 // Footer.tsx
-// import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import union from "@/assets/Union.png";
 import trishul from "@/assets/trishul.png";
 
 export function Footer() {
+  const [isVisible, setIsVisible] = useState(false);
+  const footerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const footer = footerRef.current;
+    if (!footer) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        } else {
+          // Reset so it re-animates every time you scroll back
+          setIsVisible(false);
+        }
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(footer);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <footer className="relative bg-[#F42903] text-primary-foreground ">
+    <footer
+      ref={footerRef}
+      className="relative bg-[#F42903] text-primary-foreground"
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? "translateY(0)" : "translateY(20px)",
+        transition: "opacity 900ms ease-out, transform 900ms ease-out",
+      }}
+    >
       {/* Trishul Background */}
       <div className="absolute inset-0 mx-auto max-w-9xl w-full px-6 md:px-61.5 pointer-events-none z-0">
         <img
@@ -51,9 +82,7 @@ export function Footer() {
 
           {/* Newsletter */}
           <div className="w-fit">
-            <p className="font-display mb-3 text-white">
-              काली कुलम ज्ञान पत्रिका
-            </p>
+            <p className="font-display mb-3 text-white">काली कुलम ज्ञान पत्रिका</p>
             <form
               onSubmit={(e) => e.preventDefault()}
               className="flex items-center gap-2 rounded-full border-2 border-white bg-transparent px-4 py-2"

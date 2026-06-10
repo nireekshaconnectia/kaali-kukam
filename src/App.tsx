@@ -29,7 +29,7 @@ function App() {
 
       <Suspense fallback={<div className="flex items-center text-2xl text-center">Loading...</div>}>
         <Routes>
-          <Route path="/" element={<Layout isReady={!showOverlay} />}>
+          <Route path="/" element={<Layout />}>
             <Route path="/" element={<Home />} />
           </Route>
         </Routes>

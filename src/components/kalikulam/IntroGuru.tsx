@@ -1,21 +1,53 @@
 // IntroGuru.tsx
 import guru from "@/assets/guru.png";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 export function IntroGuru() {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: false, amount: 0.3 });
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const textVariants = {
+    hidden: { opacity: 0, x: -80 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.7, ease: [0.4, 0, 0.2, 1] as const },
+    },
+  };
+
+  const imageVariants = {
+    hidden: { opacity: 0, x: 80 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.7, ease: [0.4, 0, 0.2, 1] as const, delay: 0.2 },
+    },
+  };
+
   return (
     <section className="w-full overflow-x-clip px-6 md:px-61.5 pt-16.5">
-      <div className="max-w-7xl mx-auto">
+      <motion.div
+        ref={ref}
+        className="max-w-7xl mx-auto"
+        variants={containerVariants}
+        initial="hidden"
+        animate={isInView ? "visible" : "hidden"}
+      >
         <div className="relative">
-          {/*
-           * The image is floated RIGHT with shape-outside so text flows
-           * around the guru's silhouette. Adjust the polygon() points to
-           * match your actual image's contour — these are tuned for a
-           * standing figure with dreadlocks & a mala on the right side.
-           *
-           * Polygon coordinate system: percentage of the float box (w × h).
-           * Left edge of figure ≈ 15–20% in from the float box left.
-           */}
-          <div
+          {/* Desktop: floated image from right */}
+          <motion.div
             className="hidden md:block"
             style={{
               float: "right",
@@ -34,6 +66,7 @@ export function IntroGuru() {
               )`,
               shapeMargin: "16px",
             }}
+            variants={imageVariants}
           >
             <img
               src={guru}
@@ -44,21 +77,29 @@ export function IntroGuru() {
               decoding="async"
               className="w-full max-w-xl object-contain mt-10"
             />
-          </div>
+          </motion.div>
 
-          {/* Text flows around the floated image */}
-          <p className="text-white text-sm md:text-lg tracking-wide mb-2">
-            पूज्य आदिगुरु
-          </p>
-          <h2
-            className="font-body text-2xl md:text-3xl font-bold
+          {/* Text content - animates from left */}
+          <motion.div variants={textVariants}>
+            <p className="text-white text-sm md:text-lg tracking-wide mb-2">
+              पूज्य आदिगुरु
+            </p>
+          </motion.div>
+
+          <motion.div variants={textVariants}>
+            <h2
+              className="font-body text-2xl md:text-3xl font-bold
               bg-linear-to-r from-[#EBB57C] to-[#94622C]
               bg-clip-text text-transparent mb-4"
-          >
-            मांगीलाल भील
-          </h2>
+            >
+              मांगीलाल भील
+            </h2>
+          </motion.div>
 
-          <div className="space-y-6 text-[#FFFFFF] leading-relaxed tracking-wide text-[18px]">
+          <motion.div
+            className="space-y-6 text-[#FFFFFF] leading-relaxed tracking-wide text-[18px]"
+            variants={textVariants}
+          >
             <p>
               तंत्र शास्त्र के सूत्र "
               <span className="font-bold">गृहस्थो नास्ति मे तुल्य:</span>"
@@ -73,16 +114,19 @@ export function IntroGuru() {
               साधना के लिए वन जाने की आवश्यकता नहीं, बल्कि समर्पित मन की
               आवश्यकता होती है।
             </p>
-            <p >
+            <p>
               खेत की माटी हो या घर की रसोई - गुरुदेव के लिए प्रत्येक कर्म माँ
               की ही सेवा है। उनका जीवन उन सभी गृहस्थों के लिए एक आलोक-स्तंभ
               है, जो सांसारिक दायित्वों के साथ आध्यात्मिक मार्ग पर चलना
               चाहते हैं।
             </p>
-          </div>
+          </motion.div>
 
-          {/* On mobile: image stacks below text normally */}
-          <div className="md:hidden flex justify-center mt-6">
+          {/* On mobile: image stacks below text normally with animation */}
+          <motion.div
+            className="md:hidden flex justify-center mt-6"
+            variants={imageVariants}
+          >
             <img
               src={guru}
               alt="पूज्य आदिगुरु मांगीलाल भील"
@@ -92,10 +136,9 @@ export function IntroGuru() {
               decoding="async"
               className="w-68 sm:w-56 object-contain"
             />
-          </div>
-
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
