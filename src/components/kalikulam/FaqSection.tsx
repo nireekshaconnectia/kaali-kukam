@@ -174,13 +174,13 @@ export function FaqSection() {
         }
         
         .scroll-visible::-webkit-scrollbar-track {
-          background: #0a0a0a;
+          background: #FFFFFF;
           border-radius: 10px;
           border: 1px solid #2a2a2a;
         }
         
         .scroll-visible::-webkit-scrollbar-thumb {
-          background: #000000;
+          background: #000;
           border-radius: 10px;
           border: 1px solid #3a3a3a;
         }
@@ -197,7 +197,7 @@ export function FaqSection() {
         /* For Firefox */
         .scroll-visible {
           scrollbar-width: auto;
-          scrollbar-color: #000000 #0a0a0a;
+          scrollbar-color: #FFFFFF #0a0a0a;
         }
       `}</style>
     </motion.section>
