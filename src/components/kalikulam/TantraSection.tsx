@@ -55,22 +55,25 @@ function AnimatedRow({ item, index }: { item: typeof items[0]; index: number }) 
       animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -100 }}
       transition={{ duration: 0.7, ease: [0.4, 0, 0.2, 1], delay: index * 0.15 }}
     >
-     <div className={`mb-4 md:mb-0 ${item.imageRight ? "md:order-1" : "md:order-2"}`}>
+      <div className={`mb-4 md:mb-0 ${item.imageRight ? "md:order-1" : "md:order-2"}`}>
         <img
           src={item.titleImg}
           alt={item.title}
           className="h-8 md:h-12 w-auto mb-4 object-contain"
           loading="lazy"
         />
-        <p className="text-[#FFFFFF] leading-relaxed text-[18px]">
+        {/* CHANGE 1: text-[18px] → text-[22px] */}
+        <p className="text-[#FFFFFF] leading-loose text-[18px]">
           {item.text}
         </p>
       </div>
 
-      {/* Image */}
-    <div
-  className={`flex justify-center my-4 md:mb-0 ${item.imageRight ? "md:order-2 md:-mr-25" : "md:order-1"}`}
->
+      {/* CHANGE 2: imageRight uses -mr-40, imageLeft uses -ml-40 */}
+      <div
+        className={`flex justify-center my-4 md:mb-0 ${
+          item.imageRight ? "md:order-2 md:-mr-40" : "md:order-1 md:-ml-40"
+        }`}
+      >
         <div className="relative inline-block">
           <img
             src={item.emblem}
