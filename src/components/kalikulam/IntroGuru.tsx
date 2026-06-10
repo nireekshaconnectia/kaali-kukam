@@ -26,7 +26,7 @@ function AnimatedPara({
         timerRef.current = setTimeout(() => {
           hasDelayedOnce.current = true;
           setVisible(true);
-        }, 8000);
+        }, 10000);
       } else {
         hasDelayedOnce.current = true;
         setVisible(true);
