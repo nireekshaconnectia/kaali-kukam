@@ -18,30 +18,45 @@ const GradientText = ({ text, className }: { text: string; className?: string })
 export function DakshinaSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const [activeIndex, setActiveIndex] = useState(-1);
+  const timeoutsRef = useRef<ReturnType<typeof setTimeout>[]>([]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
+            // Clear any pending timeouts
+            timeoutsRef.current.forEach(timeout => clearTimeout(timeout));
+            timeoutsRef.current = [];
+            
+            // Animate elements one by one
             const elements = [0, 1, 2, 3];
             elements.forEach((index, i) => {
-              setTimeout(() => {
+              const timeout = setTimeout(() => {
                 setActiveIndex(index);
               }, i * 300);
+              timeoutsRef.current.push(timeout);
             });
-            observer.disconnect();
+          } else {
+            // Reset animation when section is out of view
+            setActiveIndex(-1);
+            // Clear pending timeouts
+            timeoutsRef.current.forEach(timeout => clearTimeout(timeout));
+            timeoutsRef.current = [];
           }
         });
       },
-      { threshold: 0.2, rootMargin: "0px 0px -100px 0px" }
+      { threshold: 0.2 }
     );
 
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      timeoutsRef.current.forEach(timeout => clearTimeout(timeout));
+    };
   }, []);
 
   const getAnimationClass = (index: number) => {
@@ -172,8 +187,8 @@ export function DakshinaSection() {
           </div>
 
           <div className={`transition-all duration-700 delay-300 ${getAnimationClass(3)}`}>
-            <p className="mx-auto mt-10 max-w-9xl text-foreground leading-relaxed md:tracking-widest space-y-4 text-xl px-10 md:px-31">
-              दक्षिणा केवल धन नहीं, यह श्रद्धा का वह प्रवाह है जो शिष्य से गुरु तक और गुरु से  <br/>शक्ति तक पहुँचता है। भारतीय संस्कृति में दक्षिणा एक देवी का नाम है: यज्ञ की पत्नी। <br/> जहाँ दक्षिणा है, वहाँ यज्ञ पूर्ण है। जहाँ दक्षिणा नहीं, वहाँ साधना अधूरी है।
+            <p className="mx-auto max-w-4xl text-foreground/90 leading-relaxed md:leading-loose tracking-wide text-base md:text-xl px-6 md:px-16 font-light">
+              दक्षिणा केवल धन नहीं, यह श्रद्धा का वह प्रवाह है जो शिष्य से गुरु तक और गुरु से शक्ति तक पहुँचता है। भारतीय संस्कृति में दक्षिणा एक देवी का नाम है: यज्ञ की पत्नी। जहाँ दक्षिणा है, वहाँ यज्ञ पूर्ण है। जहाँ दक्षिणा नहीं, वहाँ साधना अधूरी है।
             </p>
           </div>
         </div>
