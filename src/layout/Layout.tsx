@@ -9,7 +9,7 @@ function Layout() {
       <Navbar />
       
       {/* Main content with padding-top for fixed navbar and horizontal alignment */}
-      <main className=" pt-15.25">
+      <main>
         <Outlet />
       </main>
       

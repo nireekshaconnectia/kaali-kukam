@@ -8,7 +8,7 @@ import vectorSwaha from "@/assets/Vector.png";
 export function Hero() {
   return (
     <section
-      className="relative overflow-hidden w-full flex items-start pt-15.25 justify-center px-6 md:px-61.5"
+      className="relative overflow-hidden w-full flex items-start pt-18 justify-center px-6 md:px-61.5"
       style={{ fontFamily: "'Mukta', serif", background: "#000" }}
     >
       <div
@@ -38,7 +38,7 @@ export function Hero() {
           style={{
             position: "absolute",
             top: "20%",
-            right: "0%",
+            right: "2%",
             width: "38%",
           }}
         />

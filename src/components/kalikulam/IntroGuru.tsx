@@ -3,7 +3,7 @@ import guru from "@/assets/guru.png";
 
 export function IntroGuru() {
   return (
-    <section className="w-full overflow-x-clip px-6 md:px-60 pt-16.5">
+    <section className="w-full overflow-x-clip px-6 md:px-61.5 pt-16.5">
       <div className="max-w-7xl mx-auto">
         <div className="relative">
           {/*
@@ -20,7 +20,7 @@ export function IntroGuru() {
             style={{
               float: "right",
               width: "42%",
-              marginRight: "-25px",
+              marginRight: "-30px",
               shapeOutside: `polygon(
                 22% 0%,
                 78% 0%,

@@ -16,8 +16,8 @@ const items = [
     emblem: roundShape,
     text: "तंत्र न कोई रहस्य है, न कोई भय की विद्या। यह इस सृष्टि की समग्र शक्ति को समझने और जीवन में उतारने का मार्ग है। जीवन का हर अनुभव, सुख हो या दुख, परिवार हो या एकांत, सब साधना है।",
     imageRight: true,
-    topImgPosition: { top: "-15%", left: "0%" },
-    topImgSize: "w-28 md:w-32",
+    topImgPosition: { top: "5%", left: "0%" },
+    topImgSize: "w-38 md:w-42",
   },
   {
     title: "मंत्र",
@@ -43,7 +43,7 @@ const items = [
 
 export function TantraSection() {
   return (
-    <section className="w-full  px-10 md:px-61 py-44">
+    <section className="w-full  px-10 md:px-61.5 py-20">
       <div className="max-w-9xl mx-auto">
         <div className="mb-16 flex flex-col items-center text-center">
           <img
