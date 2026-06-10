@@ -27,7 +27,7 @@ const items = [
     text: "मंत्र वह दिव्य ध्वनि है जो सृष्टि के आरंभ से विद्यमान है। प्रत्येक मंत्र एक विशेष शक्ति का वाहक है। जब इसे सही विधि, सही भाव और सही समय पर उच्चारित किया जाए तो यह जीवन को बदलने की क्षमता रखता है।",
     imageRight: false,
     topImgPosition: { top: "-10%", left: "-3%" },
-    topImgSize: "w-32 md:w-40 ",
+    topImgSize: "w-38 md:w-42",
   },
   {
     title: "यंत्र",
@@ -37,7 +37,7 @@ const items = [
     text: "यंत्र एक पवित्र ज्यामितीय संरचना है जिसमें देवी-देवताओं की शक्ति को आह्वान किया जाता है। यह केवल एक चित्र नहीं, यह एक जीवंत ऊर्जा केंद्र है। घर में, व्यापार में और जीवन के हर क्षेत्र में यंत्र एक अदृश्य सुरक्षा कवच का कार्य करता है।",
     imageRight: true,
     topImgPosition: { top: "-22%", left: "18%" },
-    topImgSize: "w-24 md:w-32",
+    topImgSize: "w-38 md:w-40",
   },
 ];
 
@@ -87,7 +87,7 @@ export function TantraSection() {
                     alt={item.title}
                     loading="lazy"
                     decoding="async"
-                    className="w-28 md:w-36 drop-shadow-[0_0_30px_oklch(0.55_0.24_28/0.35)]"
+                    className="w-38 md:w-45 drop-shadow-[0_0_30px_oklch(0.55_0.24_28/0.35)]"
                   />
                   <img
                     src={item.topImg}
