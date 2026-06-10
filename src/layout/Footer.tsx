@@ -7,16 +7,16 @@ export function Footer() {
   return (
     <footer className="relative bg-[#F42903] text-primary-foreground ">
       {/* Trishul Background */}
-      <div className="absolute inset-0 mx-auto max-w-5xl pointer-events-none z-0 px-6 md:px-55">
+      <div className="absolute inset-0 mx-auto max-w-9xl w-full px-6 md:px-61.5 pointer-events-none z-0">
         <img
           src={trishul}
           alt="त्रिशूल"
           loading="lazy"
-          className="absolute -top-24 md:top-auto md:bottom-0 right-2 md:right-18 h-[110%] md:h-[125%] w-auto object-contain md:object-bottom object-top"
+          className="absolute -top-24 md:top-auto md:bottom-0 right-6 md:right-61.5 h-[110%] md:h-[125%] w-auto object-contain md:object-bottom object-top"
         />
       </div>
 
-      <div className="relative mx-auto flex max-w-5xl flex-col md:flex-row justify-between gap-10 px-6 md:px-20 py-14">
+      <div className="relative mx-auto flex max-w-9xl flex-col md:flex-row justify-between gap-10 px-6 md:px-61.5 py-14">
         {/* Col 1 — Logo + address */}
         <div className="z-10 flex-1">
           <img src={union} alt="Union" className="h-20 w-auto mt-2" />
